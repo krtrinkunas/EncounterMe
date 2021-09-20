@@ -4,12 +4,8 @@
              x:Class="EncounterMeApp.Views.MapPage">
     <ContentPage.Content>
         <StackLayout>
-            <Frame BackgroundColor="Blue" Padding="24" CornerRadius="0">
-                <Label Text="MapsDemo" HorizontalTextAlignment="Center"
-                       TextColor="White" FontSize="36"/>
-            </Frame>
-
-            <maps:Map IsShowingUser="True" />
+            <maps:Map x:Name="mapOfVilnius" IsShowingUser="True"/>
+            <Button Text="Create a location" Clicked="Button_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
