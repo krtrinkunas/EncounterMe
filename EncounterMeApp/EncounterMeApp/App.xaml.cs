@@ -1,8 +1,4 @@
-﻿using EncounterMeApp.Services;
-using EncounterMeApp.Views;
-using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
 namespace EncounterMeApp
 {
@@ -13,7 +9,6 @@ namespace EncounterMeApp
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 
