@@ -1,26 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:viewmodels="clr-namespace:EncounterMeApp.ViewModels"
-             x:Class="EncounterMeApp.Views.LeaderboardPage"
-             BackgroundColor="AntiqueWhite"
-             x:DataType="viewmodels:LeaderboardViewModel">
-    
-            <ContentPage.BindingContext>
-                <viewmodels:LeaderboardViewModel/>
-             </ContentPage.BindingContext>
-    
-    <Grid RowDefinitions="*,Auto, Auto, *">
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:viewmodels="clr-namespace:EncounterMeApp.ViewModels"
+    xmlns:mvvm ="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
+    xmlns:model ="clr-namespace:EncounterMeApp.Models"
+    x:Class="EncounterMeApp.Views.LeaderboardPage"
+    BackgroundColor="AntiqueWhite"
+    x:DataType="viewmodels:LeaderboardViewModel">
+    <ContentPage.BindingContext>
+        <viewmodels:LeaderboardViewModel/>
+    </ContentPage.BindingContext>
 
-            <Label
-                Grid.Row="1"
-                HorizontalOptions="Center"
-                FontSize="Large"
-                Text="{Binding CountDisplay}"/>
-
-            <Button 
-                    Command="{Binding IncreaseCount}"
-                    Grid.Row="2" Text="Click Me"/>
-        </Grid>
+    <ListView BackgroundColor="AntiqueWhite"
+              ItemsSource="{Binding Player}"
+              HasUnevenRows="True"
+              SeparatorColor="Blue"
+              SeparatorVisibility="None">
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="model:Player">
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Remember"/>
+                    </ViewCell.ContextActions>
+                    <Grid Padding="10">
+                        <Frame CornerRadius="20"
+                               HasShadow="True">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding ProfilePic}"
+                                       WidthRequest="70"/>
+                                <StackLayout VerticalOptions="Center">
+                                    <Label VerticalOptions="Center"
+                                        FontSize="Large"
+                                        Text="{Binding NickName}"/>
+                                    <Label VerticalOptions="Center"
+                                       FontSize="Large"
+                                       Text="{Binding Points}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.Header>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Welcome to Leaderboard!"
+                       TextColor="Black"/>
+            </StackLayout>
+        </ListView.Header>
+    </ListView>
 
 </ContentPage>
