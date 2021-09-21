@@ -15,6 +15,31 @@ namespace EncounterMeApp.Views
         public LeaderboardPage()
         {
             InitializeComponent();
+
+            BindingContext = this;
+        }
+
+        int count = 0;
+        string countDisplay = "Click Me";
+        public string CountDisplay
+        {
+            get => countDisplay;
+            set
+            {
+                if (value == countDisplay)
+                {
+                    return;
+                }
+
+                countDisplay = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void ButtonClick_Clicked(object sender, EventArgs e)
+        {
+            count++;
+            CountDisplay = $"You clicked {count} time(s)";
         }
     }
 }
