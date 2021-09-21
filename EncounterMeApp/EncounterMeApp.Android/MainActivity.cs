@@ -24,20 +24,11 @@ namespace EncounterMeApp.Droid
             base.OnStart();
             if ((int)Build.VERSION.SdkInt >= 23)
             {
-                //CheckSelfPermission(Manifest.Permission.AccessFineLocation);
-                RequestPermissions(LocationPermissions, RequestLocationId);
-
-                /*if (CheckSelfPermission(Manifest.Permission.AccessFineLocation)!              //TODO: sutvarkyti sita mesla, kadkiekviena syki neprasytu location access
-                        = Permission.Granted)
+                if (CheckSelfPermission(Manifest.Permission.AccessFineLocation) != Permission.Granted)
                 {
                     RequestPermissions(LocationPermissions, RequestLocationId);
                 }
-                else
-                {
-
-                }*/
             }
-
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
