@@ -22,9 +22,15 @@ namespace EncounterMeApp.ViewModels
 
             var image = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png";
 
-            Player.Add(new Player { NickName = "Destroyer3000", Points = "2000 points", ProfilePic = image });
-            Player.Add(new Player { NickName = "Enjoyer3000", Points = "1000 points", ProfilePic = image });
-            Player.Add(new Player { NickName = "Dinosower3000", Points = "500 points", ProfilePic = image });
+            Player.Add(new Player { NickName = "Destroyer3000", Points = "2894 points", ProfilePic = image });
+            Player.Add(new Player { NickName = "Enjoyer69420", Points = "468465 points", ProfilePic = image });
+            Player.Add(new Player { NickName = "Dinosower", Points = "4881 points", ProfilePic = image });
+            Player.Add(new Player { NickName = "GetRekt", Points = "89610 points", ProfilePic = image });
+            Player.Add(new Player { NickName = "1336", Points = "8412 points", ProfilePic = image });
+            Player.Add(new Player { NickName = "Ninja", Points = "21 points", ProfilePic = image });
+            Player.Add(new Player { NickName = "Shroud", Points = "51127 points", ProfilePic = image });
+            Player.Add(new Player { NickName = "PashaBiceps", Points = "819856 points", ProfilePic = image });
+            Player.Add(new Player { NickName = "NoScope", Points = "754 points", ProfilePic = image });
 
             RefreshCommand = new AsyncCommand(Refresh);
         }

@@ -12,19 +12,26 @@
         <viewmodels:LeaderboardViewModel/>
     </ContentPage.BindingContext>
 
-    <ListView BackgroundColor="AntiqueWhite"
+    <ListView 
+              ItemSelected="ListView_ItemSelected"
+              ItemTapped="ListView_ItemTapped"
+              CachingStrategy="RecycleElement"
+              BackgroundColor="AntiqueWhite"
               ItemsSource="{Binding Player}"
               HasUnevenRows="True"
               SeparatorColor="Blue"
-              SeparatorVisibility="None">
+              SeparatorVisibility="None"
+              IsPullToRefreshEnabled="True"
+              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+              RefreshCommand="{Binding RefreshCommand}">
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="model:Player">
                 <ViewCell>
                     <ViewCell.ContextActions>
-                        <MenuItem Text="Remember"/>
+                        <MenuItem Text="AddFriend" Clicked="MenuItem_Clicked"/>
                     </ViewCell.ContextActions>
-                    <Grid Padding="10">
-                        <Frame CornerRadius="20"
+                    <Grid Padding="5">
+                        <Frame CornerRadius="10"
                                HasShadow="True">
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="{Binding ProfilePic}"
@@ -34,7 +41,7 @@
                                         FontSize="Large"
                                         Text="{Binding NickName}"/>
                                     <Label VerticalOptions="Center"
-                                       FontSize="Large"
+                                       FontSize="Small"
                                        Text="{Binding Points}"/>
                                 </StackLayout>
                             </StackLayout>
@@ -46,6 +53,8 @@
         <ListView.Header>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Welcome to Leaderboard!"
+                       FontSize="Large"
+                       HorizontalTextAlignment="Center"
                        TextColor="Black"/>
             </StackLayout>
         </ListView.Header>
