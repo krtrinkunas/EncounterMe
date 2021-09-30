@@ -150,4 +150,13 @@
       <Name>EncounterMeApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\correo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\katty.png" />
+  </ItemGroup>
 </Project>
