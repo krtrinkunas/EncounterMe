@@ -7,7 +7,8 @@
     xmlns:model ="clr-namespace:EncounterMeApp.Models"
     x:Class="EncounterMeApp.Views.LeaderboardPage"
     BackgroundColor="AntiqueWhite"
-    x:DataType="viewmodels:LeaderboardViewModel">
+    x:DataType="viewmodels:LeaderboardViewModel"
+    Title="Leaderboard">
     <ContentPage.BindingContext>
         <viewmodels:LeaderboardViewModel/>
     </ContentPage.BindingContext>
@@ -50,14 +51,6 @@
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
-        <ListView.Header>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Welcome to Leaderboard!"
-                       FontSize="Large"
-                       HorizontalTextAlignment="Center"
-                       TextColor="Black"/>
-            </StackLayout>
-        </ListView.Header>
     </ListView>
 
 </ContentPage>
