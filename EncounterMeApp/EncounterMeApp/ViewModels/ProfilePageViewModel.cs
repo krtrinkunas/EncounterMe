@@ -34,6 +34,8 @@ namespace EncounterMeApp.ViewModels
        }
        */
 
+        //Case for data binding
+        /*
         public Player newPlayer;
 
         public ProfilePageViewModel()
@@ -48,5 +50,6 @@ namespace EncounterMeApp.ViewModels
         public int TestPoints => newPlayer.Points;
         public string TestImage => newPlayer.ProfilePic;
         public PlayerType TestType => newPlayer.Type;
+        */
     }
 }
