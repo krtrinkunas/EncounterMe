@@ -5,11 +5,6 @@
              xmlns:viewmodels="clr-namespace:EncounterMeApp.ViewModels"
              BackgroundColor="Orange"
              x:Class="EncounterMeApp.Views.ProfilePage">
-
-    <ContentPage.BindingContext>
-        <viewmodels:ProfilePageViewModel/>
-    </ContentPage.BindingContext>
-    
     <ContentPage.Content>
         <ScrollView >
         <StackLayout>
@@ -18,7 +13,7 @@
                 <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,*,*">
                     <Button Grid.Row="0" Grid.Column="2" HeightRequest="56" WidthRequest="56" CornerRadius="28" BackgroundColor="AntiqueWhite" ImageSource="Phone" VerticalOptions="Start" HorizontalOptions="End" Margin="0,-50,0,0"/>
                     <Button Grid.Row="0" Grid.Column="2" HeightRequest="56" WidthRequest="56" CornerRadius="28" BackgroundColor="AntiqueWhite" ImageSource="Correo" VerticalOptions="Start" HorizontalOptions="Start" Margin="0,-50,0,0"/>
-                    <Label x:Name="nicknameLabel" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding TestNick}" FontSize="25" FontAttributes="Bold" Padding="20,10,0,0"/>
+                    <Label x:Name="nicknameLabel" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" FontSize="25" FontAttributes="Bold" Padding="20,10,0,0"/>
                     <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Bugtown" Padding ="20,10,0,0" TextColor="Silver"/>
                     <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Padding="20,0,0,0">
                         <Label.FormattedText>
@@ -32,9 +27,9 @@
                     <Label Grid.Row="4" Grid.Column="1" Text="Locations visited" TextColor="Silver" FontAttributes="Bold" HorizontalTextAlignment="Center" Padding="0,20,0,0"/>
                     <Label Grid.Row="4" Grid.Column="2" Text="Locations owned" TextColor="Silver" FontAttributes="Bold" HorizontalTextAlignment="Center" Padding="0,20,0,0"/>
 
-                    <Label Grid.Row="5" Grid.Column="0" Text="{Binding TestPoints}" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-                    <Label Grid.Row="5" Grid.Column="1" Text="{Binding TestVisited}" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-                    <Label Grid.Row="5" Grid.Column="2" Text="{Binding TestOwned}" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <Label x:Name ="pointsLabel" Grid.Row="5" Grid.Column="0" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <Label x:Name ="visitedPlacesLabel" Grid.Row="5" Grid.Column="1" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <Label x:Name ="ownedPlacesLabel" Grid.Row="5" Grid.Column="2" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
 
                     <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Text="Follow" FontAttributes="Bold" VerticalOptions="End" BackgroundColor="AntiqueWhite" TextColor="White"/>
 

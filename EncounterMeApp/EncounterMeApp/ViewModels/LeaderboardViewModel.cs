@@ -21,7 +21,7 @@ namespace EncounterMeApp.ViewModels
 
             Player = new List<Player>();
 
-            var image = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png";
+            var image = "https://e7.pngegg.com/pngimages/922/865/png-clipart-discord-pepe-the-frog-video-games-pepe-thumbnail.png";
 
             Player.Add(new Player { NickName = "Destroyer3000", Points = 2894, ProfilePic = image });
             Player.Add(new Player { NickName = "Enjoyer69420", Points = 468465, ProfilePic = image });
