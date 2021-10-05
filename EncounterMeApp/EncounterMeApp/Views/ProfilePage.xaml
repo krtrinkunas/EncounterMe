@@ -1,8 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:views="clr-namespace:EncounterMeApp.Views"
+             xmlns:viewmodels="clr-namespace:EncounterMeApp.ViewModels"
              BackgroundColor="Orange"
              x:Class="EncounterMeApp.Views.ProfilePage">
+
+    <ContentPage.BindingContext>
+        <viewmodels:ProfilePageViewModel/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
         <ScrollView>
         <StackLayout>
@@ -11,7 +18,7 @@
                 <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,*,*">
                     <Button Grid.Row="0" Grid.Column="2" HeightRequest="56" WidthRequest="56" CornerRadius="28" BackgroundColor="AntiqueWhite" ImageSource="Phone" VerticalOptions="Start" HorizontalOptions="End" Margin="0,-50,0,0"/>
                     <Button Grid.Row="0" Grid.Column="2" HeightRequest="56" WidthRequest="56" CornerRadius="28" BackgroundColor="AntiqueWhite" ImageSource="Correo" VerticalOptions="Start" HorizontalOptions="Start" Margin="0,-50,0,0"/>
-                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="Doomer McFeelsman" FontSize="25" FontAttributes="Bold" Padding="20,10,0,0"/>
+                    <Label x:Name="nicknameLabel" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding DisplayName}" FontSize="25" FontAttributes="Bold" Padding="20,10,0,0"/>
                     <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Bugtown" Padding ="20,10,0,0" TextColor="Silver"/>
                     <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Padding="20,0,0,0">
                         <Label.FormattedText>
