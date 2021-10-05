@@ -9,6 +9,8 @@ namespace EncounterMeApp.Models
         public enum PlayerType { Creator, Explorer};
         public string NickName { get; set; }
         public int Points { get; set; }
+        public int LocationsVisited { get; set; }
+        public int LocationsOwned { get; set; }
         public string ProfilePic { get; set; }
 
         public int CompareTo(object obj)
