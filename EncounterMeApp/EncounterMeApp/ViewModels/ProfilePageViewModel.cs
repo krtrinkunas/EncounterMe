@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EncounterMeApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -20,19 +21,32 @@ namespace EncounterMeApp.ViewModels
                 {
                     return;
                 }
-
+                
+                //Cia tikrinti su Regex, ar geras vardas/email ir tik tada priskirti, jei praeina validacija?
                 name = value;
                 OnPropertyChanged(nameof(Name));
             }
         }
-        */
+ 
+       void OnPropertyChanged(string name)
+       {
+           PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
+       }
+       */
 
-        public string DisplayName => "TEST PEPA";
-        /*
-        void OnPropertyChanged(string name)
+        public Player newPlayer;
+
+        public ProfilePageViewModel()
         {
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
+            var image = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png";
+            newPlayer = new Player { NickName = "Doomer McFeelsman", LocationsOwned = 2, LocationsVisited = 11, Points = 4856, ProfilePic = image, Type = PlayerType.Creator }; //Kaip padaryti, kad galetu prieit tiesiogiai, kad nereiketu veliau priskirinet?
         }
-        */
+        //Kodel neveikia su paprastu '='?
+        public string TestNick => newPlayer.NickName;
+        public int TestOwned => newPlayer.LocationsOwned;
+        public int TestVisited => newPlayer.LocationsVisited;
+        public int TestPoints => newPlayer.Points;
+        public string TestImage => newPlayer.ProfilePic;
+        public PlayerType TestType => newPlayer.Type;
     }
 }

@@ -4,9 +4,10 @@ using System.Text;
 
 namespace EncounterMeApp.Models
 {
+    public enum PlayerType { Creator, Explorer};
     public class Player : IComparable
     {
-        public enum PlayerType { Creator, Explorer};
+        public PlayerType Type { get; set; }
         public string NickName { get; set; }
         public int Points { get; set; }
         public int LocationsVisited { get; set; }
