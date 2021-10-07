@@ -19,7 +19,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="Email: " FontAttributes="Bold"/>
-                                <Span Text="borntofeel@pepemail.com" TextColor="Silver"/>
+                                <Span x:Name="currentEmail"  TextColor="Silver"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -32,6 +32,7 @@
                     <Label x:Name ="ownedPlacesLabel" Grid.Row="5" Grid.Column="2" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
 
                     <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Text="Follow" FontAttributes="Bold" VerticalOptions="End" BackgroundColor="AntiqueWhite" TextColor="White"/>
+                     <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Text="Change Email" FontAttributes="Bold" VerticalOptions="End" BackgroundColor="AntiqueWhite" TextColor="White"/>
 
                 </Grid>
 

@@ -13,6 +13,7 @@ namespace EncounterMeApp.Models
         public int LocationsVisited { get; set; }
         public int LocationsOwned { get; set; }
         public string ProfilePic { get; set; }
+        public string Email { get; set; }
 
         public int CompareTo(object obj)
         {
