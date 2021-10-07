@@ -6,10 +6,10 @@
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
             <StackLayout Margin="10" Orientation="Horizontal">
-                <Label Text="Ligh/Dark mode" FontSize="Medium" FontAttributes="Bold" TextColor="Black" Padding="0, 3, 0, 0"/>
+                <Label Text="Light/Dark mode" FontSize="Medium" FontAttributes="Bold" TextColor="Black" Padding="0, 3, 0, 0"/>
                 <Switch VerticalOptions="Center" HorizontalOptions="End"  x:Name="ThemeSwitch"/>
             </StackLayout>
-            <Entry x:Name="UserInput" Placeholder="Your new email goes here:" PlaceholderColor="Gray" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+            <Entry x:Name="UserInput" Placeholder="Your new email goes here:" PlaceholderColor="Gray" HorizontalOptions="Center" VerticalOptions="Center" />
             <Button Text="Change Email" CornerRadius="50" BackgroundColor="DarkMagenta" Clicked="ChangeEmail_Button_Clicked"/>
 
             <Button CornerRadius="50" BackgroundColor="DarkMagenta"  Text="Save settings" Clicked="Save_Button_Clicked"/>
