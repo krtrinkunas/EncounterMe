@@ -19,12 +19,13 @@ namespace EncounterMeApp.Views
         {
             InitializeComponent();
 
-            newPlayer = new Player { NickName = "Doomer McFeelsman", LocationsOwned = 2, LocationsVisited = 11, Points = 4856, Type = PlayerType.Creator };
+            newPlayer = new Player { NickName = "Doomer McFeelsman", LocationsOwned = 2, LocationsVisited = 11, Points = 4856, Type = PlayerType.Creator, Email = "pepe@pepe.com" };
 
             nicknameLabel.Text = newPlayer.NickName;
             pointsLabel.Text = newPlayer.Points.ToString();
             visitedPlacesLabel.Text = newPlayer.LocationsVisited.ToString();
             ownedPlacesLabel.Text = newPlayer.LocationsOwned.ToString();
+            currentEmail.Text = newPlayer.Email;
         }
 
     }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
+using System.Text.RegularExpressions;
 
 namespace EncounterMeApp.Views
 {
@@ -32,6 +33,17 @@ namespace EncounterMeApp.Views
         private void Reset_Button_Clicked(object sender, EventArgs e)//To clear, what has been saved
         {
             Preferences.Clear();
+        }
+        private void ChangeEmail_Button_Clicked(object sender, EventArgs e)
+        {
+            //Regex for email
+            /*var newEmail = UserInput.Text;
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(newEmail);
+            if (match.Success)
+                await DisplayAlert("Success!",$"Your new email is: {newEmail}", "OK");
+            else
+                await DisplayAlert("Error!", "Email invalid.", "OK");*/
         }
     }
 }
