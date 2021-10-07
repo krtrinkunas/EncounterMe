@@ -10,7 +10,7 @@
                 <Switch VerticalOptions="Center" HorizontalOptions="End"  x:Name="ThemeSwitch"/>
             </StackLayout>
             <Entry x:Name="UserInput" Placeholder="Your new email goes here:" PlaceholderColor="Gray" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
-            <Button Text="Submit" VerticalOptions="Center" Clicked="ChangeEmail_Button_Clicked"/>
+            <Button Text="Change Email" CornerRadius="50" BackgroundColor="DarkMagenta" Clicked="ChangeEmail_Button_Clicked"/>
 
             <Button CornerRadius="50" BackgroundColor="DarkMagenta"  Text="Save settings" Clicked="Save_Button_Clicked"/>
             <Button CornerRadius="50" BackgroundColor="DarkMagenta"  Text="Reset Settings" Clicked="Reset_Button_Clicked"/>
