@@ -76,7 +76,7 @@ namespace EncounterMeApp.Views
         }
         public int WriteReadFile()
         {
-            File.WriteAllText(file, "1234a");
+            File.WriteAllText(file, "1234");
             string pointsStr = File.ReadAllText(file);
 
             try
