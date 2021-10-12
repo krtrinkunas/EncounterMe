@@ -13,6 +13,12 @@ namespace EncounterMeApp.ViewModels
     {
         public List<Player> Player { get; set; }
 
+        public Player this[int key]
+        {
+            get => Player[key];
+            set => Player[key] = value;
+        }
+
         public AsyncCommand RefreshCommand { get; }
         public LeaderboardViewModel()
         {

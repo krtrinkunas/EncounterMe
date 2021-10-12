@@ -22,7 +22,6 @@ namespace EncounterMeApp.ViewModels
                     return;
                 }
                 
-                //Cia tikrinti su Regex, ar geras vardas/email ir tik tada priskirti, jei praeina validacija?
                 name = value;
                 OnPropertyChanged(nameof(Name));
             }
