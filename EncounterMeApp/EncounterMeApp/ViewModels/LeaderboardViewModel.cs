@@ -38,8 +38,7 @@ namespace EncounterMeApp.ViewModels
             Player.Add(new Player { NickName = "PashaBiceps", Points = 819856, ProfilePic = image });
             Player.Add(new Player { NickName = "NoScope", Points = 754, ProfilePic = image });
 
-            Player.Sort();
-            Player.Reverse();
+            Player.SortDesc();
 
             RefreshCommand = new AsyncCommand(Refresh);
         }
