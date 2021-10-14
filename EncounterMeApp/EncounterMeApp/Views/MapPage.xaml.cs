@@ -41,24 +41,32 @@ namespace EncounterMeApp.Views
 
         public void DisplayExistingPins()
         {
-            Location a = new Location(new Position(54.684384, 25.277140), WriteReadFile(), "Petro Cvirkos aikštė");
+            Location example1 = new Location(pos: new Position(54.684384, 25.277140), point: WriteReadFile(), name: "Petro Cvirkos aikštė", own: "Tomas");
+            Location example2 = new Location(pos: new Position(54.685372, 25.286621), point: WriteReadFile(), name: "Katedra");
             var pin1 = new Pin()
             {
-                Position = a.position,
-                Label = a.NAME
+                Position = example1.position,
+                Label = example1.NAME
             };
             pin1.MarkerClicked += async (s, args) =>
             {
                 args.HideInfoWindow = true;
                 string pinName = ((Pin)s).Label;
                 await DisplayActionSheet(pinName, "Cancel", "Occupy", $"COORDS: {((Pin)s).Position.Latitude},{((Pin)s).Position.Longitude}",
-                    $"Points: {a.points}", $"Owner: {a.owner}");
+                    $"Points: {example1.points}", $"Owner: {example1.owner}");
             };
 
             var pin2 = new Pin()
             {
-                Position = new Position(54.685372, 25.286621),
-                Label = "Katedra"
+                Position = example2.position,
+                Label = example2.NAME
+            };
+            pin2.MarkerClicked += async (s, args) =>
+            {
+                args.HideInfoWindow = true;
+                string pinName = ((Pin)s).Label;
+                await DisplayActionSheet(pinName, "Cancel", "Occupy", $"COORDS: {((Pin)s).Position.Latitude},{((Pin)s).Position.Longitude}",
+                    $"Points: {example2.points}", $"Owner: {example2.owner}");
             };
             mapOfVilnius.Pins.Add(pin1);
             mapOfVilnius.Pins.Add(pin2);
