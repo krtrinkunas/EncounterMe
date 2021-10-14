@@ -16,7 +16,29 @@ namespace EncounterMeApp.Views
     public partial class MapPage : ContentPage
     {
         //private readonly Geocoder _geocoder = new Geocoder();
-        string file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "points.txt");
+        private string file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "points.txt");
+
+        public string FileProperty
+        {
+            //by skipping getter the property would be write-only (rarely used)
+            get
+            {
+                return file;
+            }
+
+            //by skipping setter the property would be read-only (occasionally used)
+            set
+            {
+                if (value == null)
+                {
+                    file = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("The file path cannot be null");
+                }
+            }
+        }
         public struct Location
         {
             public Location(Position pos, int point, string name, string own = "No owner")
