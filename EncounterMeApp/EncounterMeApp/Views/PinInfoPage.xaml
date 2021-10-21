@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.PrefersStatusBarHidden="True"
+             ios:Page.PreferredStatusBarUpdateAnimation="Fade"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EncounterMeApp.Views.PinInfoPage">
+    <ContentPage.Content>
+        <Grid RowDefinitions="*">
+            <ScrollView VerticalScrollBarVisibility="Never">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*" ColumnDefinitions="*,*" Margin="0,-45,0,0">
+                    <!--1. Main picture-->
+                    <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Source="House1.jpg" VerticalOptions="StartAndExpand" Aspect="AspectFill" HeightRequest="350"/>
+                    <Button Grid.Row="0" Grid.Column="1" BackgroundColor="Transparent" ImageSource="Heart" BorderColor="White" BorderWidth="1" CornerRadius="27" Margin="0,60,30,0" HeightRequest="70" WidthRequest="70" HorizontalOptions="End" VerticalOptions="Start"/>
+
+
+                    <!--2. Main information-->
+                    <Label x:Name ="nameOfPin" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" FontSize="30" Padding="20,10,20,5" VerticalOptions="Start"/>
+                    <Label x:Name ="ownerOfPin" Grid.Row="2" Grid.Column="0" TextColor="Silver" FontAttributes="Bold" FontSize="15" Padding="20,0" VerticalOptions="Start"/>
+                    <Button x:Name ="pointsOfPin" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  BorderColor="Silver" TextColor="Black" BorderWidth="1" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="15" WidthRequest="130" HeightRequest="50" CornerRadius="25" VerticalOptions="Center" Margin="0,0,30,0" HorizontalOptions="End"/>
+
+                    <!--3. House information-->
+                    <Label Grid.Row="3" Grid.Column="0" Text="Location information" FontAttributes="Bold" FontSize="17" Padding="20,40,0,0" VerticalOptions="Start"/>
+
+                    <CollectionView ItemsSource="{Binding features}"
+                               Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"  
+                               Margin="0,10"
+                               HeightRequest="110"
+                               VerticalOptions="FillAndExpand"
+                               HorizontalScrollBarVisibility="Never" 
+                               ItemsLayout="HorizontalList">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="15,0" RowDefinitions="*,Auto" ColumnDefinitions="Auto">
+                                    <Button Grid.Row="0" BackgroundColor="Transparent" Grid.Column="0" Text="{Binding Quantity}" TextColor="Black" WidthRequest="10" FontSize="25" FontAttributes="Bold" CornerRadius="25" BorderColor="Silver" BorderWidth="1"/>
+                                    <Label Grid.Row="1" Grid.Column="0"  WidthRequest="90" Text="{Binding Name}" HorizontalTextAlignment="Center"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <!--4. Description-->
+                    <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" TextColor="Silver" FontSize="17" Padding="20,0,20,70" VerticalOptions="Start" Text="Some information &#x0a;" />
+
+                </Grid>
+            </ScrollView>
+
+            <!-- 5. Float buttons-->
+            <StackLayout Grid.Row="0" Orientation="Horizontal"  Padding="0,0,0,22" VerticalOptions="End" HorizontalOptions="CenterAndExpand" HeightRequest="60">
+                <Button BackgroundColor="Black" TextColor="White" ImageSource="Message" FontAttributes="Bold" Text="Occupy" WidthRequest="150" CornerRadius="30" FontSize="18"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
