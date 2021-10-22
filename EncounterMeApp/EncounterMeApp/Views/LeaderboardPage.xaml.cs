@@ -1,4 +1,5 @@
 ﻿using EncounterMeApp.Models;
+using EncounterMeApp.Services;
 using EncounterMeApp.ViewModels;
 using System;
 using System.Collections.Generic;

@@ -8,10 +8,15 @@
     x:Class="EncounterMeApp.Views.LeaderboardPage"
     BackgroundColor="AntiqueWhite"
     x:DataType="viewmodels:LeaderboardViewModel"
-    Title="Leaderboard">
+    Title="Leaderboard"
+    x:Name="MyLeaderboardPage">
     <ContentPage.BindingContext>
         <viewmodels:LeaderboardViewModel/>
     </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddCommand}"/>
+    </ContentPage.ToolbarItems>
 
     <ListView 
               ItemSelected="ListView_ItemSelected"
@@ -30,6 +35,10 @@
                 <ViewCell>
                     <ViewCell.ContextActions>
                         <MenuItem Text="AddFriend" Clicked="MenuItem_Clicked"/>
+                        <MenuItem Command="{Binding Source={x:Reference MyLeaderboardPage}, Path=BindingContext.RemoveCommand}}"
+                                  CommandParameter="{Binding .}"
+                                  IsDestructive="True"
+                                  Text="Delete"/>
                     </ViewCell.ContextActions>
                     <Grid Padding="5">
                         <Frame CornerRadius="10"
@@ -44,6 +53,9 @@
                                     <Label VerticalOptions="Center"
                                        FontSize="Small"
                                        Text="{Binding Points}"/>
+                                    <Label VerticalOptions="Center"
+                                       FontSize="Small"
+                                       Text="{Binding Id}"/>
                                 </StackLayout>
                             </StackLayout>
                         </Frame>
