@@ -29,7 +29,7 @@ namespace EncounterMeApp.Views
             //by skipping setter the property would be read-only (occasionally used)
             set
             {
-                if (value == null)
+                if (value != null)
                 {
                     file = value;
                 }
@@ -74,8 +74,12 @@ namespace EncounterMeApp.Views
             {
                 args.HideInfoWindow = true;
                 string pinName = ((Pin)s).Label;
-                await DisplayActionSheet(pinName, "Cancel", "Occupy", $"COORDS: {((Pin)s).Position.Latitude},{((Pin)s).Position.Longitude}",
-                    $"Points: {example1.points}", $"Owner: {example1.owner}");
+                string action = await DisplayActionSheet(pinName, "Cancel", "Occupy", $"COORDS: {((Pin)s).Position.Latitude},{((Pin)s).Position.Longitude}",
+                    $"Points: {example1.points}", $"Owner: {example1.owner}", "More info");
+                if (action == "More info")
+                {
+                    _ = Navigation.PushAsync(new PinInfoPage(pinName, example1.owner, example1.points));
+                }
             };
 
             var pin2 = new Pin()
