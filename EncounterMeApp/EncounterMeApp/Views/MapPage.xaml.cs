@@ -70,6 +70,28 @@ namespace EncounterMeApp.Views
 
         public void DisplayExistingPins()
         {
+            foreach (Location location in LocationList)
+            {
+                var pin = new Pin()
+                {
+                    Position = location.position,
+                    Label = location.NAME
+                };
+                pin.MarkerClicked += async (s, args) =>
+                {
+                    args.HideInfoWindow = true;
+                    string pinName = ((Pin)s).Label;
+                    string action = await DisplayActionSheet(pinName, "Cancel", "Occupy", $"COORDS: {((Pin)s).Position.Latitude},{((Pin)s).Position.Longitude}",
+                        $"Points: {location.points}", $"Owner: {location.owner}", "More info");
+                    if (action == "More info")
+                    {
+                        _ = Navigation.PushAsync(new PinInfoPage(pinName, location.owner, location.points));
+                    }
+                };
+
+                mapOfVilnius.Pins.Add(pin);
+            }
+            /*
             Location example1 = new Location(pos: new Position(54.684384, 25.277140), point: WriteReadFile(), name: "Petro Cvirkos aikštė", own: "Tomas");
             Location example2 = new Location(pos: new Position(54.685372, 25.286621), point: WriteReadFile(), name: "Katedra");
             var pin1 = new Pin()
@@ -103,6 +125,7 @@ namespace EncounterMeApp.Views
             };
             mapOfVilnius.Pins.Add(pin1);
             mapOfVilnius.Pins.Add(pin2);
+            */
         }
 
         public async void DisplayCurrentLocation()
@@ -120,6 +143,8 @@ namespace EncounterMeApp.Views
             var yCoord = await App.Current.MainPage.DisplayPromptAsync("Y coordinate of your location", "coordinate goes here goes here");
             var position = new Position(float.Parse(xCoord), float.Parse(yCoord));
             await LocationDatabase.AddLocation(position, Int32.Parse(points), name);
+
+            LocationList.Add(new Location(position, Int32.Parse(points), name));
             //Isvalai collection, pasiimi visus locationus is database ir juos displayini (po viena?)
         }
         public int WriteReadFile()
