@@ -16210,22 +16210,25 @@ namespace EncounterMeApp.Droid
 			public const int notify_panel_notification_icon_bg = 2131165350;
 			
 			// aapt resource value: 0x7F0700A7
-			public const int Phone = 2131165351;
+			public const int Peter = 2131165351;
 			
 			// aapt resource value: 0x7F0700A8
-			public const int preference_list_divider_material = 2131165352;
+			public const int Phone = 2131165352;
 			
 			// aapt resource value: 0x7F0700A9
-			public const int test_custom_background = 2131165353;
+			public const int preference_list_divider_material = 2131165353;
 			
 			// aapt resource value: 0x7F0700AA
-			public const int tooltip_frame_dark = 2131165354;
+			public const int test_custom_background = 2131165354;
 			
 			// aapt resource value: 0x7F0700AB
-			public const int tooltip_frame_light = 2131165355;
+			public const int tooltip_frame_dark = 2131165355;
 			
 			// aapt resource value: 0x7F0700AC
-			public const int xamarin_logo = 2131165356;
+			public const int tooltip_frame_light = 2131165356;
+			
+			// aapt resource value: 0x7F0700AD
+			public const int xamarin_logo = 2131165357;
 			
 			static Drawable()
 			{
