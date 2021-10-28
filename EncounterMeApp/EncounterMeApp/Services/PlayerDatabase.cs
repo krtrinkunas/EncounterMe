@@ -1,5 +1,4 @@
 ﻿using EncounterMeApp.Models;
-using EncounterMeApp.Views;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,6 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
-using Xamarin.Forms.Maps;
 
 namespace EncounterMeApp.Services
 {
@@ -18,35 +16,41 @@ namespace EncounterMeApp.Services
         {
             if (db != null)
                 return;
-            // var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "LeaderboardDatabase.db"); //What is the difference?
-            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "LeaderboardDatabase.db");
+            // var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "LocationDatabase.db"); //What is the difference?
+            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "LocationDatabase.db");
 
             db = new SQLiteAsyncConnection(databasePath);
 
-            await db.CreateTableAsync<MapPage.Location>();
+            await db.CreateTableAsync<Player>();
         }
 
-        public static async Task AddLocation(Position pos, int point, string name, string own = "No owner")
+        public static async Task AddPlayer(string nickName, int points)
         {
             await Init();
-            var location = new MapPage.Location(pos, point, name, own);
+            var image = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png";
+            var player = new Player
+            {
+                NickName = nickName,
+                Points = points,
+                ProfilePic = image
+            };
 
-            var id = await db.InsertAsync(location);
+            var id = await db.InsertAsync(player);
         }
 
-        public static async Task RemoveLocation(int id)
+        public static async Task RemovePlayer(int id)
         {
             await Init();
 
-            await db.DeleteAsync<MapPage.Location>(id);
+            await db.DeleteAsync<Player>(id);
         }
 
-        public static async Task<IEnumerable<MapPage.Location>> GetLocations()
+        public static async Task<IEnumerable<Player>> GetPlayers()
         {
             await Init();
 
-            var locations = await db.Table<MapPage.Location>().ToListAsync();
-            return locations;
+            var players = await db.Table<Player>().ToListAsync();
+            return players;
         }
     }
 }
