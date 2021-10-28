@@ -54,10 +54,16 @@ namespace EncounterMeApp.Views
             public int points { get; }
             public string owner { get; }
         }
+
+        public List<Location> LocationList;
         public MapPage()
         {
             InitializeComponent();
             DisplayCurrentLocation();
+
+            LocationList = new List<Location>();
+            LocationList.Add(new Location(pos: new Position(54.684384, 25.277140), point: WriteReadFile(), name: "Petro Cvirkos aikštė", own: "Tomas"));
+            LocationList.Add(new Location(pos: new Position(54.685372, 25.286621), point: WriteReadFile(), name: "Katedra"));
             DisplayExistingPins();
         }
 
