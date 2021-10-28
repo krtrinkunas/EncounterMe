@@ -9,7 +9,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
-using EncounterMeApp.Services;
 
 namespace EncounterMeApp.Views
 {
@@ -17,7 +16,29 @@ namespace EncounterMeApp.Views
     public partial class MapPage : ContentPage
     {
         //private readonly Geocoder _geocoder = new Geocoder();
-        string file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "points.txt");
+        private string file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "points.txt");
+
+        public string FileProperty
+        {
+            //by skipping getter the property would be write-only (rarely used)
+            get
+            {
+                return file;
+            }
+
+            //by skipping setter the property would be read-only (occasionally used)
+            set
+            {
+                if (value != null)
+                {
+                    file = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("The file path cannot be null");
+                }
+            }
+        }
         public struct Location
         {
             public Location(Position pos, int point, string name, string own = "No owner")
@@ -27,24 +48,16 @@ namespace EncounterMeApp.Views
                 points = point;
                 owner = own;
             }
+
             public Position position { get; }
             public string NAME { get; }
             public int points { get; }
             public string owner { get; }
         }
-
-        public List<Location> LocationList { get; set; }
-
         public MapPage()
         {
             InitializeComponent();
-
             DisplayCurrentLocation();
-
-            LocationList = new List<Location>();
-            LocationList.Add(new Location(pos: new Position(54.684384, 25.277140), point: WriteReadFile(), name: "Petro Cvirkos aikštė", own: "Tomas"));
-            LocationList.Add(new Location(pos: new Position(54.685372, 25.286621), point: WriteReadFile(), name: "Katedra"));
-
             DisplayExistingPins();
         }
 
@@ -61,8 +74,12 @@ namespace EncounterMeApp.Views
             {
                 args.HideInfoWindow = true;
                 string pinName = ((Pin)s).Label;
-                await DisplayActionSheet(pinName, "Cancel", "Occupy", $"COORDS: {((Pin)s).Position.Latitude},{((Pin)s).Position.Longitude}",
-                    $"Points: {example1.points}", $"Owner: {example1.owner}");
+                string action = await DisplayActionSheet(pinName, "Cancel", "Occupy", $"COORDS: {((Pin)s).Position.Latitude},{((Pin)s).Position.Longitude}",
+                    $"Points: {example1.points}", $"Owner: {example1.owner}", "More info");
+                if (action == "More info")
+                {
+                    _ = Navigation.PushAsync(new PinInfoPage(pinName, example1.owner, example1.points));
+                }
             };
 
             var pin2 = new Pin()
@@ -87,16 +104,9 @@ namespace EncounterMeApp.Views
             mapOfVilnius.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Distance.FromKilometers(5)));
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        private void Button_Clicked(object sender, EventArgs e)
         {
-            //DisplayAlert("You", "Clicked", "THE BUTTON");
-            var name = await App.Current.MainPage.DisplayPromptAsync("Name of your location", "Name goes here");
-            var points = await App.Current.MainPage.DisplayPromptAsync("Value of your location", "Points goes here");
-            var xCoord = await App.Current.MainPage.DisplayPromptAsync("X coordinate of your location", "coordinate goes here goes here");
-            var yCoord = await App.Current.MainPage.DisplayPromptAsync("Y coordinate of your location", "coordinate goes here goes here");
-            var position = new Position(float.Parse(xCoord), float.Parse(yCoord));
-            await LocationDatabase.AddLocation(position, Int32.Parse(points), name);
-            //Isvalai collection, pasiimi visus locationus is database ir juos displayini (po viena?)
+            DisplayAlert("You", "Clicked", "THE BUTTON");
         }
         public int WriteReadFile()
         {

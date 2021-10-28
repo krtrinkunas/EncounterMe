@@ -16,8 +16,8 @@ namespace EncounterMeApp.Services
         {
             if (db != null)
                 return;
-            // var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "LocationDatabase.db"); //What is the difference?
-            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "LocationDatabase.db");
+            // var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "LeaderboardDatabase.db"); //What is the difference?
+            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "LeaderboardDatabase.db");
 
             db = new SQLiteAsyncConnection(databasePath);
 

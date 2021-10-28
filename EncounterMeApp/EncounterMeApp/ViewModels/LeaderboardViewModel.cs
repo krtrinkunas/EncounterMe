@@ -67,9 +67,10 @@ namespace EncounterMeApp.ViewModels
             await Task.Delay(2000);
 
             Player.Clear();
-            var players = await PlayerDatabase.GetPlayers();
-            Player.AddRange(players);
 
+            var players = await PlayerDatabase.GetPlayers();
+
+            Player.AddRange(players);
             //Player.SortDesc();
 
             IsBusy = false;
