@@ -16,29 +16,7 @@ namespace EncounterMeApp.Views
     public partial class MapPage : ContentPage
     {
         //private readonly Geocoder _geocoder = new Geocoder();
-        private string file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "points.txt");
-
-        public string FileProperty
-        {
-            //by skipping getter the property would be write-only (rarely used)
-            get
-            {
-                return file;
-            }
-
-            //by skipping setter the property would be read-only (occasionally used)
-            set
-            {
-                if (value != null)
-                {
-                    file = value;
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException("The file path cannot be null");
-                }
-            }
-        }
+        string file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "points.txt");
         public struct Location
         {
             public Location(Position pos, int point, string name, string own = "No owner")
@@ -74,12 +52,8 @@ namespace EncounterMeApp.Views
             {
                 args.HideInfoWindow = true;
                 string pinName = ((Pin)s).Label;
-                string action = await DisplayActionSheet(pinName, "Cancel", "Occupy", $"COORDS: {((Pin)s).Position.Latitude},{((Pin)s).Position.Longitude}",
-                    $"Points: {example1.points}", $"Owner: {example1.owner}", "More info");
-                if (action == "More info")
-                {
-                    _ = Navigation.PushAsync(new PinInfoPage(pinName, example1.owner, example1.points));
-                }
+                await DisplayActionSheet(pinName, "Cancel", "Occupy", $"COORDS: {((Pin)s).Position.Latitude},{((Pin)s).Position.Longitude}",
+                    $"Points: {example1.points}", $"Owner: {example1.owner}");
             };
 
             var pin2 = new Pin()
@@ -106,7 +80,8 @@ namespace EncounterMeApp.Views
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            DisplayAlert("You", "Clicked", "THE BUTTON");
+            //DisplayAlert("You", "Clicked", "THE BUTTON");
+
         }
         public int WriteReadFile()
         {
