@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
+using EncounterMeApp.Services;
 
 namespace EncounterMeApp.Views
 {
@@ -110,9 +111,16 @@ namespace EncounterMeApp.Views
             mapOfVilnius.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Distance.FromKilometers(5)));
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
-            DisplayAlert("You", "Clicked", "THE BUTTON");
+            //DisplayAlert("You", "Clicked", "THE BUTTON");
+            var name = await App.Current.MainPage.DisplayPromptAsync("Name of your location", "Name goes here");
+            var points = await App.Current.MainPage.DisplayPromptAsync("Value of your location", "Points goes here");
+            var xCoord = await App.Current.MainPage.DisplayPromptAsync("X coordinate of your location", "coordinate goes here goes here");
+            var yCoord = await App.Current.MainPage.DisplayPromptAsync("Y coordinate of your location", "coordinate goes here goes here");
+            var position = new Position(float.Parse(xCoord), float.Parse(yCoord));
+            await LocationDatabase.AddLocation(position, Int32.Parse(points), name);
+            //Isvalai collection, pasiimi visus locationus is database ir juos displayini (po viena?)
         }
         public int WriteReadFile()
         {
