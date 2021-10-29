@@ -17,7 +17,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="Email: " FontAttributes="Bold"/>
-                                <Span Text="borntofeel@pepemail.com" TextColor="Silver"/>
+                                <Span x:Name="currentEmail"  TextColor="Silver"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
