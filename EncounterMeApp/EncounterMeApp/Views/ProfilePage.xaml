@@ -3,17 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:views="clr-namespace:EncounterMeApp.Views"
              xmlns:viewmodels="clr-namespace:EncounterMeApp.ViewModels"
-             BackgroundColor="Orange"
+             BackgroundColor="#59C3C3"
              x:Class="EncounterMeApp.Views.ProfilePage">
     <ContentPage.Content>
         <ScrollView >
         <StackLayout>
             <Image Source="Katty" Aspect="AspectFill" HeightRequest="630" WidthRequest="300"/>
             <Frame HasShadow="False" CornerRadius="40" Margin="0,-50,0,0" VerticalOptions="FillAndExpand">
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,*,*">
-                    <Button Grid.Row="0" Grid.Column="2" HeightRequest="56" WidthRequest="56" CornerRadius="28" BackgroundColor="AntiqueWhite" ImageSource="Phone" VerticalOptions="Start" HorizontalOptions="End" Margin="0,-50,0,0"/>
-                    <Button Grid.Row="0" Grid.Column="2" HeightRequest="56" WidthRequest="56" CornerRadius="28" BackgroundColor="AntiqueWhite" ImageSource="Correo" VerticalOptions="Start" HorizontalOptions="Start" Margin="0,-50,0,0"/>
-                    <Label x:Name="nicknameLabel" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" FontSize="25" FontAttributes="Bold" Padding="20,10,0,0"/>
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,*,*">
+                        <Label x:Name="nicknameLabel" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" FontSize="25" FontAttributes="Bold" Padding="20,10,0,0"/>
                     <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Bugtown" Padding ="20,10,0,0" TextColor="Silver"/>
                     <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Padding="20,0,0,0">
                         <Label.FormattedText>
@@ -31,7 +29,7 @@
                     <Label x:Name ="visitedPlacesLabel" Grid.Row="5" Grid.Column="1" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                     <Label x:Name ="ownedPlacesLabel" Grid.Row="5" Grid.Column="2" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
 
-                    <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Text="Follow" FontAttributes="Bold" VerticalOptions="End" BackgroundColor="AntiqueWhite" TextColor="White"/>
+                    <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Text="Follow" FontAttributes="Bold" VerticalOptions="End" BackgroundColor="#F45B69" TextColor="White"/>
 
                 </Grid>
 
