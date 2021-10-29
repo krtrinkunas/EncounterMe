@@ -8,22 +8,22 @@
         <StackLayout Padding="0">
             <Grid>
                 <StackLayout Padding="0" Margin="0">
-                <Frame BackgroundColor="LightGreen" HeightRequest="130" HorizontalOptions="FillAndExpand">
+                <Frame BackgroundColor="#59C3C3" HeightRequest="130" HorizontalOptions="FillAndExpand">
                         
                 </Frame>
                 </StackLayout>
                 <StackLayout Margin="15,110,15,0">
                     
-                <Frame BackgroundColor="White" HasShadow="True" HeightRequest="450" HorizontalOptions="FillAndExpand">
+                <Frame BackgroundColor="WHITE" HasShadow="True" HeightRequest="450" HorizontalOptions="FillAndExpand">
                     <StackLayout>
                         <StackLayout HorizontalOptions="CenterAndExpand">
                             <Label Text="SIGN IN" TextColor="Black" FontSize="Medium" FontAttributes="Bold" />
                         </StackLayout>
 
                     <StackLayout Margin="0,25,0,0">
-                        <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" Margin="0" CornerRadius="50" HorizontalOptions="FillAndExpand">
+                        <Frame BackgroundColor="#EBEBEB" BorderColor="DarkGray" Padding="0" Margin="0" CornerRadius="50" HorizontalOptions="FillAndExpand">
                             <StackLayout Orientation="Horizontal">
-                                <Frame BackgroundColor="AliceBlue" CornerRadius="50" HeightRequest="35" WidthRequest="35" Padding="0" HorizontalOptions="Start" Margin="7">
+                                <Frame BackgroundColor="#OC1B33" CornerRadius="50" HeightRequest="35" WidthRequest="35" Padding="0" HorizontalOptions="Start" Margin="7">
                                                
                                 </Frame>
 
@@ -31,9 +31,9 @@
                             </StackLayout>
                         </Frame>
                         
-                        <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" Margin="0,20,0,0" CornerRadius="50" HorizontalOptions="FillAndExpand">
+                        <Frame BackgroundColor="#EBEBEB" BorderColor="DarkGray" Padding="0" Margin="0,20,0,0" CornerRadius="50" HorizontalOptions="FillAndExpand">
                              <StackLayout Orientation="Horizontal">
-                                  <Frame BackgroundColor="AliceBlue" CornerRadius="50" HeightRequest="35" WidthRequest="35" Padding="0" HorizontalOptions="Start" Margin="7">
+                                  <Frame BackgroundColor="#OC1B33" CornerRadius="50" HeightRequest="35" WidthRequest="35" Padding="0" HorizontalOptions="Start" Margin="7">
 
                                   </Frame>
 
@@ -48,7 +48,7 @@
                         <Label Text="Forgot Password" HorizontalTextAlignment="End" TextColor="DarkSeaGreen" HorizontalOptions="EndAndExpand" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                     </StackLayout>
                         
-                    <Button Text="SIGN IN" BackgroundColor="Purple" TextColor="White" FontAttributes="Bold" CornerRadius="30"/>
+                    <Button Text="SIGN IN" BackgroundColor="#F45B69" TextColor="White" FontAttributes="Bold" CornerRadius="30"/>
 
                     <StackLayout>
 
