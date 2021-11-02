@@ -7,13 +7,12 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace Api.PlayerController
+namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class PlayerController : ControllerBase
     {
-
         public static List<Player> Players { get; } = new List<Player>();
         // GET: api/Player
         [HttpGet]

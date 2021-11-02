@@ -10,8 +10,7 @@ namespace EncounterMeApp.Services
 {
     public class InternetPlayerService
     {
-        static string baseUrl = "http://10.0.2.2:5000";
-
+        static string baseUrl = "http://10.0.2.2:5000"; //???
         static HttpClient client;
 
         public InternetPlayerService()
