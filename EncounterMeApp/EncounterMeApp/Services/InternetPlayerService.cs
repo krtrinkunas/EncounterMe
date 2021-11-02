@@ -22,7 +22,7 @@ namespace EncounterMeApp.Services
             };
         }
 
-        public async Task<IEnumerable<Player>> GetPlayer()
+        public static async Task<IEnumerable<Player>> GetPlayers()
         {
             var json = await client.GetStringAsync("api/Player");
             var players = JsonConvert.DeserializeObject<IEnumerable<Player>>(json);
@@ -38,7 +38,8 @@ namespace EncounterMeApp.Services
                 NickName = nickName,
                 Points = points,
                 ProfilePic = image,
-                Id = random.Next(0, 10000)
+                Id = random.Next(0, 10000),
+                Email = "random@mail.com"
             };
 
             var json = JsonConvert.SerializeObject(player);

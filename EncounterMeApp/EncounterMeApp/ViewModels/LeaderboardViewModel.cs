@@ -52,12 +52,12 @@ namespace EncounterMeApp.ViewModels
         {
             var nickName = await App.Current.MainPage.DisplayPromptAsync("Name", "Name goes here");
             var points = await App.Current.MainPage.DisplayPromptAsync("Points", "Points goes here");
-            await PlayerDatabase.AddPlayer(nickName, Int32.Parse(points));
+            await InternetPlayerService.AddPlayer(nickName, Int32.Parse(points));
             await Refresh();
         }
         async Task Remove(Player player)
         {
-            await PlayerDatabase.RemovePlayer(player.Id);
+            await InternetPlayerService.RemovePlayer(player.Id);
             await Refresh();
         }
         async Task Refresh()
@@ -68,7 +68,7 @@ namespace EncounterMeApp.ViewModels
 
             Player.Clear();
 
-            var players = await PlayerDatabase.GetPlayers();
+            var players = await InternetPlayerService.GetPlayers();
 
             Player.AddRange(players);
             //Player.SortDesc();
