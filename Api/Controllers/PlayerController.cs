@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EncounterMeApp.Models;
+using Microsoft.AspNetCore.Mvc;
 //using MyCoffeeApp.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -6,11 +7,11 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace MyCoffeeApp.WebAPI.Controllers
+namespace Api.PlayerController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CoffeeController : ControllerBase
+    public class PlayerController : ControllerBase
     {
 
         public static List<Player> Players { get; } = new List<Player>();
