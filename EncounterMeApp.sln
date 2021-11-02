@@ -7,9 +7,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncounterMeApp.Android", "E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncounterMeApp.iOS", "EncounterMeApp\EncounterMeApp.iOS\EncounterMeApp.iOS.csproj", "{59B94A78-80EE-48A0-A4C2-EC397C2CD135}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncounterMeApp", "EncounterMeApp\EncounterMeApp\EncounterMeApp.csproj", "{9C4E907E-FCC7-437F-96ED-DD3C1B1D8E55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EncounterMeApp", "EncounterMeApp\EncounterMeApp\EncounterMeApp.csproj", "{9C4E907E-FCC7-437F-96ED-DD3C1B1D8E55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{0E02209B-509B-4061-BD0A-99B4EBBF7078}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{F6BB1557-BB7E-48A3-8273-57BDBFC686FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{A70AD400-FB5E-4189-917C-39B6194DEF00}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedModels", "SharedModels\SharedModels.shproj", "{0AD8297E-7615-4804-986A-4EA3CCE53836}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedModels\SharedModels.projitems*{0ad8297e-7615-4804-986a-4ea3cce53836}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|iPhone = Debug|iPhone
@@ -73,9 +84,25 @@ Global
 		{9C4E907E-FCC7-437F-96ED-DD3C1B1D8E55}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{9C4E907E-FCC7-437F-96ED-DD3C1B1D8E55}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{9C4E907E-FCC7-437F-96ED-DD3C1B1D8E55}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{F6BB1557-BB7E-48A3-8273-57BDBFC686FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6BB1557-BB7E-48A3-8273-57BDBFC686FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6BB1557-BB7E-48A3-8273-57BDBFC686FC}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{F6BB1557-BB7E-48A3-8273-57BDBFC686FC}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{F6BB1557-BB7E-48A3-8273-57BDBFC686FC}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{F6BB1557-BB7E-48A3-8273-57BDBFC686FC}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{F6BB1557-BB7E-48A3-8273-57BDBFC686FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6BB1557-BB7E-48A3-8273-57BDBFC686FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6BB1557-BB7E-48A3-8273-57BDBFC686FC}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{F6BB1557-BB7E-48A3-8273-57BDBFC686FC}.Release|iPhone.Build.0 = Release|Any CPU
+		{F6BB1557-BB7E-48A3-8273-57BDBFC686FC}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{F6BB1557-BB7E-48A3-8273-57BDBFC686FC}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F6BB1557-BB7E-48A3-8273-57BDBFC686FC} = {0E02209B-509B-4061-BD0A-99B4EBBF7078}
+		{0AD8297E-7615-4804-986A-4EA3CCE53836} = {A70AD400-FB5E-4189-917C-39B6194DEF00}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {17ACD0CE-D18D-41FD-8B7F-F9FD2654E5D5}
