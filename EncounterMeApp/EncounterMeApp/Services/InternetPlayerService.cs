@@ -1,5 +1,6 @@
 ﻿using EncounterMeApp.Models;
 using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -21,6 +22,7 @@ namespace EncounterMeApp.Services
                 BaseAddress = new Uri(baseUrl)
             };
         }
+
 
         public async Task<IEnumerable<Player>> GetPlayers()
         {

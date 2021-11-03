@@ -1,9 +1,12 @@
 ﻿using EncounterMeApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using SQLite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 //Use db instead of collection
 namespace Api.Controllers
@@ -12,48 +15,101 @@ namespace Api.Controllers
     [ApiController]
     public class PlayerController : ControllerBase
     {
-        public static List<Player> Players { get; } = new List<Player>();
-        // GET: api/Player
-        [HttpGet]
-        public IEnumerable<Player> Get()
+        //public static List<Player> Players { get; } = new List<Player>();
+
+        SQLiteAsyncConnection db;
+
+        async Task Init()
         {
-            return Players;
+            if (db != null)
+            {
+                return;
+            }
+
+            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "PlayerDatabase.db");
+
+            db = new SQLiteAsyncConnection(databasePath);
+
+            await db.CreateTableAsync<Player>();
         }
 
+        // GET: api/Player
+        [HttpGet]
+        public async Task<IEnumerable<Player>> Get()
+        {
+            try
+            {
+                await Init();
+                var players = await db.Table<Player>().ToListAsync();
+                return players;
+            }
+            catch(Exception ex)
+            {
+            }
+
+            return null;
+            
+        }
+
+        /*
         // GET api/Player/5
         [HttpGet("{id}")]
         public Player Get(int id)
         {
             return Players.FirstOrDefault(c => c.Id == id);
         }
+        */
 
         // POST api/Player
         [HttpPost]
-        public void Post([FromBody] Player value)
+        public async void Post([FromBody] Player value)
         {
-            Players.Add(value);
+            try
+            {
+                await Init();
+                await db.InsertAsync(value);
+            }
+            catch(Exception ex)
+            {
+
+            }
+
+            //Players.Add(value);
         }
 
+        /*
         // PUT api/Player/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Player value)
+        public async Task PutAsync(int id, [FromBody] Player value)
         {
-            var coffee = Players.FirstOrDefault(c => c.Id == id);
+            var coffee = await db.(c => c.Id == id);
             if (coffee == null)
                 return;
 
             coffee = value;
         }
+        */
 
         // DELETE api/<PlayerController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async void Delete(int id)
         {
+            try
+            {
+                await Init();
+                await db.DeleteAsync<Player>(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            /*
             var coffee = Players.FirstOrDefault(c => c.Id == id);
             if (coffee == null)
                 return;
 
             Players.Remove(coffee);
+            */
         }
     }
 }
