@@ -14,6 +14,7 @@ namespace EncounterMeApp.ViewModels
     {
         public ObservableRangeCollection<Player> Player { get; set; }
 
+        public InternetPlayerService service = new InternetPlayerService();
         public Player this[int key]
         {
             get => Player[key];
@@ -52,12 +53,12 @@ namespace EncounterMeApp.ViewModels
         {
             var nickName = await App.Current.MainPage.DisplayPromptAsync("Name", "Name goes here");
             var points = await App.Current.MainPage.DisplayPromptAsync("Points", "Points goes here");
-            await InternetPlayerService.AddPlayer(nickName, Int32.Parse(points));
+            await service.AddPlayer(nickName, Int32.Parse(points));
             await Refresh();
         }
         async Task Remove(Player player)
         {
-            await InternetPlayerService.RemovePlayer(player.Id);
+            await service.RemovePlayer(player.Id);
             await Refresh();
         }
         async Task Refresh()
@@ -68,7 +69,7 @@ namespace EncounterMeApp.ViewModels
 
             Player.Clear();
 
-            var players = await InternetPlayerService.GetPlayers();
+            var players = await service.GetPlayers();
 
             Player.AddRange(players);
             //Player.SortDesc();
