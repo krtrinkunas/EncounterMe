@@ -1,12 +1,11 @@
 ﻿using EncounterMeApp.Models;
 using Microsoft.AspNetCore.Mvc;
-//using MyCoffeeApp.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
+//Use db instead of collection
 namespace Api.Controllers
 {
     [Route("api/[controller]")]

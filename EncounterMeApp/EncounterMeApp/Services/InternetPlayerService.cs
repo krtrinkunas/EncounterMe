@@ -11,34 +11,19 @@ namespace EncounterMeApp.Services
     public class InternetPlayerService
     {
 
-        string baseUrl = "http://10.0.2.2:20082"; //???
+        string baseUrl = "http://10.0.2.2:20082";
         HttpClient client;
 
         public InternetPlayerService()
         {
-            client = new HttpClient(/*GetInsecureHandler()*/)
+            client = new HttpClient()
             {
                 BaseAddress = new Uri(baseUrl)
             };
         }
 
-        // This method must be in a class in a platform project, even if
-        // the HttpClient object is constructed in a shared project.
-        public HttpClientHandler GetInsecureHandler()
-        {
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
-            {
-                if (cert.Issuer.Equals("CN=localhost"))
-                    return true;
-                return errors == System.Net.Security.SslPolicyErrors.None;
-            };
-            return handler;
-        }
-
-
         public async Task<IEnumerable<Player>> GetPlayers()
-        { //try catch
+        {
             try
             {
                 var httpResponse = await client.GetAsync("api/Player");
