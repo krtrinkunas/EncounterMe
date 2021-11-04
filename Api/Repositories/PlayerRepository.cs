@@ -31,9 +31,20 @@ namespace Api.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Player>> GetPlayers()
+        public async Task<IEnumerable<Player>> Get()
         {
             return await _context.Players.ToListAsync();
+        }
+
+        public async Task<Player> Get(int id)
+        {
+            return await _context.Players.FindAsync(id);
+        }
+
+        public async Task Update(Player player)
+        {
+            _context.Entry(player).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
     }
 }

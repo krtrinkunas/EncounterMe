@@ -31,6 +31,7 @@ namespace Api
         {
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             services.AddDbContext<PlayerContext>(o => o.UseSqlite("Data source=players.db"));
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

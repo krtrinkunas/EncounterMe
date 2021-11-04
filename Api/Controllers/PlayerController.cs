@@ -1,4 +1,5 @@
-﻿using EncounterMeApp.Models;
+﻿using Api.Repositories;
+using EncounterMeApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using SQLite;
 using System;
@@ -15,101 +16,94 @@ namespace Api.Controllers
     [ApiController]
     public class PlayerController : ControllerBase
     {
+        private IPlayerRepository _playerRepository;
+
         //public static List<Player> Players { get; } = new List<Player>();
 
-        SQLiteAsyncConnection db;
 
-        async Task Init()
+        public PlayerController(IPlayerRepository playerRepository)
         {
-            if (db != null)
-            {
-                return;
-            }
-
-            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "PlayerDatabase.db");
-
-            db = new SQLiteAsyncConnection(databasePath);
-
-            await db.CreateTableAsync<Player>();
+            _playerRepository = playerRepository;
         }
+
 
         // GET: api/Player
         [HttpGet]
-        public async Task<IEnumerable<Player>> Get()
+        public async Task<IEnumerable<Player>> GetPlayers()
         {
             try
             {
-                await Init();
-                var players = await db.Table<Player>().ToListAsync();
-                return players;
+                return await _playerRepository.Get();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+               
             }
 
             return null;
             
         }
 
-        /*
         // GET api/Player/5
         [HttpGet("{id}")]
-        public Player Get(int id)
+        public async Task<ActionResult<Player>> GetSingle(int id)
         {
-            return Players.FirstOrDefault(c => c.Id == id);
+            return await _playerRepository.Get(id);
         }
-        */
-
+        
         // POST api/Player
         [HttpPost]
-        public async void Post([FromBody] Player value)
+        public async Task<ActionResult<Player>> Post([FromBody] Player value)
         {
             try
             {
-                await Init();
-                await db.InsertAsync(value);
+                var newPlayer = await _playerRepository.Create(value);
+                return CreatedAtAction(nameof(GetPlayers), new { id = newPlayer.Id }, newPlayer);
             }
             catch(Exception ex)
             {
 
             }
 
-            //Players.Add(value);
+            return null;
         }
 
-        /*
         // PUT api/Player/5
         [HttpPut("{id}")]
-        public async Task PutAsync(int id, [FromBody] Player value)
+        public async Task<ActionResult<Player>> Put(int id, [FromBody] Player value)
         {
-            var coffee = await db.(c => c.Id == id);
-            if (coffee == null)
-                return;
+            if(id != value.Id)
+            {
+                return BadRequest();
+            }
 
-            coffee = value;
+            await _playerRepository.Update(value);
+            return NoContent();
         }
-        */
+
 
         // DELETE api/<PlayerController>/5
         [HttpDelete("{id}")]
-        public async void Delete(int id)
+        public async Task<ActionResult<Player>> Delete(int id)
         {
             try
             {
-                await Init();
-                await db.DeleteAsync<Player>(id);
+                var playerToDelete = await _playerRepository.Get(id);
+                if (playerToDelete == null)
+                {
+                    return NotFound();
+                }
+
+                await _playerRepository.Delete(playerToDelete.Id);
+                return NoContent();
             }
             catch (Exception ex)
             {
 
             }
-            /*
-            var coffee = Players.FirstOrDefault(c => c.Id == id);
-            if (coffee == null)
-                return;
 
-            Players.Remove(coffee);
-            */
+            return null;
         }
+
     }
 }

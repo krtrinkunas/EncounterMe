@@ -8,10 +8,10 @@ namespace Api.Repositories
 {
     public interface IPlayerRepository
     {
-        Task<IEnumerable<Player>> GetPlayers();
-        //Task<Player> GetSingle(int id);
+        Task<IEnumerable<Player>> Get();
+        Task<Player> Get(int id);
         Task<Player> Create(Player player);
-        //Task Update(Player player);
+        Task Update(Player player);
         Task Delete(int id);
         
 
