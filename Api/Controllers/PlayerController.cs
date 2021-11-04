@@ -27,7 +27,7 @@ namespace Api.Controllers
         }
 
 
-        // GET: api/Player
+        // GET: api/Players
         [HttpGet]
         public async Task<IEnumerable<Player>> GetPlayers()
         {
@@ -44,14 +44,14 @@ namespace Api.Controllers
             
         }
 
-        // GET api/Player/5
+        // GET api/Players/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Player>> GetSingle(int id)
         {
             return await _playerRepository.Get(id);
         }
         
-        // POST api/Player
+        // POST api/Players
         [HttpPost]
         public async Task<ActionResult<Player>> Post([FromBody] Player value)
         {
@@ -68,7 +68,7 @@ namespace Api.Controllers
             return null;
         }
 
-        // PUT api/Player/5
+        // PUT api/Players/5
         [HttpPut("{id}")]
         public async Task<ActionResult<Player>> Put(int id, [FromBody] Player value)
         {
