@@ -53,12 +53,13 @@ namespace EncounterMeApp.ViewModels
         {
             var nickName = await App.Current.MainPage.DisplayPromptAsync("Name", "Name goes here");
             var points = await App.Current.MainPage.DisplayPromptAsync("Points", "Points goes here");
-            await service.AddPlayer(nickName, Int32.Parse(points));
+            var newPlayer = new Player { NickName = nickName, Points = Int32.Parse(points), Email = "email@email.com", Id = 1, LocationsOwned = 26, LocationsVisited = 54, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0 };
+            await service.AddPlayer(newPlayer);
             await Refresh();
         }
         async Task Remove(Player player)
         {
-            await service.RemovePlayer(player.Id);
+            await service.DeletePlayer(player);
             await Refresh();
         }
         async Task Refresh()

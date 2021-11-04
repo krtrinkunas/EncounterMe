@@ -25,7 +25,6 @@ namespace EncounterMeApp.Services
             };
         }
 
-
         /*
         public InternetPlayerService(HttpClient httpClient)
         {
@@ -36,7 +35,7 @@ namespace EncounterMeApp.Services
 
         public async Task AddPlayer(Player player)
         {
-            var response = await _httpClient.PostAsync("api/Players",
+            var response = await _httpClient.PostAsync("api/Player",
                 new StringContent(JsonConvert.SerializeObject(player), Encoding.UTF8, "application/json"));
 
             response.EnsureSuccessStatusCode();
@@ -44,14 +43,14 @@ namespace EncounterMeApp.Services
 
         public async Task DeletePlayer(Player player)
         {
-            var response = await _httpClient.DeleteAsync($"Players/{player.Id}"); //?
+            var response = await _httpClient.DeleteAsync($"api/Player/{player.Id}"); //?
 
             response.EnsureSuccessStatusCode();
         }
 
         public async Task UpdatePlayer(Player player)
         {
-            var response = await _httpClient.PutAsync($"Players/{player.Id}", //?
+            var response = await _httpClient.PutAsync($"api/Player/{player.Id}", //?
                 new StringContent(JsonConvert.SerializeObject(player), Encoding.UTF8, "application/json"));
 
             response.EnsureSuccessStatusCode();
@@ -59,7 +58,7 @@ namespace EncounterMeApp.Services
 
         public async Task<Player> GetPlayer(int id)
         {
-            var response = await _httpClient.GetAsync($"api/Players/{id}"); //?
+            var response = await _httpClient.GetAsync($"api/Player/{id}"); //?
 
             response.EnsureSuccessStatusCode();
 
@@ -71,7 +70,7 @@ namespace EncounterMeApp.Services
 
         public async Task<IEnumerable<Player>> GetPlayers()
         {
-            var response = await _httpClient.GetAsync("api/Players"); //?
+            var response = await _httpClient.GetAsync("api/Player"); //?
 
             response.EnsureSuccessStatusCode();
 
