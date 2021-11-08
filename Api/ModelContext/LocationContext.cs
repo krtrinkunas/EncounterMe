@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace Api.ModelContext
 {
-    public class PlayerContext : DbContext
+    public class LocationContext : DbContext
     {
-        public PlayerContext(DbContextOptions<PlayerContext> options)
+
+        public LocationContext(DbContextOptions<LocationContext> options)
             : base(options)
         {
             Database.EnsureCreated();
         }
 
-        public DbSet<Player> Players { get; set; }
+        public DbSet<MyLocation> Locations { get; set; }
     }
 }
