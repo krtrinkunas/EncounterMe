@@ -40,7 +40,16 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<MyLocation>> GetSingle(int id)
         {
-            return await _locationRepository.Get(id);
+            try
+            {
+                return await _locationRepository.Get(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return null;
         }
 
         [HttpPost]
