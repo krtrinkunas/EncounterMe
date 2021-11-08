@@ -31,18 +31,6 @@ namespace EncounterMeApp.ViewModels
             Player = new ObservableRangeCollection<Player>();
 
             //var image = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png";
-            /*
-            Player.Add(new Player { NickName = "Destroyer3000", Points = 2894, ProfilePic = image });
-            Player.Add(new Player { NickName = "Enjoyer69420", Points = 468465, ProfilePic = image });
-            Player.Add(new Player { NickName = "Dinosower", Points = 4881, ProfilePic = image });
-            Player.Add(new Player { NickName = "GetRekt", Points = 89610, ProfilePic = image });
-            Player.Add(new Player { NickName = "1336", Points = 8412, ProfilePic = image });
-            Player.Add(new Player { NickName = "Ninja", Points = 21, ProfilePic = image });
-            Player.Add(new Player { NickName = "Shroud", Points = 51127, ProfilePic = image });
-            Player.Add(new Player { NickName = "PashaBiceps", Points = 819856, ProfilePic = image });
-            Player.Add(new Player { NickName = "NoScope", Points = 754, ProfilePic = image });*/
-
-            //Player.SortDesc();
 
             RefreshCommand = new AsyncCommand(Refresh);
             AddCommand = new AsyncCommand(Add);
