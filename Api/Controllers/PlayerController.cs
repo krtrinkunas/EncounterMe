@@ -48,7 +48,16 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Player>> GetSingle(int id)
         {
-            return await _playerRepository.Get(id);
+            try
+            {
+                return await _playerRepository.Get(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return null;
         }
         
         // POST api/Players
