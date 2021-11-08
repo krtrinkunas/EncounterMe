@@ -17,6 +17,7 @@ namespace EncounterMeApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MapPage : ContentPage
     {
+        public InternetLocationService service = new InternetLocationService();
         public List<MyLocation> LocationList;
         public MapPage()
         {
@@ -34,7 +35,7 @@ namespace EncounterMeApp.Views
         public async void DisplayExistingPins()
         {
             LocationList.Clear();
-            var locations = await LocationDatabase.GetLocations();
+            var locations = await service.GetLocations();
 
             LocationList.AddRange(locations);
 
