@@ -23,13 +23,20 @@ namespace EncounterMeApp.Services
 
             db = new SQLiteAsyncConnection(databasePath);
 
-            await db.CreateTableAsync<MapPage.Location>();
+            await db.CreateTableAsync<MyLocation>();
         }
 
-        public static async Task AddLocation(Position pos, int point, string name, string own = "No owner")
+        public static async Task AddLocation(double posX, double posY, int point, string name, string own = "No owner")
         {
             await Init();
-            var location = new MapPage.Location(pos, point, name, own);
+            var location = new MyLocation
+            {
+                positionX = posX,
+                positionY = posY,
+                NAME = name,
+                points = point,
+                owner = own
+            };
 
             var id = await db.InsertAsync(location);
         }
@@ -38,14 +45,14 @@ namespace EncounterMeApp.Services
         {
             await Init();
 
-            await db.DeleteAsync<MapPage.Location>(id);
+            await db.DeleteAsync<MyLocation>(id);
         }
 
-        public static async Task<IEnumerable<MapPage.Location>> GetLocations()
+        public static async Task<IEnumerable<MyLocation>> GetLocations()
         {
             await Init();
 
-            var locations = await db.Table<MapPage.Location>().ToListAsync();
+            var locations = await db.Table<MyLocation>().ToListAsync();
             return locations;
         }
     }
