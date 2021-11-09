@@ -17,9 +17,11 @@ namespace EncounterMeApp.Views
     {
         public List<Player> PlayerList;
         public Player CurrentPlayer;
+        IPlayerService playerService;
         public LoginPage()
         {
             InitializeComponent();
+            playerService = DependencyService.Get<IPlayerService>();
         }
 
         private async void btnRegister_Clicked(object sender, EventArgs e)
@@ -34,7 +36,7 @@ namespace EncounterMeApp.Views
 
             PlayerList.Clear();
 
-            var players = await PlayerDatabase.GetPlayers();
+            var players = await playerService.GetPlayers();
 
             PlayerList.AddRange(players);
 
