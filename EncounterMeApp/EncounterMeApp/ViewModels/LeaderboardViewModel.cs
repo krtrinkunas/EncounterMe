@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace EncounterMeApp.ViewModels
 {
@@ -14,7 +15,7 @@ namespace EncounterMeApp.ViewModels
     {
         public ObservableRangeCollection<Player> Player { get; set; }
 
-        public InternetPlayerService service = new InternetPlayerService();
+        IPlayerService playerService;
         public Player this[int key]
         {
             get => Player[key];
@@ -35,6 +36,8 @@ namespace EncounterMeApp.ViewModels
             RefreshCommand = new AsyncCommand(Refresh);
             AddCommand = new AsyncCommand(Add);
             RemoveCommand = new AsyncCommand<Player>(Remove);
+
+            playerService = DependencyService.Get<IPlayerService>();
         }
 
         async Task Add()
@@ -42,12 +45,12 @@ namespace EncounterMeApp.ViewModels
             var nickName = await App.Current.MainPage.DisplayPromptAsync("Name", "Name goes here");
             var points = await App.Current.MainPage.DisplayPromptAsync("Points", "Points goes here");
             var newPlayer = new Player { NickName = nickName, Points = Int32.Parse(points), Email = "email@email.com", Id = 1, LocationsOwned = 26, LocationsVisited = 54, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0 };
-            await service.AddPlayer(newPlayer);
+            await playerService.AddPlayer(newPlayer);
             await Refresh();
         }
         async Task Remove(Player player)
         {
-            await service.DeletePlayer(player);
+            await playerService.DeletePlayer(player);
             await Refresh();
         }
         async Task Refresh()
@@ -58,7 +61,7 @@ namespace EncounterMeApp.ViewModels
 
             Player.Clear();
 
-            var players = await service.GetPlayers();
+            var players = await playerService.GetPlayers();
 
             Player.AddRange(players);
             //Player.SortDesc();

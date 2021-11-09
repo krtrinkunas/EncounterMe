@@ -1,11 +1,14 @@
 ﻿using EncounterMeApp.Models;
+using EncounterMeApp.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(InternetLocationService))]
 namespace EncounterMeApp.Services
 {
     public class InternetLocationService : ILocationService
@@ -31,14 +34,14 @@ namespace EncounterMeApp.Services
 
         public async Task DeleteLocation(MyLocation location)
         {
-            var response = await _httpClient.DeleteAsync($"api/Location/{location.Id}"); //?
+            var response = await _httpClient.DeleteAsync($"api/Location/{location.Id}");
 
             response.EnsureSuccessStatusCode();
         }
 
         public async Task<MyLocation> GetLocation(int id)
         {
-            var response = await _httpClient.GetAsync($"api/Location/{id}"); //?
+            var response = await _httpClient.GetAsync($"api/Location/{id}");
 
             response.EnsureSuccessStatusCode();
 
@@ -50,7 +53,7 @@ namespace EncounterMeApp.Services
 
         public async Task<IEnumerable<MyLocation>> GetLocations()
         {
-            var response = await _httpClient.GetAsync("api/Location"); //?
+            var response = await _httpClient.GetAsync("api/Location");
 
             response.EnsureSuccessStatusCode();
 

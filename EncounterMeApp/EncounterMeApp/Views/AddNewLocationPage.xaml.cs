@@ -16,11 +16,14 @@ namespace EncounterMeApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddNewLocationPage : ContentPage
     {
-        public InternetLocationService service = new InternetLocationService();
+        //public InternetLocationService service = new InternetLocationService();
+        ILocationService locationService;
         public AddNewLocationPage()
         {
             InitializeComponent();
             DisplayCurrentLocation();
+
+            locationService = DependencyService.Get<ILocationService>();
         }
 
         private async void MyMap_MapClickedAsync(object sender, Xamarin.Forms.Maps.MapClickedEventArgs e)
@@ -35,7 +38,7 @@ namespace EncounterMeApp.Views
                 Random random = new Random();
                 var newId = random.Next(100);
                 var newLocation = new MyLocation{ NAME = name, points = Int32.Parse(points), positionX = xCoord, positionY = yCoord, owner = "NewOwner", Id = newId};
-                await service.AddLocation(newLocation);
+                await locationService.AddLocation(newLocation);
                 //await LocationDatabase.AddLocation(xCoord, yCoord, Int32.Parse(points), name);
                 
             }
