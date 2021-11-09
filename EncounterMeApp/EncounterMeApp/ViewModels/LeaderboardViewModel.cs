@@ -42,11 +42,17 @@ namespace EncounterMeApp.ViewModels
 
         async Task Add()
         {
-            var nickName = await App.Current.MainPage.DisplayPromptAsync("Name", "Name goes here");
-            var points = await App.Current.MainPage.DisplayPromptAsync("Points", "Points goes here");
-            var newPlayer = new Player { NickName = nickName, Points = Int32.Parse(points), Email = "email@email.com", Id = 1, LocationsOwned = 26, LocationsVisited = 54, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0 };
-            await playerService.AddPlayer(newPlayer);
-            await Refresh();
+
+            //var nickName = await App.Current.MainPage.DisplayPromptAsync("Name", "Name goes here");
+            //var points = await App.Current.MainPage.DisplayPromptAsync("Points", "Points goes here");
+            //await PlayerDatabase.AddPlayer(nickName, Int32.Parse(points));
+            //await Refresh();
+            
+            //var nickName = await App.Current.MainPage.DisplayPromptAsync("Name", "Name goes here");
+            //var points = await App.Current.MainPage.DisplayPromptAsync("Points", "Points goes here");
+            //var newPlayer = new Player { NickName = nickName, Points = Int32.Parse(points), Email = "email@email.com", Id = 1, LocationsOwned = 26, LocationsVisited = 54, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0 };
+            //await playerService.AddPlayer(newPlayer);
+            //await Refresh();
         }
         async Task Remove(Player player)
         {

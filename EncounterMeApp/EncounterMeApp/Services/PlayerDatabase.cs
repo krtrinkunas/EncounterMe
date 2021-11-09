@@ -24,7 +24,7 @@ namespace EncounterMeApp.Services
             await db.CreateTableAsync<Player>();
         }
 
-        public static async Task AddPlayer(string nickName, int points)
+        public static async Task AddPlayer(string nickName, int points, string firstname, string lastname, string password, string email)
         {
             await Init();
             var image = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png";
@@ -32,6 +32,10 @@ namespace EncounterMeApp.Services
             {
                 NickName = nickName,
                 Points = points,
+                Firstname = firstname,
+                Lastname = lastname,
+                Email = email,
+                Password = password,
                 ProfilePic = image
             };
 
