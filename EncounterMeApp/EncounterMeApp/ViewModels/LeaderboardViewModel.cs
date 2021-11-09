@@ -50,10 +50,10 @@ namespace EncounterMeApp.ViewModels
 
         async Task Add()
         {
-            var nickName = await App.Current.MainPage.DisplayPromptAsync("Name", "Name goes here");
-            var points = await App.Current.MainPage.DisplayPromptAsync("Points", "Points goes here");
-            await PlayerDatabase.AddPlayer(nickName, Int32.Parse(points));
-            await Refresh();
+            //var nickName = await App.Current.MainPage.DisplayPromptAsync("Name", "Name goes here");
+            //var points = await App.Current.MainPage.DisplayPromptAsync("Points", "Points goes here");
+            //await PlayerDatabase.AddPlayer(nickName, Int32.Parse(points));
+            //await Refresh();
         }
         async Task Remove(Player player)
         {

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:views="clr-namespace:EncounterMeApp.Views"
              xmlns:viewmodels="clr-namespace:EncounterMeApp.ViewModels"
-             x:Class="EncounterMeApp.Views.LoginPage">
+             x:Class="EncounterMeApp.Views.LoginPage"
+             Shell.FlyoutBehavior="Disabled">
     <ScrollView >
         <StackLayout Padding="0">
             <Grid>
@@ -27,7 +28,7 @@
                                                
                                 </Frame>
 
-                                <Entry Placeholder="Email" TextColor="Black" HorizontalOptions="FillAndExpand" Margin="0,0,15,0"/>
+                                <Entry x:Name="entryUserName" Placeholder="Email" TextColor="Black" HorizontalOptions="FillAndExpand" Margin="0,0,15,0"/>
                             </StackLayout>
                         </Frame>
                         
@@ -37,7 +38,7 @@
 
                                   </Frame>
 
-                                  <Entry Placeholder="Password" IsPassword="True" TextColor="Black" HorizontalOptions="FillAndExpand" Margin="0,0,15,0"/>
+                                  <Entry x:Name="entryPassword" Placeholder="Password" IsPassword="True" TextColor="Black" HorizontalOptions="FillAndExpand" Margin="0,0,15,0"/>
                              </StackLayout>
                         </Frame>
                     </StackLayout>
@@ -48,13 +49,13 @@
                         <Label Text="Forgot Password" HorizontalTextAlignment="End" TextColor="DarkSeaGreen" HorizontalOptions="EndAndExpand" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                     </StackLayout>
                         
-                    <Button Text="SIGN IN" BackgroundColor="#F45B69" TextColor="White" FontAttributes="Bold" CornerRadius="30"/>
+                    <Button x:Name="btnLogin" Text="SIGN IN" BackgroundColor="#F45B69" TextColor="White" FontAttributes="Bold" CornerRadius="30" Clicked="btnLogin_Clicked"/>
 
                     <StackLayout>
 
                         <Label Text="Still Not Connected?" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
 
-                        <Label Text="Sign Up" HorizontalTextAlignment="Center" TextColor="DarkSeaGreen" HorizontalOptions="Center" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                        <Button x:Name="btnRegister" Text="Sign Up" HorizontalOptions="Center" TextColor="DarkSeaGreen" FontAttributes="Bold" BackgroundColor="#EBEBEB" CornerRadius="30" Clicked="btnRegister_Clicked"/>
  
 
                     </StackLayout>
