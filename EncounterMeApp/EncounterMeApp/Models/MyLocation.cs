@@ -11,5 +11,6 @@ namespace EncounterMeApp.Models
         public string NAME { get; set; }
         public int points { get; set; }
         public string owner { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -29,6 +29,9 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ILocationRepository, LocationRepository>();
+            services.AddDbContext<LocationContext>(p => p.UseSqlite("Data source=locations.db"));
+
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             services.AddDbContext<PlayerContext>(o => o.UseSqlite("Data source=players.db"));
 
