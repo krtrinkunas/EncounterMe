@@ -23,7 +23,6 @@ namespace EncounterMeApp.ViewModels
         }
 
 
-
         public AsyncCommand RefreshCommand { get; }
         //public AsyncCommand AddCommand { get; }
         public AsyncCommand<Player> RemoveCommand { get; }
