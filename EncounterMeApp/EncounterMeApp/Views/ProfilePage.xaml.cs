@@ -31,7 +31,15 @@ namespace EncounterMeApp.Views
             ownedPlacesLabel.Text = App.player.LocationsOwned.ToString();
             currentEmail.Text = App.player.Email;
         }
-
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            nicknameLabel.Text = App.player.NickName;
+            pointsLabel.Text = App.player.Points.ToString();
+            visitedPlacesLabel.Text = App.player.LocationsVisited.ToString();
+            ownedPlacesLabel.Text = App.player.LocationsOwned.ToString();
+            currentEmail.Text = App.player.Email;
+        }
         /*public ProfilePage()
         {
             InitializeComponent();
@@ -42,7 +50,7 @@ namespace EncounterMeApp.Views
             ownedPlacesLabel.Text = newPlayer.Firstname;
             currentEmail.Text = newPlayer.Email;
         }*/
-        
+
         /*public ProfilePage(string username)
         {
             InitializeComponent();
