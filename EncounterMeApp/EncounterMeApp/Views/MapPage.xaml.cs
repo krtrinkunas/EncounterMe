@@ -18,14 +18,22 @@ namespace EncounterMeApp.Views
     public partial class MapPage : ContentPage
     {
         ILocationService locationService;
-        public List<MyLocation> LocationList;
+        private Lazy<List<MyLocation>> _LocationList = null;
+
+        public List<MyLocation> LocationList
+        {
+            get 
+            {
+                return _LocationList.Value; // CIA LUZTA
+            }
+        }
         public MapPage()
         {
             locationService = DependencyService.Get<ILocationService>();
             InitializeComponent();
             DisplayCurrentLocation();
 
-            LocationList = new List<MyLocation>();
+            _LocationList = new Lazy<List<MyLocation>>(() => LoadLocations().Result);
             //DisplayExistingPins();
         }
         protected override void OnAppearing()
@@ -33,12 +41,12 @@ namespace EncounterMeApp.Views
             base.OnAppearing();
             //DisplayExistingPins();
         }
-        public async void DisplayExistingPins()
+        public void DisplayExistingPins()
         {
-            LocationList.Clear();
-            var locations = await locationService.GetLocations();
+            //LocationList.Clear();
+            //var locations = await locationService.GetLocations();
 
-            LocationList.AddRange(locations);
+            //LocationList.AddRange(locations);
 
             foreach (MyLocation location in LocationList)
             {
@@ -79,6 +87,15 @@ namespace EncounterMeApp.Views
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             DisplayExistingPins();
+        }
+        public async Task<List<MyLocation>> LoadLocations()
+        {
+            List<MyLocation> temp = new List<MyLocation>();
+            var locations = await locationService.GetLocations();
+
+            temp.AddRange(locations);
+
+            return temp;
         }
     }
 }
