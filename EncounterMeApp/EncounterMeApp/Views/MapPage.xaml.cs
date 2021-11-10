@@ -26,12 +26,12 @@ namespace EncounterMeApp.Views
             DisplayCurrentLocation();
 
             LocationList = new List<MyLocation>();
-            DisplayExistingPins();
+            //DisplayExistingPins();
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            DisplayExistingPins();
+            //DisplayExistingPins();
         }
         public async void DisplayExistingPins()
         {
@@ -73,6 +73,11 @@ namespace EncounterMeApp.Views
         {
             await Navigation.PushAsync(new AddNewLocationPage());
 
+            DisplayExistingPins();
+        }
+
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
             DisplayExistingPins();
         }
     }
