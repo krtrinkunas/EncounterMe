@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using EncounterMeApp.Models;
 using EncounterMeApp.Services;
+using EncounterMeApp.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms.Maps;
 
@@ -46,6 +47,7 @@ namespace EncounterMeApp.Views
                 await playerService.UpdatePlayer(App.player);
 
                 await locationService.AddLocation(newLocation);
+
                 
             }
             await Navigation.PopToRootAsync();
