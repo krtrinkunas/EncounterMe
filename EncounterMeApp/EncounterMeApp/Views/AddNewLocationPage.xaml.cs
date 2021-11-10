@@ -26,6 +26,7 @@ namespace EncounterMeApp.Views
             locationService = DependencyService.Get<ILocationService>();
         }
 
+        //public List<MyLocation> tempList = new List<MyLocation>();
         private async void MyMap_MapClickedAsync(object sender, Xamarin.Forms.Maps.MapClickedEventArgs e)
         {
             var xCoord = e.Position.Latitude;
@@ -37,7 +38,10 @@ namespace EncounterMeApp.Views
                 var points = await App.Current.MainPage.DisplayPromptAsync("Value of your location", "Points goes here");
                 Random random = new Random();
                 var newId = random.Next(100);
-                var newLocation = new MyLocation{ NAME = name, points = Int32.Parse(points), positionX = xCoord, positionY = yCoord, owner = "NewOwner", Id = newId};
+                var newLocation = new MyLocation{ NAME = name, points = Int32.Parse(points), positionX = xCoord, positionY = yCoord, owner = App.player.NickName, Id = newId};
+               // App.player.LocationsOwned += 1;
+                //App.player.LocationsVisited += 1;
+
                 await locationService.AddLocation(newLocation);
                 //await LocationDatabase.AddLocation(xCoord, yCoord, Int32.Parse(points), name);
                 
