@@ -22,8 +22,10 @@ namespace EncounterMeApp.ViewModels
             set => Player[key] = value;
         }
 
+
+
         public AsyncCommand RefreshCommand { get; }
-        public AsyncCommand AddCommand { get; }
+        //public AsyncCommand AddCommand { get; }
         public AsyncCommand<Player> RemoveCommand { get; }
         public LeaderboardViewModel()
         {
@@ -31,29 +33,16 @@ namespace EncounterMeApp.ViewModels
 
             Player = new ObservableRangeCollection<Player>();
 
+            _ = Refresh();
             //var image = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png";
 
             RefreshCommand = new AsyncCommand(Refresh);
-            AddCommand = new AsyncCommand(Add);
+            //AddCommand = new AsyncCommand(Add);
             RemoveCommand = new AsyncCommand<Player>(Remove);
 
             playerService = DependencyService.Get<IPlayerService>();
         }
 
-        async Task Add()
-        {
-
-            //var nickName = await App.Current.MainPage.DisplayPromptAsync("Name", "Name goes here");
-            //var points = await App.Current.MainPage.DisplayPromptAsync("Points", "Points goes here");
-            //await PlayerDatabase.AddPlayer(nickName, Int32.Parse(points));
-            //await Refresh();
-            
-            //var nickName = await App.Current.MainPage.DisplayPromptAsync("Name", "Name goes here");
-            //var points = await App.Current.MainPage.DisplayPromptAsync("Points", "Points goes here");
-            //var newPlayer = new Player { NickName = nickName, Points = Int32.Parse(points), Email = "email@email.com", Id = 1, LocationsOwned = 26, LocationsVisited = 54, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0 };
-            //await playerService.AddPlayer(newPlayer);
-            //await Refresh();
-        }
         async Task Remove(Player player)
         {
             await playerService.DeletePlayer(player);
