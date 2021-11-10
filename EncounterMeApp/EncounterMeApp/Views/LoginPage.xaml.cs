@@ -40,42 +40,20 @@ namespace EncounterMeApp.Views
 
             PlayerList.AddRange(players);
 
-            /*if (Application.Current.Properties.ContainsKey("Username") && Application.Current.Properties.ContainsKey("Password"))
+            Player newPlayer = PlayerList.Find(delegate (Player play)
             {
-                var username = Application.Current.Properties["Username"] as string;
-                var password = Application.Current.Properties["Password"] as string;
-                var firstname = Application.Current.Properties["Firstname"] as string;
+                return play.NickName == entryUserName.Text && play.Password == entryPassword.Text;
+            });
 
-                if (entryUserName.Text == username && entryPassword.Text == password)
-                {
-                    DisplayAlert("Login Successful!", "Welcome " + firstname + "!", "OK");
-                }
-                else
-                {
-                    DisplayAlert("", "Login Failed!", "OK");
-                }
+            if (newPlayer != null)
+            {
+                await DisplayAlert("Login Successful!", "Welcome " + newPlayer.Firstname + "!", "OK");
+                App.player = newPlayer;
+                await Shell.Current.GoToAsync($"//{nameof(ProfilePage)}");
             }
             else
             {
-                DisplayAlert("", "Login Failed!", "OK");
-            }
-            */
-
-            foreach (Player player in PlayerList)
-            {
-                if (player.NickName == entryUserName.Text)
-                {
-                    if (player.Password == entryPassword.Text)
-                    {
-                        await DisplayAlert("Login Successful!", "Welcome " + player.Firstname + "!", "OK");
-                        App.player = player;
-                        //var Detail = new NavigationPage(new ProfilePage(player));
-
-                        await Shell.Current.GoToAsync($"//{nameof(ProfilePage)}");
-                        //Application.Current.MainPage  = new AppShell();
-                        //await Navigation.PopAsync(new AppShell());
-                    }
-                }
+                await DisplayAlert("", "Login Failed!", "OK");
             }
         }
     }

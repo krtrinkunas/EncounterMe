@@ -14,10 +14,12 @@
         <viewmodels:LeaderboardViewModel/>
     </ContentPage.BindingContext>
 
+    <!--
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddCommand}"/>
     </ContentPage.ToolbarItems>
-
+    -->
+    
     <ListView 
               ItemSelected="ListView_ItemSelected"
               ItemTapped="ListView_ItemTapped"
