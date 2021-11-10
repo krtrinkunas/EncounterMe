@@ -18,22 +18,23 @@ namespace EncounterMeApp.Views
     public partial class MapPage : ContentPage
     {
         ILocationService locationService;
-        private Lazy<List<MyLocation>> _LocationList = null;
+        public Lazy<Task<List<MyLocation>>> _LocationList = null;
 
-        public List<MyLocation> LocationList
+        /*public List<MyLocation> LocationList
         {
             get 
             {
-                return _LocationList.Value; // CIA LUZTA
+                return _LocationList.Value; 
             }
-        }
+        }*/
         public MapPage()
         {
             locationService = DependencyService.Get<ILocationService>();
             InitializeComponent();
             DisplayCurrentLocation();
+            
 
-            _LocationList = new Lazy<List<MyLocation>>(() => LoadLocations().Result);
+            _LocationList = new Lazy<Task<List<MyLocation>>>(async () => await LoadLocations());
             //DisplayExistingPins();
         }
         protected override void OnAppearing()
@@ -41,14 +42,14 @@ namespace EncounterMeApp.Views
             base.OnAppearing();
             //DisplayExistingPins();
         }
-        public void DisplayExistingPins()
+        public async void DisplayExistingPins()
         {
             //LocationList.Clear();
             //var locations = await locationService.GetLocations();
 
             //LocationList.AddRange(locations);
-
-            foreach (MyLocation location in LocationList)
+            //var list = await _LocationList.Value;
+            foreach (MyLocation location in await _LocationList.Value)
             {
                 var pin = new Pin()
                 {
@@ -85,7 +86,7 @@ namespace EncounterMeApp.Views
         }
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
-        {
+        { 
             DisplayExistingPins();
         }
         public async Task<List<MyLocation>> LoadLocations()
@@ -97,5 +98,6 @@ namespace EncounterMeApp.Views
 
             return temp;
         }
+        
     }
 }

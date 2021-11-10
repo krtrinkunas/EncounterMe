@@ -55,11 +55,13 @@ namespace EncounterMeApp.Services
         {
             try
             {
-                var response = await _httpClient.GetAsync("api/Location");
+                var Rresponse = _httpClient.GetAsync("api/Location"); // CIA LUZTA
+                var response = await Rresponse.ConfigureAwait(false);   //_httpClient.GetAsync("api/Location"); // CIA LUZTA
                 response.EnsureSuccessStatusCode();
 
                 var responseAsString = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<IEnumerable<MyLocation>>(responseAsString);
+                var kazkas = JsonConvert.DeserializeObject<IEnumerable<MyLocation>>(responseAsString);
+                return kazkas;  //JsonConvert.DeserializeObject<IEnumerable<MyLocation>>(responseAsString);
             }
             catch (Exception ex)
             {
