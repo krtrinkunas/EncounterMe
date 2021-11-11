@@ -53,22 +53,12 @@ namespace EncounterMeApp.Services
 
         public async Task<IEnumerable<MyLocation>> GetLocations()
         {
-            try
-            {
-                
-                var response = await (_httpClient.GetAsync("api/Location")).ConfigureAwait(false);
-                response.EnsureSuccessStatusCode();
 
-                var responseAsString = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<IEnumerable<MyLocation>>(responseAsString);
-            }
-            catch (Exception ex)
-            {
+            var response = await (_httpClient.GetAsync("api/Location")).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
 
-            }
-
-
-            return null;
+            var responseAsString = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<IEnumerable<MyLocation>>(responseAsString);
         }
 
         public async Task UpdateLocation(MyLocation location)
