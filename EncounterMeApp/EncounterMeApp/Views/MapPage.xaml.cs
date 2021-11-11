@@ -33,7 +33,7 @@ namespace EncounterMeApp.Views
             locationService = DependencyService.Get<ILocationService>();
             InitializeComponent();
             DisplayCurrentLocation();
-            
+
 
             _LocationList = new Lazy<Task<List<MyLocation>>>(async () => await LoadLocations());
             _MyLocationList = new Lazy<Task<List<MyLocation>>>(async () => await LoadMyLocations());
@@ -91,7 +91,7 @@ namespace EncounterMeApp.Views
         }
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
-        { 
+        {
             DisplayExistingPins(_LocationList);
         }
         private void ToolbarItem_Clicked_1(object sender, EventArgs e)
@@ -102,6 +102,7 @@ namespace EncounterMeApp.Views
         {
             mapOfVilnius.Pins.Clear();
         }
+
         public async Task<List<MyLocation>> LoadLocations()
         {
             List<MyLocation> temp = new List<MyLocation>();
