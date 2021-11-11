@@ -38,7 +38,7 @@ namespace EncounterMeApp.Services
 
             response.EnsureSuccessStatusCode();
         }
-
+        
         public async Task<MyLocation> GetLocation(int id)
         {
             var response = await _httpClient.GetAsync($"api/Location/{id}");
@@ -63,7 +63,7 @@ namespace EncounterMeApp.Services
 
         public async Task UpdateLocation(MyLocation location)
         {
-            var response = await _httpClient.PutAsync($"api/Location/{location.Id}", //?
+            var response = await _httpClient.PutAsync($"api/Location/{location.Id}",
                 new StringContent(JsonConvert.SerializeObject(location), Encoding.UTF8, "application/json"));
 
             response.EnsureSuccessStatusCode();

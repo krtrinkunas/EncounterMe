@@ -1,6 +1,9 @@
 ﻿using Api.Repositories;
 using EncounterMeApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using Serilog.Exceptions;
+using Serilog.Formatting.Json;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -9,7 +12,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-//Use db instead of collection
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
@@ -18,8 +20,14 @@ namespace Api.Controllers
     {
         private IPlayerRepository _playerRepository;
 
-        //public static List<Player> Players { get; } = new List<Player>();
+        private static string file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"log-{Date}.txt");
 
+        ILogger logger = new LoggerConfiguration()
+            .Enrich.WithExceptionDetails()
+            .WriteTo.RollingFile(
+            new JsonFormatter(renderMessage: true),
+            file)
+            .CreateLogger();
 
         public PlayerController(IPlayerRepository playerRepository)
         {
@@ -37,7 +45,7 @@ namespace Api.Controllers
             }
             catch (Exception ex)
             {
-               
+                logger.Error(ex, "Exception in GetPlayers, PlayerController");
             }
 
             return null;
@@ -54,7 +62,7 @@ namespace Api.Controllers
             }
             catch (Exception ex)
             {
-
+                logger.Error(ex, "Exception in GetSingle, PlayerController");
             }
 
             return null;
@@ -71,7 +79,7 @@ namespace Api.Controllers
             }
             catch(Exception ex)
             {
-
+                logger.Error(ex, "Exception in Post, PlayerController");
             }
 
             return null;
@@ -86,8 +94,17 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
-            await _playerRepository.Update(value);
-            return NoContent();
+            try
+            {
+                await _playerRepository.Update(value);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception in Put, PlayerController");
+            }
+
+            return null;
         }
 
 
@@ -108,7 +125,7 @@ namespace Api.Controllers
             }
             catch (Exception ex)
             {
-
+                logger.Error(ex, "Exception in Delete, PlayerController");
             }
 
             return null;

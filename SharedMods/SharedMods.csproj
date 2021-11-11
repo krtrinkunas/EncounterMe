@@ -4,4 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Serilog.Exceptions" Version="8.0.0" />
+  </ItemGroup>
+
 </Project>
