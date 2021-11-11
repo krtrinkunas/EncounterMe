@@ -5,7 +5,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Show all locations" Clicked="ToolbarItem_Clicked"/>
         <ToolbarItem Text="Show only my locations" Clicked="ToolbarItem_Clicked_1"/>
-        <ToolbarItem Text="Clear map" Clicked="ToolbarItem_Clicked_2"/>
+        <!--<ToolbarItem Text="Clear map" Clicked="ToolbarItem_Clicked_2"/>-->
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>

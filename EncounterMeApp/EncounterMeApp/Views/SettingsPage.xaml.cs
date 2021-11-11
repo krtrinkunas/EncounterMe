@@ -21,13 +21,13 @@ namespace EncounterMeApp.Views
         {
             InitializeComponent();
             playerService = DependencyService.Get<IPlayerService>();
-            ThemeSwitch.IsToggled = Preferences.Get("ThemeSwitch", false);
+            //ThemeSwitch.IsToggled = Preferences.Get("ThemeSwitch", false);
         }
 
-        private void Save_Button_Clicked(object sender, EventArgs e) //To define, what needs to be saved
+        /*private void Save_Button_Clicked(object sender, EventArgs e) //To define, what needs to be saved
         {
             Preferences.Set("ThemeSwitch", ThemeSwitch.IsToggled);
-        }
+        }*/
 
         private async void LogOut_Button_Clicked(object sender, EventArgs e)
         {

@@ -98,10 +98,10 @@ namespace EncounterMeApp.Views
         {
             DisplayExistingPins(_MyLocationList);
         }
-        private void ToolbarItem_Clicked_2(object sender, EventArgs e)
+        /*private void ToolbarItem_Clicked_2(object sender, EventArgs e)
         {
             mapOfVilnius.Pins.Clear();
-        }
+        }*/
         public async Task<List<MyLocation>> LoadLocations()
         {
             List<MyLocation> temp = new List<MyLocation>();

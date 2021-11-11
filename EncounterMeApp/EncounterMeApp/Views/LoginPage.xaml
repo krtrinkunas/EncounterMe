@@ -43,11 +43,11 @@
                         </Frame>
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal">
+                    <!--<StackLayout Orientation="Horizontal">
                         <CheckBox IsChecked="False" Color="DarkSeaGreen"/>
                         <Label Text="Remember Me" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
                         <Label Text="Forgot Password" HorizontalTextAlignment="End" TextColor="DarkSeaGreen" HorizontalOptions="EndAndExpand" FontAttributes="Bold" VerticalTextAlignment="Center"/>
-                    </StackLayout>
+                    </StackLayout>-->
                         
                     <Button x:Name="btnLogin" Text="SIGN IN" BackgroundColor="#F45B69" TextColor="White" FontAttributes="Bold" CornerRadius="30" Clicked="btnLogin_Clicked"/>
 
