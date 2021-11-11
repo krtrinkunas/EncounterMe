@@ -2,8 +2,13 @@
 using EncounterMeApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using Serilog.Exceptions;
+using Serilog.Formatting.Json;
+using Serilog.Sinks.RollingFile;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,6 +19,14 @@ namespace Api.Controllers
     public class LocationController : ControllerBase
     {
         private ILocationRepository _locationRepository;
+        private static string file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"log-{Date}.txt");
+
+        ILogger logger = new LoggerConfiguration()
+            .Enrich.WithExceptionDetails()
+            .WriteTo.RollingFile(
+            new JsonFormatter(renderMessage: true),
+            file)
+            .CreateLogger();
 
         public LocationController(ILocationRepository locationRepository)
         {
@@ -30,7 +43,7 @@ namespace Api.Controllers
             }
             catch (Exception ex)
             {
-
+                logger.Error(ex, "Exception in GetLocations, LocationController");
             }
 
             return null;
@@ -46,7 +59,7 @@ namespace Api.Controllers
             }
             catch (Exception ex)
             {
-
+                logger.Error(ex, "Exception in GetSingle, LocationController");
             }
 
             return null;
@@ -62,7 +75,7 @@ namespace Api.Controllers
             }
             catch (Exception ex)
             {
-
+                logger.Error(ex, "Exception in Post, LocationController");
             }
 
             return null;
@@ -75,9 +88,18 @@ namespace Api.Controllers
             {
                 return BadRequest();
             }
+            try
+            {
+                await _locationRepository.Update(value);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception in Put, LocationController");
+            }
 
-            await _locationRepository.Update(value);
-            return NoContent();
+            return null;
+            
         }
 
         [HttpDelete("{id}")]
@@ -96,7 +118,7 @@ namespace Api.Controllers
             }
             catch (Exception ex)
             {
-                
+                logger.Error(ex, "Exception in Delete, LocationController");
             }
 
             return null;
