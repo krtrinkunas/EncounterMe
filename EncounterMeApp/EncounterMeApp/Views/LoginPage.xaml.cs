@@ -32,28 +32,35 @@ namespace EncounterMeApp.Views
 
         private async void btnLogin_Clicked(object sender, EventArgs e)
         {
-            PlayerList = new List<Player>();
+            if(entryUserName.Text != null && entryPassword.Text != null && entryUserName.Text != "" && entryPassword.Text != "")
+            { 
+                PlayerList = new List<Player>();
 
-            PlayerList.Clear();
+                PlayerList.Clear();
 
-            var players = await playerService.GetPlayers();
+                var players = await playerService.GetPlayers();
 
-            PlayerList.AddRange(players);
+                PlayerList.AddRange(players);
 
-            Player newPlayer = PlayerList.Find(delegate (Player play)
-            {
-                return play.NickName == entryUserName.Text && play.Password == entryPassword.Text;
-            });
+                Player newPlayer = PlayerList.Find(delegate (Player play)
+                {
+                    return play.NickName == entryUserName.Text && play.Password == entryPassword.Text;
+                });
 
-            if (newPlayer != null)
-            {
-                await DisplayAlert("Login Successful!", "Welcome " + newPlayer.Firstname + "!", "OK");
-                App.player = newPlayer;
-                await Shell.Current.GoToAsync($"//{nameof(ProfilePage)}");
+                if (newPlayer != null)
+                {
+                    await DisplayAlert("Login Successful!", "Welcome " + newPlayer.Firstname + "!", "OK");
+                    App.player = newPlayer;
+                    await Shell.Current.GoToAsync($"//{nameof(ProfilePage)}");
+                }
+                else
+                {
+                    await DisplayAlert("Login Failed!", "This account does not exist", "OK");
+                }
             }
             else
             {
-                await DisplayAlert("", "Login Failed!", "OK");
+                await DisplayAlert("My Login Failed!", "You left your username or passwaord empty", "OK");
             }
         }
     }
