@@ -34,6 +34,7 @@ namespace EncounterMeApp.Views
         private void Occupy_Button_Clicked(object sender, EventArgs e)
         {
             App.player.Points += currentLocation.points;
+            App.player.LocationsOwned += 1;
             playerService.UpdatePlayer(App.player);
             ownerOfPin.Text = "Owner" + App.player.NickName;
 
