@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using EncounterMeApp.Services;
 using EncounterMeApp.Models;
+using System.Text.RegularExpressions;
 
 namespace EncounterMeApp.Views
 {
@@ -29,15 +30,24 @@ namespace EncounterMeApp.Views
                 && !string.IsNullOrEmpty(entryFirstName.Text) && !string.IsNullOrEmpty(entryLastName.Text) 
                 && !string.IsNullOrEmpty(entryPassword.Text))
             {
-                var newId = random.Next(100);
-                var newPlayer = new Player { NickName = entryUserName.Text, Points = 0, Email = entryEmail.Text, Id = newId, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = entryFirstName.Text, Lastname = entryLastName.Text, Password = entryPassword.Text };
-                await playerService.AddPlayer(newPlayer);
-                await DisplayAlert("", "Registration Successful!", "OK");
-                await Navigation.PopAsync();
+                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                Match match = regex.Match(entryEmail.Text);
+                if (match.Success)
+                {
+                    var newId = random.Next(100);
+                    var newPlayer = new Player { NickName = entryUserName.Text, Points = 0, Email = entryEmail.Text, Id = newId, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = entryFirstName.Text, Lastname = entryLastName.Text, Password = entryPassword.Text };
+                    await playerService.AddPlayer(newPlayer);
+                    await DisplayAlert("", "Registration Successful!", "OK");
+                    await Navigation.PopAsync();
+                }
+                else
+                {
+                    await DisplayAlert("Registration Failed!", "Invalid email.", "OK");
+                }
             }
             else
             {
-                await DisplayAlert("Registration Failed!", "You left some required fields empty", "OK");
+                await DisplayAlert("Registration Failed!", "You left some required fields empty.", "OK");
             }
         }
     }
