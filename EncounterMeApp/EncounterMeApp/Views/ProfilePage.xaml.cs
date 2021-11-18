@@ -24,7 +24,7 @@ namespace EncounterMeApp.Views
             //NavigationPage.SetBackButtonTitle(this, "Back");
             InitializeComponent();
             //newPlayer = new Player { NickName = "Doomer McFeelsman", LocationsOwned = 2, LocationsVisited = 11, Points = 4856, Type = PlayerType.Creator, Email = "pepe@pepe.com" };
-
+            ProfileImage.Source = ImageSource.FromFile("Peter");
             nicknameLabel.Text = App.player.NickName;
             pointsLabel.Text = App.player.Points.ToString();
             visitedPlacesLabel.Text = App.player.LocationsVisited.ToString();
@@ -40,16 +40,22 @@ namespace EncounterMeApp.Views
             ownedPlacesLabel.Text = App.player.LocationsOwned.ToString();
             currentEmail.Text = App.player.Email;
         }
-        /*public ProfilePage()
+
+        private async void btnProfilePicture_Clicked(object sender, EventArgs e)
         {
-            InitializeComponent();
-            newPlayer = new Player { NickName = "Doomer McFeelsman", LocationsOwned = 2, LocationsVisited = 11, Points = 4856, Type = PlayerType.Creator, Email = "pepe@pepe.com" };
-            nicknameLabel.Text = newPlayer.NickName;
-            pointsLabel.Text = newPlayer.Points.ToString();
-            visitedPlacesLabel.Text = newPlayer.Lastname;
-            ownedPlacesLabel.Text = newPlayer.Firstname;
-            currentEmail.Text = newPlayer.Email;
-        }*/
+            string profilePicPath = await DisplayPromptAsync("What is the file name?", "(The file must exist in Resources/drawable folder of the app", keyboard: Keyboard.Default);
+            ProfileImage.Source = profilePicPath;
+        }
+        /*public ProfilePage()
+{
+   InitializeComponent();
+   newPlayer = new Player { NickName = "Doomer McFeelsman", LocationsOwned = 2, LocationsVisited = 11, Points = 4856, Type = PlayerType.Creator, Email = "pepe@pepe.com" };
+   nicknameLabel.Text = newPlayer.NickName;
+   pointsLabel.Text = newPlayer.Points.ToString();
+   visitedPlacesLabel.Text = newPlayer.Lastname;
+   ownedPlacesLabel.Text = newPlayer.Firstname;
+   currentEmail.Text = newPlayer.Email;
+}*/
 
         /*public ProfilePage(string username)
         {
