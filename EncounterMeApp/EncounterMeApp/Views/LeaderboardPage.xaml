@@ -54,10 +54,10 @@
                                         Text="{Binding NickName}"/>
                                     <Label VerticalOptions="Center"
                                        FontSize="Small"
-                                       Text="{Binding Points}"/>
+                                       Text="{Binding Points, StringFormat='Points: {0}'}"/>
                                     <Label VerticalOptions="Center"
                                        FontSize="Small"
-                                       Text="{Binding Id}"/>
+                                       Text="{Binding Id, StringFormat='Player Id: {0}'}"/>
                                 </StackLayout>
                             </StackLayout>
                         </Frame>

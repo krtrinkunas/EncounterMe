@@ -4,6 +4,7 @@ using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,15 +17,8 @@ namespace EncounterMeApp.ViewModels
         public ObservableRangeCollection<Player> Player { get; set; }
 
         IPlayerService playerService;
-        public Player this[int key]
-        {
-            get => Player[key];
-            set => Player[key] = value;
-        }
-
 
         public AsyncCommand RefreshCommand { get; }
-        //public AsyncCommand AddCommand { get; }
         public AsyncCommand<Player> RemoveCommand { get; }
         public LeaderboardViewModel()
         {
@@ -36,7 +30,6 @@ namespace EncounterMeApp.ViewModels
             //var image = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png";
 
             RefreshCommand = new AsyncCommand(Refresh);
-            //AddCommand = new AsyncCommand(Add);
             RemoveCommand = new AsyncCommand<Player>(Remove);
 
             playerService = DependencyService.Get<IPlayerService>();
@@ -61,6 +54,10 @@ namespace EncounterMeApp.ViewModels
             //Player.SortDesc();
 
             IsBusy = false;
+        }
+        async Task RefreshOnAppearing()
+        {
+
         }
     }
 }
