@@ -37,8 +37,20 @@ namespace EncounterMeApp.Views
             string action = await DisplayActionSheet("Do you want to add a location in these coordinates?", "Cancel", "Yes", $"X: {xCoord}", $"Y: {yCoord}");
             if (action == "Yes")
             {
-                var name = await App.Current.MainPage.DisplayPromptAsync("Name of your location", "Name goes here");
-                var points = await App.Current.MainPage.DisplayPromptAsync("Value of your location", "Points goes here");
+                string name;
+                do
+                {
+                    name = await App.Current.MainPage.DisplayPromptAsync("Name of your location", "Name goes here");
+                }
+                while (name == "");
+
+                string points;
+                do
+                {
+                    points = await App.Current.MainPage.DisplayPromptAsync("Value of your location", "Points goes here");
+                }
+                while (points == "");
+
                 Random random = new Random();
                 var newId = random.Next(100);
                 var newLocation = new MyLocation{ NAME = name, points = Int32.Parse(points), positionX = xCoord, positionY = yCoord, owner = App.player.NickName, Id = newId};
