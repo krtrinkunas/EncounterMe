@@ -32,7 +32,7 @@ namespace EncounterMeApp.Views
 
         private async void btnLogin_Clicked(object sender, EventArgs e)
         {
-            if(entryUserName.Text != null && entryPassword.Text != null && entryUserName.Text != "" && entryPassword.Text != "")
+            if(!string.IsNullOrEmpty(entryUserName.Text) && !string.IsNullOrEmpty(entryPassword.Text))
             { 
                 PlayerList = new List<Player>();
 
@@ -60,7 +60,7 @@ namespace EncounterMeApp.Views
             }
             else
             {
-                await DisplayAlert("My Login Failed!", "You left your username or passwaord empty", "OK");
+                await DisplayAlert("My Login Failed!", "You left your username or password empty", "OK");
             }
         }
     }
