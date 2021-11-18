@@ -1,4 +1,5 @@
-﻿using EncounterMeApp.Services;
+﻿using EncounterMeApp.Models;
+using EncounterMeApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,29 +15,30 @@ namespace EncounterMeApp.Views
     public partial class PinInfoPage : ContentPage
     {
 
-        private int locationPoints;
-        private string locationOwner;
-        private string locationName;
+        MyLocation currentLocation;
         IPlayerService playerService;
-        public PinInfoPage(string name, string owner, int points)
+        ILocationService locationService;
+        public PinInfoPage(MyLocation location)
         {
-            playerService = DependencyService.Get<IPlayerService>();
             InitializeComponent();
-            nameOfPin.Text = name;
-            ownerOfPin.Text = "Owner: " + owner;
-            pointsOfPin.Text = points.ToString();
+            playerService = DependencyService.Get<IPlayerService>();
+            locationService = DependencyService.Get<ILocationService>();
 
-            locationPoints = points;
-            locationName = name;
-            locationOwner = owner;
+            nameOfPin.Text = location.NAME;
+            ownerOfPin.Text = "Owner: " + location.owner;
+            pointsOfPin.Text = location.points.ToString();
+
+            currentLocation = location;
         }
 
         private void Occupy_Button_Clicked(object sender, EventArgs e)
         {
-            App.player.Points += locationPoints;
+            App.player.Points += currentLocation.points;
             playerService.UpdatePlayer(App.player);
             ownerOfPin.Text = "Owner" + App.player.NickName;
-            locationOwner = App.player.NickName;
+
+            currentLocation.owner = App.player.NickName;
+            locationService.UpdateLocation(currentLocation);
         }
     }
 }

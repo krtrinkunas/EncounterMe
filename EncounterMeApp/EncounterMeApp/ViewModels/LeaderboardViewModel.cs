@@ -55,9 +55,5 @@ namespace EncounterMeApp.ViewModels
 
             IsBusy = false;
         }
-        async Task RefreshOnAppearing()
-        {
-
-        }
     }
 }
