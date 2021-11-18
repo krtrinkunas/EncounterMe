@@ -60,7 +60,7 @@ namespace EncounterMeApp.Views
             }
             else
             {
-                await DisplayAlert("My Login Failed!", "You left your username or password empty", "OK");
+                await DisplayAlert("Login Failed!", "You left your username or password empty", "OK");
             }
         }
     }
