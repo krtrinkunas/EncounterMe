@@ -18,6 +18,7 @@ namespace EncounterMeApp.Views
     public partial class MapPage : ContentPage
     {
         ILocationService locationService;
+        IPlayerService playerService;
         public static Lazy<Task<List<MyLocation>>> _LocationList = null;
         public static Lazy<Task<List<MyLocation>>> _MyLocationList = null;
 
@@ -31,6 +32,7 @@ namespace EncounterMeApp.Views
         public MapPage()
         {
             locationService = DependencyService.Get<ILocationService>();
+            playerService = DependencyService.Get<IPlayerService>();
             InitializeComponent();
             DisplayCurrentLocation();
             
@@ -63,11 +65,13 @@ namespace EncounterMeApp.Views
                 {
                     args.HideInfoWindow = true;
                     string pinName = ((Pin)s).Label;
-                    string action = await DisplayActionSheet(pinName, "Cancel", "Occupy", $"COORDS: {((Pin)s).Position.Latitude},{((Pin)s).Position.Longitude}",
+                    string action = await DisplayActionSheet(pinName, "OK", "Cancel", $"COORDS: {((Pin)s).Position.Latitude},{((Pin)s).Position.Longitude}", //Need to remove the 'OK' button
                         $"Points: {location.points}", $"Owner: {location.owner}", "More info");
                     if (action == "More info")
                     {
-                        _ = Navigation.PushAsync(new PinInfoPage(pinName, location.owner, location.points));
+                        App.player.LocationsVisited += 1;
+                        await playerService.UpdatePlayer(App.player);
+                        _ = Navigation.PushAsync(new PinInfoPage(location));
                     }
                 };
 

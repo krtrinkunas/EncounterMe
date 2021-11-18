@@ -46,7 +46,7 @@
 
             <!-- 5. Float buttons-->
             <StackLayout Grid.Row="0" Orientation="Horizontal"  Padding="0,0,0,22" VerticalOptions="End" HorizontalOptions="CenterAndExpand" HeightRequest="60">
-                <Button BackgroundColor="Black" TextColor="White" ImageSource="Message" FontAttributes="Bold" Text="Occupy" WidthRequest="150" CornerRadius="30" FontSize="18"/>
+                <Button BackgroundColor="Black" TextColor="White" ImageSource="Message" FontAttributes="Bold" Text="Occupy" WidthRequest="150" CornerRadius="30" FontSize="18" Clicked="Occupy_Button_Clicked"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

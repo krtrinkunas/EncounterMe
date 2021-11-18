@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EncounterMeApp.Models;
+using EncounterMeApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,12 +14,31 @@ namespace EncounterMeApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PinInfoPage : ContentPage
     {
-        public PinInfoPage(string name, string owner, int points)
+
+        MyLocation currentLocation;
+        IPlayerService playerService;
+        ILocationService locationService;
+        public PinInfoPage(MyLocation location)
         {
             InitializeComponent();
-            nameOfPin.Text = name;
-            ownerOfPin.Text = "Owner: " + owner;
-            pointsOfPin.Text = points.ToString();
+            playerService = DependencyService.Get<IPlayerService>();
+            locationService = DependencyService.Get<ILocationService>();
+
+            nameOfPin.Text = location.NAME;
+            ownerOfPin.Text = "Owner: " + location.owner;
+            pointsOfPin.Text = location.points.ToString();
+
+            currentLocation = location;
+        }
+
+        private void Occupy_Button_Clicked(object sender, EventArgs e)
+        {
+            App.player.Points += currentLocation.points;
+            playerService.UpdatePlayer(App.player);
+            ownerOfPin.Text = "Owner" + App.player.NickName;
+
+            currentLocation.owner = App.player.NickName;
+            locationService.UpdateLocation(currentLocation);
         }
     }
 }
