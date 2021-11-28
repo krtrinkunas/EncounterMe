@@ -30,10 +30,10 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ILocationRepository, LocationRepository>();
-            services.AddDbContext<LocationContext>(p => p.UseSqlite("Data source=locations.db"));
+            //services.AddDbContext<LocationContext>(p => p.UseSqlite("Data source=locations.db"));
 
             services.AddScoped<IPlayerRepository, PlayerRepository>();
-            services.AddDbContext<PlayerContext>(o => o.UseSqlite("Data source=players.db"));
+            //services.AddDbContext<PlayerContext>(o => o.UseSqlite("Data source=players.db"));
 
             services.AddDbContext<DatabaseContext>(o => o.UseSqlite("Data source=EncounerMeDB.db"));
 

@@ -10,9 +10,9 @@ namespace Api.Repositories
 {
     public class LocationRepository : ILocationRepository
     {
-        private LocationContext _context;
+        private DatabaseContext _context;
 
-        public LocationRepository(LocationContext context)
+        public LocationRepository(DatabaseContext context)
         {
             _context = context;
         }
