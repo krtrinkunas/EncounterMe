@@ -54,8 +54,12 @@ namespace EncounterMeApp.Views
                         $"Points: {location.points}", $"Owner: {location.owner}", "More info");
                     if (action == "More info")
                     {
-                        App.player.LocationsVisited += 1;
-                        await playerService.UpdatePlayer(App.player);
+                        var currentLocation = await Geolocation.GetLastKnownLocationAsync();
+                        if (App.player.NickName != location.owner && Location.CalculateDistance(currentLocation.Latitude, currentLocation.Longitude, pin.Position.Latitude, pin.Position.Longitude, 0) <= 1)
+                        {
+                            App.player.LocationsVisited += 1;
+                            await playerService.UpdatePlayer(App.player);
+                        }
                         _ = Navigation.PushAsync(new PinInfoPage(location));
                     }
                 };
