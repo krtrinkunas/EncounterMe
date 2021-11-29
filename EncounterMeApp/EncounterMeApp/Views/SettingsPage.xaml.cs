@@ -31,7 +31,11 @@ namespace EncounterMeApp.Views
 
         private async void LogOut_Button_Clicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Are you sure you want to Log out?", "Think twice", "OK");
+            bool action = await DisplayAlert("Are you sure you want to Log out?", "Think twice", "OK", "Cancel");
+            if (action)
+            {
+                await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+            }
         }
         private void Reset_Button_Clicked(object sender, EventArgs e)//To clear, what has been saved
         {
