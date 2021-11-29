@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 using EncounterMeApp.Services;
 using EncounterMeApp.Models;
 using EncounterMeApp;
+using Xamarin.Essentials;
 
 namespace EncounterMeApp.Views
 {
@@ -22,6 +23,9 @@ namespace EncounterMeApp.Views
         {
             InitializeComponent();
             playerService = DependencyService.Get<IPlayerService>();
+            entryUserName.Text = Preferences.Get("NickNameKey", string.Empty);
+            entryPassword.Text = Preferences.Get("PasswordKey", string.Empty);
+            RememberMeSwitch.IsToggled = Preferences.Get("SwitchKey", false);
         }
 
         private async void btnRegister_Clicked(object sender, EventArgs e)
@@ -51,6 +55,14 @@ namespace EncounterMeApp.Views
                 {
                     await DisplayAlert("Login Successful!", "Welcome " + newPlayer.Firstname + "!", "OK");
                     App.player = newPlayer;
+
+                    if (RememberMeSwitch.IsToggled)
+                    {
+                        Preferences.Set("NickNameKey", entryUserName.Text);
+                        Preferences.Set("PasswordKey", entryPassword.Text);
+                        Preferences.Set("SwitchKey", RememberMeSwitch.IsToggled);
+                    }
+
                     await Shell.Current.GoToAsync($"//{nameof(ProfilePage)}");
                 }
                 else
@@ -61,6 +73,20 @@ namespace EncounterMeApp.Views
             else
             {
                 await DisplayAlert("Login Failed!", "You left your username or password empty", "OK");
+            }
+        }
+
+        private void RememberMeSwitch_Toggled(object sender, ToggledEventArgs e)
+        {
+            if (e.Value)
+            {
+                Preferences.Set("NickNameKey", entryUserName.Text);
+                Preferences.Set("PasswordKey", entryPassword.Text);
+                Preferences.Set("SwitchKey", RememberMeSwitch.IsToggled);
+            }
+            else
+            {
+                Preferences.Clear();
             }
         }
     }
