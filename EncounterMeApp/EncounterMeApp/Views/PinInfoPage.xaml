@@ -5,6 +5,9 @@
              ios:Page.PreferredStatusBarUpdateAnimation="Fade"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EncounterMeApp.Views.PinInfoPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Remove" Clicked="Remove_Button_Clicked"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid RowDefinitions="*">
             <ScrollView VerticalScrollBarVisibility="Never">

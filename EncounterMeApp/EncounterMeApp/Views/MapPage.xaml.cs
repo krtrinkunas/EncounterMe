@@ -34,6 +34,7 @@ namespace EncounterMeApp.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            mapOfVilnius.Pins.Clear();
         }
         public void DisplayExistingPins(List<MyLocation> list)
         {

@@ -42,14 +42,14 @@ namespace EncounterMeApp.Views
                 {
                     name = await App.Current.MainPage.DisplayPromptAsync("Name of your location", "Name goes here");
                 }
-                while (name == "");
+                while (name == "" || name == null);
 
                 string points;
                 do
                 {
                     points = await App.Current.MainPage.DisplayPromptAsync("Value of your location", "Points goes here");
                 }
-                while (points == "");
+                while (points == "" || name == null);
 
                 Random random = new Random();
                 var newId = random.Next(100);

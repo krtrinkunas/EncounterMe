@@ -41,5 +41,26 @@ namespace EncounterMeApp.Views
             currentLocation.owner = App.player.NickName;
             locationService.UpdateLocation(currentLocation);
         }
+
+        private async void Remove_Button_Clicked(object sender, EventArgs e)
+        {
+            if(App.player.NickName == currentLocation.owner)
+            {
+                bool action = await DisplayAlert(currentLocation.NAME, "Are you sure you want to remove this location?", "Yes", "Cancel");
+                if(action)
+                {
+                    App.player.LocationsOwned -= 1;
+                    await playerService.UpdatePlayer(App.player);
+
+                    await locationService.DeleteLocation(currentLocation);
+
+                    await Navigation.PopToRootAsync();
+                }
+            }
+            else
+            {
+                await DisplayAlert("Forbidden action", "Only location owners can remove locations", "Got it");
+            }
+        }
     }
 }
