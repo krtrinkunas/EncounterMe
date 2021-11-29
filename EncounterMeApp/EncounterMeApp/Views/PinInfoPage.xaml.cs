@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace EncounterMeApp.Views
 {
@@ -31,15 +32,34 @@ namespace EncounterMeApp.Views
             currentLocation = location;
         }
 
-        private void Occupy_Button_Clicked(object sender, EventArgs e)
+        private async void Occupy_Button_Clicked(object sender, EventArgs e)
         {
-            App.player.Points += currentLocation.points;
-            App.player.LocationsOwned += 1;
-            playerService.UpdatePlayer(App.player);
-            ownerOfPin.Text = "Owner" + App.player.NickName;
+            if (App.player.NickName != currentLocation.owner)
+            {
+                var currentCoords = await Geolocation.GetLastKnownLocationAsync();
+                if (Location.CalculateDistance(currentLocation.positionX, currentLocation.positionY, currentCoords.Latitude, currentCoords.Longitude, 0) <= 1)
+                {
+                    string answer = await DisplayPromptAsync("2 + 2 = ", "Answer goes here");
+                    if (answer == "2")
+                    {
+                        App.player.Points += currentLocation.points;
+                        App.player.LocationsOwned += 1;
+                        await playerService.UpdatePlayer(App.player);
+                        ownerOfPin.Text = "Owner: " + App.player.NickName;
 
-            currentLocation.owner = App.player.NickName;
-            locationService.UpdateLocation(currentLocation);
+                        currentLocation.owner = App.player.NickName;
+                        await locationService.UpdateLocation(currentLocation);
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("Forbidden action", "To try to occupy a location, you must be near it", "Got it");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Forbidden action", "You can't occupy your own location", "Got it");
+            }
         }
 
         private async void Remove_Button_Clicked(object sender, EventArgs e)
