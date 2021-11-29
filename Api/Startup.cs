@@ -1,5 +1,11 @@
+using Api.Aspects;
+using Api.Middleware;
 using Api.ModelContext;
 using Api.Repositories;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Autofac.Extras.DynamicProxy;
+using EncounterMeApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +31,17 @@ namespace Api
             Configuration = configuration;
         }
 
+        public ILifetimeScope AutofacContainer { get; set; }
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.File("log-.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
             services.AddScoped<ILocationRepository, LocationRepository>();
             //services.AddDbContext<LocationContext>(p => p.UseSqlite("Data source=locations.db"));
 
@@ -42,6 +55,24 @@ namespace Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
             });
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            // Register your own things directly with Autofac here. Don't
+            // call builder.Populate(), that happens in AutofacServiceProviderFactory
+            // for you.
+            builder.RegisterType<InternetLocationService>().As<ILocationService>()
+                .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
+                .InstancePerDependency();
+
+            builder.RegisterType<InternetPlayerService>().As<IPlayerService>()
+                .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
+                .InstancePerDependency();
+
+            //builder.RegisterType<WeatherServiceAgent>().As<IWeatherServiceAgent>().InstancePerDependency();
+            builder.Register(x => Log.Logger).SingleInstance();
+            builder.RegisterType<LogAspect>().SingleInstance();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +90,11 @@ namespace Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1"));
                 app.UseHttpsRedirection();
             }
+
+            this.AutofacContainer = app.ApplicationServices.GetAutofacRoot();
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
