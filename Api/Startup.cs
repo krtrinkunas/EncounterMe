@@ -99,6 +99,8 @@ namespace Api
 
             app.UseRouting();
 
+            app.UseMiddleware<StatisticsMiddleware>();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
