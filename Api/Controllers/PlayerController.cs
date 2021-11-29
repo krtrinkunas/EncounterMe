@@ -1,6 +1,7 @@
 ﻿using Api.Repositories;
 using EncounterMeApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Exceptions;
 using Serilog.Formatting.Json;
@@ -20,6 +21,7 @@ namespace Api.Controllers
     {
         private IPlayerRepository _playerRepository;
 
+        /*
         private static string file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"log-{Date}.txt");
 
         ILogger logger = new LoggerConfiguration()
@@ -28,10 +30,13 @@ namespace Api.Controllers
             new JsonFormatter(renderMessage: true),
             file)
             .CreateLogger();
+        */
+        private readonly ILogger<PlayerController> _logger;
 
-        public PlayerController(IPlayerRepository playerRepository)
+        public PlayerController(IPlayerRepository playerRepository, ILogger<PlayerController> logger)
         {
             _playerRepository = playerRepository;
+            _logger = logger;
         }
 
 
@@ -39,50 +44,22 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<IEnumerable<Player>> GetPlayers()
         {
-            try
-            {
-                return await _playerRepository.Get();
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Exception in GetPlayers, PlayerController");
-            }
-
-            return null;
-            
+           return await _playerRepository.Get();      
         }
 
         // GET api/Players/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Player>> GetSingle(int id)
         {
-            try
-            {
-                return await _playerRepository.Get(id);
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Exception in GetSingle, PlayerController");
-            }
-
-            return null;
+            return await _playerRepository.Get(id);
         }
         
         // POST api/Players
         [HttpPost]
         public async Task<ActionResult<Player>> Post([FromBody] Player value)
         {
-            try
-            {
-                var newPlayer = await _playerRepository.Create(value);
-                return CreatedAtAction(nameof(GetPlayers), new { id = newPlayer.Id }, newPlayer);
-            }
-            catch(Exception ex)
-            {
-                logger.Error(ex, "Exception in Post, PlayerController");
-            }
-
-            return null;
+            var newPlayer = await _playerRepository.Create(value);
+            return CreatedAtAction(nameof(GetPlayers), new { id = newPlayer.Id }, newPlayer);
         }
 
         // PUT api/Players/5
@@ -94,17 +71,8 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
-            try
-            {
-                await _playerRepository.Update(value);
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Exception in Put, PlayerController");
-            }
-
-            return null;
+            await _playerRepository.Update(value);
+            return NoContent();
         }
 
 
@@ -112,23 +80,14 @@ namespace Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Player>> Delete(int id)
         {
-            try
+            var playerToDelete = await _playerRepository.Get(id);
+            if (playerToDelete == null)
             {
-                var playerToDelete = await _playerRepository.Get(id);
-                if (playerToDelete == null)
-                {
-                    return NotFound();
-                }
-
-                await _playerRepository.Delete(playerToDelete.Id);
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Exception in Delete, PlayerController");
+                return NotFound();
             }
 
-            return null;
+            await _playerRepository.Delete(playerToDelete.Id);
+            return NoContent();
         }
 
     }

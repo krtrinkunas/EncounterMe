@@ -10,9 +10,9 @@ namespace Api.Repositories
 {
     public class PlayerRepository : IPlayerRepository
     {
-        private PlayerContext _context;
+        private DatabaseContext _context;
 
-        public PlayerRepository(PlayerContext context)
+        public PlayerRepository(DatabaseContext context)
         {
             _context = context;
         }
