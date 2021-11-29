@@ -19,42 +19,26 @@ namespace EncounterMeApp.Views
     {
         ILocationService locationService;
         IPlayerService playerService;
-        public static Lazy<Task<List<MyLocation>>> _LocationList = null;
-        public static Lazy<Task<List<MyLocation>>> _MyLocationList = null;
+        public List<MyLocation> _LocationList = null;
 
-        /*public List<MyLocation> LocationList
-        {
-            get 
-            {
-                return _LocationList.Value; 
-            }
-        }*/
         public MapPage()
         {
             locationService = DependencyService.Get<ILocationService>();
             playerService = DependencyService.Get<IPlayerService>();
             InitializeComponent();
             DisplayCurrentLocation();
-            
 
-            _LocationList = new Lazy<Task<List<MyLocation>>>(async () => await LoadLocations());
-            _MyLocationList = new Lazy<Task<List<MyLocation>>>(async () => await LoadMyLocations());
-            //DisplayExistingPins();
+
+            _LocationList = new List<MyLocation>();
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //DisplayExistingPins();
         }
-        public async void DisplayExistingPins(Lazy<Task<List<MyLocation>>> list)
+        public void DisplayExistingPins(List<MyLocation> list)
         {
-            //LocationList.Clear();
-            //var locations = await locationService.GetLocations();
-
-            //LocationList.AddRange(locations);
-            //var list = await _LocationList.Value;
             mapOfVilnius.Pins.Clear();
-            foreach (MyLocation location in await list.Value)
+            foreach (MyLocation location in list)
             {
                 var pin = new Pin()
                 {
@@ -74,7 +58,6 @@ namespace EncounterMeApp.Views
                         _ = Navigation.PushAsync(new PinInfoPage(location));
                     }
                 };
-
                 mapOfVilnius.Pins.Add(pin);
             }
         }
@@ -85,37 +68,32 @@ namespace EncounterMeApp.Views
             mapOfVilnius.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Distance.FromKilometers(5)));
         }
 
-        public async void Button_Clicked(object sender, EventArgs e)
+        public async void Button_Clicked_Create_Location(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AddNewLocationPage());
             mapOfVilnius.Pins.Clear();
-            _LocationList = new Lazy<Task<List<MyLocation>>>(async () => await LoadLocations());
-            _MyLocationList = new Lazy<Task<List<MyLocation>>>(async () => await LoadMyLocations());
-            //DisplayExistingPins();
         }
 
-        private void ToolbarItem_Clicked(object sender, EventArgs e)
-        { 
+        private async void Show_All_Locations_Clicked(object sender, EventArgs e)
+        {
+            await LoadLocations();
             DisplayExistingPins(_LocationList);
         }
-        private void ToolbarItem_Clicked_1(object sender, EventArgs e)
+        private async void Show_My_Locations_Clicked(object sender, EventArgs e)
         {
-            DisplayExistingPins(_MyLocationList);
+            await LoadMyLocations();
+            DisplayExistingPins(_LocationList);
         }
-        /*private void ToolbarItem_Clicked_2(object sender, EventArgs e)
-        {
-            mapOfVilnius.Pins.Clear();
-        }*/
-        public async Task<List<MyLocation>> LoadLocations()
+        public async Task LoadLocations()
         {
             List<MyLocation> temp = new List<MyLocation>();
             var locations = await locationService.GetLocations();
 
             temp.AddRange(locations);
-
-            return temp;
+            
+            _LocationList = temp;
         }
-        public async Task<List<MyLocation>> LoadMyLocations()
+        public async Task LoadMyLocations()
         {
             List<MyLocation> temp = new List<MyLocation>();
             var locations = await locationService.GetLocations();
@@ -127,7 +105,7 @@ namespace EncounterMeApp.Views
                 select location;
             temp.AddRange(myLocations);
 
-            return temp;
+            _LocationList = temp;
         }
     }
 }
