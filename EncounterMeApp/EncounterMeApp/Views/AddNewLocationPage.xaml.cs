@@ -49,7 +49,7 @@ namespace EncounterMeApp.Views
                 {
                     points = await App.Current.MainPage.DisplayPromptAsync("Value of your location", "Points goes here");
                 }
-                while (points == "" || name == null);
+                while (points == "" || points == null);
 
                 Random random = new Random();
                 var newId = random.Next(100);
