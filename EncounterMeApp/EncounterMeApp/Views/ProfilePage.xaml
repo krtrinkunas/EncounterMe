@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:views="clr-namespace:EncounterMeApp.Views"
              xmlns:viewmodels="clr-namespace:EncounterMeApp.ViewModels"
-             BackgroundColor="#59C3C3"
-             x:Class="EncounterMeApp.Views.ProfilePage">
+             BackgroundImageSource="splash.jpg"
+             x:Class="EncounterMeApp.Views.ProfilePage"
+             Title="Profile">
     <ContentPage.Content>
         <ScrollView >
         <StackLayout>
             <Image x:Name="ProfileImage" Aspect="AspectFill" HeightRequest="300" WidthRequest="200"/>
-            <Frame HasShadow="False" CornerRadius="40" Margin="0,-50,0,0" VerticalOptions="FillAndExpand">
+                <Frame HasShadow="False" CornerRadius="40" Margin="0,-50,0,0" VerticalOptions="FillAndExpand">
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,*,*">
                         <Label x:Name="nicknameLabel" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" FontSize="25" FontAttributes="Bold" Padding="20,10,0,0"/>
                     <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Bugtown" Padding ="20,10,0,0" TextColor="Silver"/>
@@ -29,7 +30,7 @@
                     <Label x:Name ="visitedPlacesLabel" Grid.Row="5" Grid.Column="1" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                     <Label x:Name ="ownedPlacesLabel" Grid.Row="5" Grid.Column="2" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
 
-                    <Button x:Name="btnProfilePicture" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Text="Update Profile Picture" FontAttributes="Bold" VerticalOptions="End" BackgroundColor="#F45B69" TextColor="White" Clicked="btnProfilePicture_Clicked"/>
+                    <Button x:Name="btnProfilePicture" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Text="Update Profile Picture" FontAttributes="Bold" VerticalOptions="End" BackgroundColor="#F45B69" CornerRadius="50" TextColor="White" Clicked="btnProfilePicture_Clicked"/>
                     
 
                 </Grid>

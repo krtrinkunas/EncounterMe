@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-             x:Class="EncounterMeApp.Views.MapPage">
+             x:Class="EncounterMeApp.Views.MapPage"
+             BackgroundColor="{StaticResource Primary}"
+>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Show all locations" Clicked="Show_All_Locations_Clicked"/>
         <ToolbarItem Text="Show only my locations" Clicked="Show_My_Locations_Clicked"/>
@@ -9,7 +11,7 @@
     <ContentPage.Content>
         <StackLayout>
             <maps:Map x:Name="mapOfVilnius" IsShowingUser="True"/>
-            <Button Text="Create a location" Clicked="Button_Clicked_Create_Location"/>
+            <Button Text="Create a location" TextColor="White" BorderColor="White" Clicked="Button_Clicked_Create_Location" BackgroundColor="#F45B69" CornerRadius="50" VerticalOptions="Center" HorizontalOptions="Center"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

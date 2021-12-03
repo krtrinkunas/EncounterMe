@@ -1,6 +1,7 @@
 ﻿using EncounterMeApp.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using EncounterMeApp.Views;
 using EncounterMeApp.Services;
+using Xamarin.Essentials;
 
 namespace EncounterMeApp.Views
 {
@@ -45,7 +47,15 @@ namespace EncounterMeApp.Views
         {
             string profilePicPath = await DisplayPromptAsync("What is the file name?", "(The file must exist in Resources/drawable folder of the app", keyboard: Keyboard.Default);
             ProfileImage.Source = profilePicPath;
+            //var result = MediaPicker.PickPhotoAsync(new MediaPickerOptions
+            //{
+            //    Title = "Please pick a photo!"
+            //});
+
+            //var stream = await result.OpenReadAsync();
+
         }
+
         /*public ProfilePage()
 {
    InitializeComponent();

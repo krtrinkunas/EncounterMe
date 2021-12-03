@@ -8,20 +8,21 @@
     <ScrollView >
         <StackLayout Padding="0">
             <Grid>
+                <Image Source="login_background.png"></Image>
                 <StackLayout Padding="0" Margin="0">
-                <Frame BackgroundColor="#59C3C3" HeightRequest="130" HorizontalOptions="FillAndExpand">
+                <!--<Frame BackgroundColor="#59C3C3" HeightRequest="130" HorizontalOptions="FillAndExpand">
                         
-                </Frame>
+                </Frame>-->
                 </StackLayout>
                 <StackLayout Margin="15,110,15,0">
                     
-                <Frame BackgroundColor="WHITE" HasShadow="True" HeightRequest="450" HorizontalOptions="FillAndExpand">
+                <Frame BackgroundColor= "Transparent" HasShadow="True" HeightRequest="450" HorizontalOptions="FillAndExpand">
                     <StackLayout>
-                        <StackLayout HorizontalOptions="CenterAndExpand">
-                            <Label Text="SIGN IN" TextColor="Black" FontSize="Medium" FontAttributes="Bold" />
-                        </StackLayout>
+                            <StackLayout HorizontalOptions="CenterAndExpand">
+                                <Label Text="SIGN IN" TextColor="Transparent" FontSize="Medium" FontAttributes="Bold" />
+                            </StackLayout>
 
-                    <StackLayout Margin="0,25,0,0">
+                            <StackLayout Margin="0,25,0,0">
                         <Frame BackgroundColor="#EBEBEB" BorderColor="DarkGray" Padding="0" Margin="0" CornerRadius="50" HorizontalOptions="FillAndExpand">
                             <StackLayout Orientation="Horizontal">
                                 <Frame BackgroundColor="#OC1B33" CornerRadius="50" HeightRequest="35" WidthRequest="35" Padding="0" HorizontalOptions="Start" Margin="7">
