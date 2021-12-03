@@ -6,7 +6,7 @@
     xmlns:mvvm ="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
     xmlns:model ="clr-namespace:EncounterMeApp.Models"
     x:Class="EncounterMeApp.Views.LeaderboardPage"
-    BackgroundColor="AntiqueWhite"
+    BackgroundImageSource="https://w0.peakpx.com/wallpaper/477/255/HD-wallpaper-minimal-colorful-mountain-sun-sunset.jpg"
     x:DataType="viewmodels:LeaderboardViewModel"
     Title="Leaderboard"
     x:Name="MyLeaderboardPage">
@@ -24,7 +24,7 @@
               ItemSelected="ListView_ItemSelected"
               ItemTapped="ListView_ItemTapped"
               CachingStrategy="RecycleElement"
-              BackgroundColor="AntiqueWhite"
+              BackgroundColor="Transparent"
               ItemsSource="{Binding Player}"
               HasUnevenRows="True"
               SeparatorColor="Blue"
@@ -37,7 +37,7 @@
                 <ViewCell>
                     <ViewCell.ContextActions>
                         <MenuItem Text="AddFriend" Clicked="MenuItem_Clicked"/>
-                        <MenuItem Command="{Binding Source={x:Reference MyLeaderboardPage}, Path=BindingContext.RemoveCommand}}"
+                        <MenuItem Command="{Binding Source={x:Reference MyLeaderboardPage}, Path=BindingContext.RemoveCommand}"
                                   CommandParameter="{Binding .}"
                                   IsDestructive="True"
                                   Text="Delete"/>

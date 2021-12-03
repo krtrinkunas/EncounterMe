@@ -2,20 +2,22 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EncounterMeApp.Views.SettingsPage"
+             BackgroundImageSource="https://wallpaperaccess.com/full/1168105.png"
              Title="Settings">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical">
+        <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+
             <!--<StackLayout Margin="10" Orientation="Horizontal">
                 <Label Text="Light/Dark mode" FontSize="Medium" FontAttributes="Bold" TextColor="Black" Padding="0, 3, 0, 0"/>
                 <Switch VerticalOptions="Center" HorizontalOptions="End"  x:Name="ThemeSwitch"/>
             </StackLayout>-->
-            <Entry x:Name="UserInput" Placeholder="Your new email goes here:" PlaceholderColor="Gray" HorizontalOptions="Center" VerticalOptions="Center" />
-            <Button Text="Change Email" CornerRadius="50" BackgroundColor="DarkMagenta" Clicked="ChangeEmail_Button_Clicked"/>
+            <Entry x:Name="UserInput" Placeholder="Your new email goes here:" PlaceholderColor="LightGray" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Button Text="Change Email" HorizontalOptions="Center" CornerRadius="50" BackgroundColor="#F45B69" Clicked="ChangeEmail_Button_Clicked"/>
 
             <!--
             <Button CornerRadius="50" BackgroundColor="DarkMagenta"  Text="Save settings" Clicked="Save_Button_Clicked"/>
             <Button CornerRadius="50" BackgroundColor="DarkMagenta"  Text="Reset Settings" Clicked="Reset_Button_Clicked"/>-->
-            <Button CornerRadius="50" BackgroundColor="DarkMagenta" Text="Log Out" Clicked="LogOut_Button_Clicked"/>
+            <Button CornerRadius="50" BackgroundColor="#F45B69" Text="Log Out" Clicked="LogOut_Button_Clicked" HorizontalOptions="Center"/>
             
         </StackLayout>
 

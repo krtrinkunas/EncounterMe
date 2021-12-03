@@ -1,0 +1,5 @@
+2021-12-02 23:57:07.536 +02:00 [INF] It took 1079 ms to perform this action GetPlayers in this controller Player
+2021-12-02 23:57:21.894 +02:00 [INF] It took 19 ms to perform this action GetPlayers in this controller Player
+2021-12-02 23:57:52.092 +02:00 [INF] It took 208 ms to perform this action Post in this controller Player
+2021-12-02 23:58:04.382 +02:00 [INF] It took 14 ms to perform this action GetPlayers in this controller Player
+2021-12-02 23:58:11.466 +02:00 [INF] It took 8 ms to perform this action GetPlayers in this controller Player
