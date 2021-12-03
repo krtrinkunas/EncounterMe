@@ -40,7 +40,7 @@ namespace EncounterMeApp.Views
                 if (Location.CalculateDistance(currentLocation.positionX, currentLocation.positionY, currentCoords.Latitude, currentCoords.Longitude, 0) <= 1)
                 {
                     string answer = await DisplayPromptAsync("2 + 2 = ", "Answer goes here");
-                    if (answer == "2")
+                    if (answer == "4")
                     {
                         App.player.Points += currentLocation.points;
                         App.player.LocationsOwned += 1;
