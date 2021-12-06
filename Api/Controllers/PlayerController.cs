@@ -20,17 +20,6 @@ namespace Api.Controllers
     public class PlayerController : ControllerBase
     {
         private IPlayerRepository _playerRepository;
-
-        /*
-        private static string file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"log-{Date}.txt");
-
-        ILogger logger = new LoggerConfiguration()
-            .Enrich.WithExceptionDetails()
-            .WriteTo.RollingFile(
-            new JsonFormatter(renderMessage: true),
-            file)
-            .CreateLogger();
-        */
         private readonly ILogger<PlayerController> _logger;
 
         public PlayerController(IPlayerRepository playerRepository, ILogger<PlayerController> logger)

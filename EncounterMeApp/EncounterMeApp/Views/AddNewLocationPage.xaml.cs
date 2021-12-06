@@ -29,7 +29,6 @@ namespace EncounterMeApp.Views
             playerService = DependencyService.Get<IPlayerService>();
         }
 
-        //public List<MyLocation> tempList = new List<MyLocation>();
         private async void MyMap_MapClickedAsync(object sender, Xamarin.Forms.Maps.MapClickedEventArgs e)
         {
             var xCoord = e.Position.Latitude;
