@@ -25,23 +25,23 @@ namespace EncounterMeApp.Views
         Random random = new Random();
         public async Task<Player> validateUser(Player newPlayer) //paduoti zaidejo duomenis ir tada juos pravaliduot
         {
-            if (!string.IsNullOrEmpty(newPlayer.NickName))
+            if (string.IsNullOrEmpty(newPlayer.NickName))
             {
                 return null;
             }
-            if (!string.IsNullOrEmpty(newPlayer.Email))
+            if (string.IsNullOrEmpty(newPlayer.Email))
             {
                 return null;
             }
-            if (!string.IsNullOrEmpty(newPlayer.Firstname))
+            if (string.IsNullOrEmpty(newPlayer.Firstname))
             {
                 return null;
             }
-            if (!string.IsNullOrEmpty(newPlayer.Lastname))
+            if (string.IsNullOrEmpty(newPlayer.Lastname))
             {
                 return null;
             }
-            if (!string.IsNullOrEmpty(newPlayer.Password))
+            if (string.IsNullOrEmpty(newPlayer.Password))
             {
                 return null;
             }
@@ -63,7 +63,7 @@ namespace EncounterMeApp.Views
         {
             var newId = random.Next(100);
             var newPlayer = new Player { NickName = entryUserName.Text, Points = 0, Email = entryEmail.Text, Id = newId, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = entryFirstName.Text, Lastname = entryLastName.Text, Password = entryPassword.Text };
-            var validatedPlayer = validateUser(newPlayer);
+            Player validatedPlayer = await validateUser(newPlayer);
 
             if (validatedPlayer == null)
             {
