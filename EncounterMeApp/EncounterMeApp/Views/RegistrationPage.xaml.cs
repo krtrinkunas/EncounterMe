@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 using EncounterMeApp.Services;
 using EncounterMeApp.Models;
 using System.Text.RegularExpressions;
+using EncounterMeApp.ViewModels;
 
 namespace EncounterMeApp.Views
 {
@@ -19,7 +20,72 @@ namespace EncounterMeApp.Views
         public RegistrationPage()
         {
             InitializeComponent();
+
+            BindingContext = this;
+
             playerService = DependencyService.Get<IPlayerService>();
+        }
+
+        string defaultMsg = "Type here...";
+
+        public string EntryUserName
+        {
+            get => defaultMsg;
+            set
+            {
+                if (value == defaultMsg)
+                    return;
+                defaultMsg = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string EntryEmail
+        {
+            get => defaultMsg;
+            set
+            {
+                if (value == defaultMsg)
+                    return;
+                defaultMsg = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string EntryFirstname
+        {
+            get => defaultMsg;
+            set
+            {
+                if (value == defaultMsg)
+                    return;
+                defaultMsg = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string EntryLastname
+        {
+            get => defaultMsg;
+            set
+            {
+                if (value == defaultMsg)
+                    return;
+                defaultMsg = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string EntryPassword
+        {
+            get => defaultMsg;
+            set
+            {
+                if (value == defaultMsg)
+                    return;
+                defaultMsg = value;
+                OnPropertyChanged();
+            }
         }
 
         Random random = new Random();
@@ -54,15 +120,11 @@ namespace EncounterMeApp.Views
             await playerService.AddPlayer(newPlayer);
             return newPlayer; //arba return null
         }
-        //playerValidation()
-        //1. Sukurti zaideja, su irasytais duomenimis
-        //2. Paduodu playeri i metoda, jeigu viskas ok, grazina playeri
-        //3. jeigu viskas ok, as ta zaideja pridedu duombaze (metode)
-        //4. Teste patikrint, ar AddPlayer buvo iskviestas, bet nereikia tikrint jo funkcionalumo
         private async void btnRegister_Clicked(object sender, EventArgs e) //
         {
+            
             var newId = random.Next(100);
-            var newPlayer = new Player { NickName = entryUserName.Text, Points = 0, Email = entryEmail.Text, Id = newId, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = entryFirstName.Text, Lastname = entryLastName.Text, Password = entryPassword.Text };
+            var newPlayer = new Player { NickName = EntryUserName, Points = 0, Email = EntryEmail, Id = newId, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = EntryFirstname, Lastname = EntryLastname, Password = EntryPassword };
             Player validatedPlayer = await validateUser(newPlayer);
 
             if (validatedPlayer == null)
@@ -74,6 +136,7 @@ namespace EncounterMeApp.Views
                 await DisplayAlert("", "Registration Successful!", "OK");
                 await Navigation.PopAsync();
             }
+            
             /*
             //Saving registration data
             if (!string.IsNullOrEmpty(entryUserName.Text) && !string.IsNullOrEmpty(entryEmail.Text) 

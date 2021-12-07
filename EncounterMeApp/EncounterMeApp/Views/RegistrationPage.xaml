@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:EncounterMeApp.ViewModels"
              x:Class="EncounterMeApp.Views.RegistrationPage"
              Shell.FlyoutBehavior="Disabled">
+
     <ContentPage.Content>
         <StackLayout Margin="25">
             
@@ -10,19 +12,19 @@
 
             <StackLayout VerticalOptions="CenterAndExpand">
                 <Label Text="Firstname" FontSize="Default" FontAttributes="Bold"/>
-                <Entry x:Name="entryFirstName" Placeholder="Type here..."></Entry>
+                <Entry Text="{Binding EntryFirstname}"></Entry>
 
                 <Label Text="Lastname" FontSize="Default" FontAttributes="Bold"/>
-                <Entry x:Name="entryLastName" Placeholder="Type here..."></Entry>
+                <Entry Text="{Binding EntryLastname}"></Entry>
 
                 <Label Text="Email" FontSize="Default" FontAttributes="Bold"/>
-                <Entry x:Name="entryEmail" Placeholder="Type here..."></Entry>
+                <Entry Text="{Binding EntryEmail}"></Entry>
 
                 <Label Text="Username" FontSize="Default" FontAttributes="Bold"/>
-                <Entry x:Name="entryUserName" Placeholder="Type here..."></Entry>
+                <Entry Text="{Binding EntryUserName}"></Entry>
 
                 <Label Text="Password" FontSize="Default" FontAttributes="Bold"/>
-                <Entry x:Name="entryPassword" Placeholder="Type here..." IsPassword="True"></Entry>
+                <Entry Text="{Binding EntryPassword}" IsPassword="True"></Entry>
 
                 <Button x:Name="btnRegister" Text="REGISTER" Clicked="btnRegister_Clicked"></Button>
                 
