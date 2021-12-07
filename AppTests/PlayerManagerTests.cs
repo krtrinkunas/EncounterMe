@@ -46,5 +46,15 @@ namespace AppTests
             yield return new object[] { null, new Player { Email = "" } };
             yield return new object[] { null, new Player { Password = "" } };
         }
+
+        [Fact]
+        public async Task validateUser_GetsValidPlayerWithInvalidEmail_ReturnsNull()
+        {
+            Player validPlayer = new Player { NickName = "TestNickName", Points = 0, Email = "email", Id = 52, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = "TestFirstName", Lastname = "TestLatsName", Password = "password123" };
+
+            Player validatedPlayer = await _sut.validateUser(validPlayer);
+
+            Assert.Null(validatedPlayer);
+        }
     }
 }
