@@ -26,64 +26,68 @@ namespace EncounterMeApp.Views
             playerService = DependencyService.Get<IPlayerService>();
         }
 
-        string defaultMsg = "Type here...";
+        string entryUserName = "";
+        string entryEmail = "";
+        string entryFirstName = "";
+        string entryLastName = "";
+        string entryPassword = "";
 
         public string EntryUserName
         {
-            get => defaultMsg;
+            get => entryUserName;
             set
             {
-                if (value == defaultMsg)
+                if (value == entryUserName)
                     return;
-                defaultMsg = value;
+                entryUserName = value;
                 OnPropertyChanged();
             }
         }
 
         public string EntryEmail
         {
-            get => defaultMsg;
+            get => entryEmail;
             set
             {
-                if (value == defaultMsg)
+                if (value == entryEmail)
                     return;
-                defaultMsg = value;
+               entryEmail = value;
                 OnPropertyChanged();
             }
         }
 
-        public string EntryFirstname
+        public string EntryFirstName
         {
-            get => defaultMsg;
+            get => entryFirstName;
             set
             {
-                if (value == defaultMsg)
+                if (value == entryFirstName)
                     return;
-                defaultMsg = value;
+                entryFirstName = value;
                 OnPropertyChanged();
             }
         }
 
-        public string EntryLastname
+        public string EntryLastName
         {
-            get => defaultMsg;
+            get => entryLastName;
             set
             {
-                if (value == defaultMsg)
+                if (value == entryLastName)
                     return;
-                defaultMsg = value;
+                entryLastName = value;
                 OnPropertyChanged();
             }
         }
 
         public string EntryPassword
         {
-            get => defaultMsg;
+            get => entryPassword;
             set
             {
-                if (value == defaultMsg)
+                if (value == entryPassword)
                     return;
-                defaultMsg = value;
+                entryPassword = value;
                 OnPropertyChanged();
             }
         }
@@ -124,7 +128,7 @@ namespace EncounterMeApp.Views
         {
             
             var newId = random.Next(100);
-            var newPlayer = new Player { NickName = EntryUserName, Points = 0, Email = EntryEmail, Id = newId, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = EntryFirstname, Lastname = EntryLastname, Password = EntryPassword };
+            var newPlayer = new Player { NickName = entryUserName, Points = 0, Email = entryEmail, Id = newId, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = entryFirstName, Lastname = entryLastName, Password = entryPassword };
             Player validatedPlayer = await validateUser(newPlayer);
 
             if (validatedPlayer == null)

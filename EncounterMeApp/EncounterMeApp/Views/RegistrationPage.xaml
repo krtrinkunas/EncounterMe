@@ -12,10 +12,10 @@
 
             <StackLayout VerticalOptions="CenterAndExpand">
                 <Label Text="Firstname" FontSize="Default" FontAttributes="Bold"/>
-                <Entry Text="{Binding EntryFirstname}"></Entry>
+                <Entry Text="{Binding EntryFirstName}"></Entry>
 
                 <Label Text="Lastname" FontSize="Default" FontAttributes="Bold"/>
-                <Entry Text="{Binding EntryLastname}"></Entry>
+                <Entry Text="{Binding EntryLastName}"></Entry>
 
                 <Label Text="Email" FontSize="Default" FontAttributes="Bold"/>
                 <Entry Text="{Binding EntryEmail}"></Entry>
