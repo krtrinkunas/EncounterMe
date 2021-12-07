@@ -16,10 +16,13 @@ namespace EncounterMeApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegistrationPage : ContentPage
     {
+        public IPlayerService playerService;
+        PlayerManager playerManager;
         public RegistrationPage()
         {
             InitializeComponent();
-
+            playerService = DependencyService.Get<IPlayerService>();
+            playerManager = new PlayerManager(playerService);
             BindingContext = this;
         }
 
@@ -90,13 +93,13 @@ namespace EncounterMeApp.Views
         }
 
         Random random = new Random();
-        PlayerValidation playerValidation = new PlayerValidation();
+        
         private async void btnRegister_Clicked(object sender, EventArgs e) //
         {
             
             var newId = random.Next(100);
             var newPlayer = new Player { NickName = entryUserName, Points = 0, Email = entryEmail, Id = newId, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = entryFirstName, Lastname = entryLastName, Password = entryPassword };
-            Player validatedPlayer = await playerValidation.validateUser(newPlayer);
+            Player validatedPlayer = await playerManager.validateUser(newPlayer);
 
             if (validatedPlayer == null)
             {

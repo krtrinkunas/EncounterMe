@@ -12,3 +12,4 @@
 2021-12-07 14:51:46.405 +02:00 [INF] It took 8 ms to perform this action GetLocations in this controller Location
 2021-12-07 14:51:47.083 +02:00 [INF] It took 10 ms to perform this action GetLocations in this controller Location
 2021-12-07 14:51:50.878 +02:00 [INF] It took 6 ms to perform this action GetPlayers in this controller Player
+2021-12-07 15:27:04.957 +02:00 [INF] It took 1495 ms to perform this action GetPlayers in this controller Player

@@ -9,13 +9,13 @@ using Xamarin.Forms;
 
 namespace EncounterMeApp
 {
-    public class PlayerValidation
+    public class PlayerManager
     {
         private IPlayerService playerService;
 
-        public PlayerValidation()
+        public PlayerManager(IPlayerService _playerService)
         {
-            playerService = DependencyService.Get<IPlayerService>();
+            playerService = _playerService;
         }
         public async Task<Player> validateUser(Player newPlayer)
         {
