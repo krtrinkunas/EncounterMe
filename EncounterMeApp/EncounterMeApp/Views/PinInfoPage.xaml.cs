@@ -44,6 +44,21 @@ namespace EncounterMeApp.Views
                     {
                         App.player.Points += currentLocation.points;
                         App.player.LocationsOwned += 1;
+
+                        var PlayerList = new List<Player>();
+                        PlayerList.Clear();
+                        var players = await playerService.GetPlayers();
+                        PlayerList.AddRange(players);
+                        Player newPlayer = PlayerList.Find(delegate (Player play)
+                        {
+                            return play.NickName == currentLocation.owner;
+                        });
+                        if (newPlayer != null)
+                        {
+                            newPlayer.LocationsOwned--;
+                            await playerService.UpdatePlayer(newPlayer);
+                        }
+
                         await playerService.UpdatePlayer(App.player);
                         ownerOfPin.Text = "Owner: " + App.player.NickName;
 
