@@ -39,8 +39,8 @@ namespace EncounterMeApp.Views
                 var currentCoords = await Geolocation.GetLastKnownLocationAsync();
                 if (Location.CalculateDistance(currentLocation.positionX, currentLocation.positionY, currentCoords.Latitude, currentCoords.Longitude, 0) <= 1)
                 {
-                    string answer = await DisplayPromptAsync("2 + 2 = ", "Answer goes here");
-                    if (answer == "4")
+                    string answer = await DisplayPromptAsync(currentLocation.question, "Answer goes here");
+                    if (answer == currentLocation.answer)
                     {
                         App.player.Points += currentLocation.points;
                         App.player.LocationsOwned += 1;
