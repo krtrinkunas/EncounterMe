@@ -18,3 +18,4 @@
 2021-12-08 11:28:30.373 +02:00 [INF] It took 59 ms to perform this action Post in this controller Location
 2021-12-08 11:28:32.219 +02:00 [INF] It took 5 ms to perform this action GetLocations in this controller Location
 2021-12-08 11:28:48.215 +02:00 [INF] It took 7 ms to perform this action GetLocations in this controller Location
+2021-12-08 12:00:43.971 +02:00 [INF] It took 1183 ms to perform this action GetLocations in this controller Location
