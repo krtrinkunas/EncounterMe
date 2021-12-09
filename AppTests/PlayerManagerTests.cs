@@ -29,6 +29,7 @@ namespace AppTests
             Player validatedPlayer = await _sut.validateUser(validPlayer);
 
             Assert.NotNull(validatedPlayer);
+            playerService.Verify(m => m.AddPlayer(It.IsAny<Player>()));
         }
         [Theory]
         [MemberData(nameof(TestData))]
@@ -37,14 +38,15 @@ namespace AppTests
             Player validatedPlayer = await _sut.validateUser(player);
 
             Assert.Equal(expected, validatedPlayer);
+            playerService.Verify(m => m.AddPlayer(It.IsAny<Player>()), Times.Never());
         }
         public static IEnumerable<object[]> TestData()
         {
-            yield return new object[] { null, new Player { NickName = "" } };
-            yield return new object[] { null, new Player { Firstname = "" } };
-            yield return new object[] { null, new Player { Lastname = "" } };
-            yield return new object[] { null, new Player { Email = "" } };
-            yield return new object[] { null, new Player { Password = "" } };
+            yield return new object[] { null, new Player { NickName = "", Points = 0, Email = "email@email.com", Id = 52, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = "TestFirstName", Lastname = "TestLatsName", Password = "password123" } };
+            yield return new object[] { null, new Player { NickName = "TestNickName", Points = 0, Email = "email@email.com", Id = 52, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = "", Lastname = "TestLatsName", Password = "password123" } };
+            yield return new object[] { null, new Player { NickName = "TestNickName", Points = 0, Email = "email@email.com", Id = 52, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = "TestFirstName", Lastname = "", Password = "password123" } };
+            yield return new object[] { null, new Player { NickName = "TestNickName", Points = 0, Email = "", Id = 52, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = "TestFirstName", Lastname = "TestLatsName", Password = "password123" } };
+            yield return new object[] { null, new Player { NickName = "TestNickName", Points = 0, Email = "email@email.com", Id = 52, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = "TestFirstName", Lastname = "TestLatsName", Password = "" } };
         }
 
         [Fact]
