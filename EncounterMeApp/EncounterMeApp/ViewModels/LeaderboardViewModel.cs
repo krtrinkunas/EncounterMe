@@ -51,7 +51,7 @@ namespace EncounterMeApp.ViewModels
             var players = await playerService.GetPlayers();
 
             Player.AddRange(players);
-            //Player.SortDesc();
+            Player.Sort((a, b) => { return a.CompareTo(b); });
 
             IsBusy = false;
         }

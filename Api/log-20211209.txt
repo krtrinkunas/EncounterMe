@@ -5,3 +5,15 @@
 2021-12-09 14:18:57.063 +02:00 [INF] It took 194 ms to perform this action Post in this controller Player
 2021-12-09 14:19:22.487 +02:00 [INF] It took 22 ms to perform this action GetPlayers in this controller Player
 2021-12-09 14:19:45.835 +02:00 [INF] It took 24 ms to perform this action GetPlayers in this controller Player
+2021-12-09 14:40:59.799 +02:00 [INF] It took 1157 ms to perform this action GetPlayers in this controller Player
+2021-12-09 14:41:17.825 +02:00 [INF] It took 57 ms to perform this action GetLocations in this controller Location
+2021-12-09 14:41:48.965 +02:00 [INF] It took 54 ms to perform this action GetPlayers in this controller Player
+2021-12-09 14:42:18.395 +02:00 [INF] It took 29 ms to perform this action GetPlayers in this controller Player
+2021-12-09 14:43:02.750 +02:00 [INF] It took 181 ms to perform this action Put in this controller Player
+2021-12-09 14:43:14.070 +02:00 [INF] It took 15 ms to perform this action GetPlayers in this controller Player
+2021-12-09 14:43:59.266 +02:00 [INF] It took 58 ms to perform this action Put in this controller Player
+2021-12-09 14:44:16.249 +02:00 [INF] It took 17 ms to perform this action GetPlayers in this controller Player
+2021-12-09 14:44:25.573 +02:00 [INF] It took 8 ms to perform this action GetPlayers in this controller Player
+2021-12-09 14:45:22.231 +02:00 [INF] It took 22 ms to perform this action GetLocations in this controller Location
+2021-12-09 14:46:42.498 +02:00 [INF] It took 963 ms to perform this action GetPlayers in this controller Player
+2021-12-09 14:46:56.284 +02:00 [INF] It took 28 ms to perform this action GetPlayers in this controller Player
