@@ -39,11 +39,26 @@ namespace EncounterMeApp.Views
                 var currentCoords = await Geolocation.GetLastKnownLocationAsync();
                 if (Location.CalculateDistance(currentLocation.positionX, currentLocation.positionY, currentCoords.Latitude, currentCoords.Longitude, 0) <= 1)
                 {
-                    string answer = await DisplayPromptAsync("2 + 2 = ", "Answer goes here");
-                    if (answer == "4")
+                    string answer = await DisplayPromptAsync(currentLocation.question, "Answer goes here");
+                    if (answer == currentLocation.answer)
                     {
                         App.player.Points += currentLocation.points;
                         App.player.LocationsOwned += 1;
+
+                        var PlayerList = new List<Player>();
+                        PlayerList.Clear();
+                        var players = await playerService.GetPlayers();
+                        PlayerList.AddRange(players);
+                        Player newPlayer = PlayerList.Find(delegate (Player play)
+                        {
+                            return play.NickName == currentLocation.owner;
+                        });
+                        if (newPlayer != null)
+                        {
+                            newPlayer.LocationsOwned--;
+                            await playerService.UpdatePlayer(newPlayer);
+                        }
+
                         await playerService.UpdatePlayer(App.player);
                         ownerOfPin.Text = "Owner: " + App.player.NickName;
 
