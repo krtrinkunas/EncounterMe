@@ -47,16 +47,5 @@ namespace EncounterMeApp.Views
             ((ListView)sender).SelectedItem = null;
         }
 
-        private async void MenuItem_Clicked(object sender, EventArgs e)
-        {
-            var player = ((MenuItem)sender).BindingContext as Player;
-
-            if (player == null)
-            {
-                return;
-            }
-
-            await DisplayAlert("Player added as a friend", player.NickName, "OK");
-        }
     }
 }

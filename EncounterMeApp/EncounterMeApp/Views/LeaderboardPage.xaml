@@ -35,13 +35,6 @@
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="model:Player">
                 <ViewCell>
-                    <ViewCell.ContextActions>
-                        <MenuItem Text="AddFriend" Clicked="MenuItem_Clicked"/>
-                        <MenuItem Command="{Binding Source={x:Reference MyLeaderboardPage}, Path=BindingContext.RemoveCommand}"
-                                  CommandParameter="{Binding .}"
-                                  IsDestructive="True"
-                                  Text="Delete"/>
-                    </ViewCell.ContextActions>
                     <Grid Padding="5">
                         <Frame CornerRadius="10"
                                HasShadow="True">
