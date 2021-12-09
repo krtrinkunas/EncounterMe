@@ -12,14 +12,13 @@ using Xamarin.Forms;
 
 namespace EncounterMeApp.ViewModels
 {
-    public class LeaderboardViewModel : BaseViewModel //Imported from MVVM helpers
+    public class LeaderboardViewModel : BaseViewModel
     {
         public ObservableRangeCollection<Player> Player { get; set; }
 
         IPlayerService playerService;
 
         public AsyncCommand RefreshCommand { get; }
-        public AsyncCommand<Player> RemoveCommand { get; }
         public LeaderboardViewModel()
         {
             Title = "Leaderboard";
@@ -30,16 +29,10 @@ namespace EncounterMeApp.ViewModels
             //var image = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png";
 
             RefreshCommand = new AsyncCommand(Refresh);
-            RemoveCommand = new AsyncCommand<Player>(Remove);
 
             playerService = DependencyService.Get<IPlayerService>();
         }
 
-        async Task Remove(Player player)
-        {
-            await playerService.DeletePlayer(player);
-            await Refresh();
-        }
         async Task Refresh()
         {
             IsBusy = true;
