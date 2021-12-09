@@ -2,16 +2,29 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              x:Class="EncounterMeApp.Views.MapPage"
-             BackgroundColor="{StaticResource Primary}"
+             BackgroundColor="Transparent"
+             Opacity="0.5"
+             Title="Map"
 >
-    <ContentPage.ToolbarItems>
+
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem Text="Show all locations" Clicked="Show_All_Locations_Clicked"/>
         <ToolbarItem Text="Show only my locations" Clicked="Show_My_Locations_Clicked"/>
-    </ContentPage.ToolbarItems>
-    <ContentPage.Content>
+    </ContentPage.ToolbarItems>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         <StackLayout>
-            <maps:Map x:Name="mapOfVilnius" IsShowingUser="True"/>
-            <Button Text="Create a location" TextColor="White" BorderColor="White" Clicked="Button_Clicked_Create_Location" BackgroundColor="#F45B69" CornerRadius="50" VerticalOptions="Center" HorizontalOptions="Center"/>
+            <maps:Map x:Name="mapOfVilnius" IsShowingUser="True" Grid.Row="0" />
+            <!--<Button Text="Create a location" TextColor="White" BorderColor="White" Clicked="Button_Clicked_Create_Location" BackgroundColor="#F45B69" CornerRadius="50" VerticalOptions="Center" HorizontalOptions="Center"/>
+            -->
+            
         </StackLayout>
-    </ContentPage.Content>
+        <ImageButton Grid.Row="0" CornerRadius="45" Source="discover_button.png" Clicked="Button_Clicked_Create_Location" HorizontalOptions="Center" WidthRequest="100" HeightRequest="80" Margin="0,0,16,22" BackgroundColor ="Transparent" VerticalOptions="End" />
+        <ImageButton Grid.Row="0" CornerRadius="45" Source="map_personal.png" Clicked="Show_My_Locations_Clicked" HorizontalOptions="Start" WidthRequest="100" HeightRequest="55" Margin="70,0,20,22" BackgroundColor ="Transparent" VerticalOptions="EndAndExpand"/>
+        <ImageButton Grid.Row="0" CornerRadius="45" Source="map_global.png" Clicked="Show_All_Locations_Clicked" HorizontalOptions="End" WidthRequest="100" HeightRequest="50" Margin="0,0,90,22" BackgroundColor ="Transparent" VerticalOptions="EndAndExpand"/>
+        <ImageButton Grid.Row="0" CornerRadius="45" Source="question.png" Clicked="Help_Button_Clicked" HorizontalOptions="Start" WidthRequest="50" HeightRequest="50" Margin="0,10,0,10" BackgroundColor="Transparent" VerticalOptions="StartAndExpand"/>
+    </Grid>
+    
 </ContentPage>
