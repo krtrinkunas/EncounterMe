@@ -47,6 +47,7 @@ namespace EncounterMeApp.Views
         {
             string profilePicPath = await DisplayPromptAsync("What is the file name?", "(The file must exist in Resources/drawable folder of the app", keyboard: Keyboard.Default);
             ProfileImage.Source = profilePicPath;
+
             //var result = MediaPicker.PickPhotoAsync(new MediaPickerOptions
             //{
             //    Title = "Please pick a photo!"

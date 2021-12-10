@@ -36,20 +36,24 @@
             <DataTemplate x:DataType="model:Player">
                 <ViewCell>
                     <Grid Padding="5">
-                        <Frame CornerRadius="10"
-                               HasShadow="True">
+                        <Frame CornerRadius="10" 
+                               HasShadow="True" BorderColor="LightGray" Opacity="0.75" BackgroundColor="LightGoldenrodYellow">
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="{Binding ProfilePic}"
                                        WidthRequest="70"/>
                                 <StackLayout VerticalOptions="Center">
                                     <Label VerticalOptions="Center"
+                                        TextColor="Black"
+                                        FontAttributes="Bold"
                                         FontSize="Large"
                                         Text="{Binding NickName}"/>
                                     <Label VerticalOptions="Center"
                                        FontSize="Small"
+                                       TextColor="DarkSlateGray"
                                        Text="{Binding Points, StringFormat='Points: {0}'}"/>
                                     <Label VerticalOptions="Center"
                                        FontSize="Small"
+                                       TextColor="DarkSlateGray"
                                        Text="{Binding Id, StringFormat='Player Id: {0}'}"/>
                                 </StackLayout>
                             </StackLayout>

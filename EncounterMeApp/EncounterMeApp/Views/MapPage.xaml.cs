@@ -112,5 +112,10 @@ namespace EncounterMeApp.Views
 
             _LocationList = temp;
         }
+
+        public async void Help_Button_Clicked(object sender, EventArgs e)
+        {
+            await DisplayAlert("Button mapping","Left - view your locations\nMiddle - add a location\nRight - view all locations", "OK");
+        }
     }
 }

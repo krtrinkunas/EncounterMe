@@ -4,7 +4,8 @@
              xmlns:views="clr-namespace:EncounterMeApp.Views"
              xmlns:viewmodels="clr-namespace:EncounterMeApp.ViewModels"
              x:Class="EncounterMeApp.Views.LoginPage"
-             Shell.FlyoutBehavior="Disabled">
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False">
     <ScrollView >
         <StackLayout Padding="0">
             <Grid>
