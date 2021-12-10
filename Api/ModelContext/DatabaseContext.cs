@@ -1,5 +1,6 @@
 ﻿using EncounterMeApp.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,15 @@ namespace Api.ModelContext
 
         public DbSet<MyLocation> Locations {get; set;}
         public DbSet<Player> Players { get; set; }
+    }
+    public class YourDbContextFactory : IDesignTimeDbContextFactory<DatabaseContext>
+    {
+        public DatabaseContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
+            optionsBuilder.UseSqlite("Data Source=EncounterMeDB.db");
+
+            return new DatabaseContext(optionsBuilder.Options);
+        }
     }
 }

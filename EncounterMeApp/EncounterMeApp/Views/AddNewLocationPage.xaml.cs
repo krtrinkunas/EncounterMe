@@ -42,18 +42,32 @@ namespace EncounterMeApp.Views
                 {
                     name = await App.Current.MainPage.DisplayPromptAsync("Name of your location", "Name goes here");
                 }
-                while (name == "" || name == null);
+                while (string.IsNullOrEmpty(name));
 
                 string points;
                 do
                 {
                     points = await App.Current.MainPage.DisplayPromptAsync("Value of your location", "Points goes here");
                 }
-                while (points == "" || points == null);
+                while (string.IsNullOrEmpty(points));
+
+                string questionTemp;
+                do
+                {
+                    questionTemp = await App.Current.MainPage.DisplayPromptAsync("Question for your location", "Question goes here");
+                }
+                while (string.IsNullOrEmpty(questionTemp));
+
+                string answerTemp;
+                do
+                {
+                    answerTemp = await App.Current.MainPage.DisplayPromptAsync("Answer for the question", "Answer goes here");
+                }
+                while (string.IsNullOrEmpty(answerTemp));
 
                 Random random = new Random();
                 var newId = random.Next(100);
-                var newLocation = new MyLocation{ NAME = name, points = Int32.Parse(points), positionX = xCoord, positionY = yCoord, owner = App.player.NickName, Id = newId};
+                var newLocation = new MyLocation{ NAME = name, points = Int32.Parse(points), positionX = xCoord, positionY = yCoord, owner = App.player.NickName, Id = newId, question = questionTemp, answer = answerTemp};
 
                 App.player.LocationsOwned += 1;
                 await playerService.UpdatePlayer(App.player);
