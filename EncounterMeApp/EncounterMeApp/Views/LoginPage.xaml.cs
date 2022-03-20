@@ -96,7 +96,7 @@ namespace EncounterMeApp.Views
         {
             CommentSection what = new CommentSection();
             await Navigation.PushAsync(what);
-            what.CreateGridForComment();
+            what.CreateLayoutForMultipleComments();
         }
     }
 }
