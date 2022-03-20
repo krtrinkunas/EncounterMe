@@ -10,7 +10,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid RowDefinitions="*">
-            <ScrollView VerticalScrollBarVisibility="Never">
+            <ScrollView VerticalScrollBarVisibility="Always">
                 <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*" ColumnDefinitions="*,*" Margin="0,-45,0,0">
                     <!--1. Main picture-->
                     <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Source="Peter.png" VerticalOptions="StartAndExpand" Aspect="AspectFill" HeightRequest="350"/>
@@ -43,6 +43,23 @@
 
                     <!--4. Description-->
                     <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" TextColor="Silver" FontSize="17" Padding="20,0,20,70" VerticalOptions="Start" Text="Some information &#x0a;" />
+                    <Button Text ="COMMENTS" 
+                            Clicked="OpenCommentSection"
+                            Grid.Row="5" 
+                            Grid.Column="0" 
+                            Grid.RowSpan="2"  
+                            BorderColor="Silver" 
+                            TextColor="Black" 
+                            BorderWidth="1" 
+                            BackgroundColor="Transparent" 
+                            FontAttributes="Bold" 
+                            FontSize="15" 
+                            WidthRequest="130" 
+                            HeightRequest="50" 
+                            CornerRadius="25" 
+                            VerticalOptions="Center" 
+                            Margin="0,0,30,0" 
+                            HorizontalOptions="End"/>
 
                 </Grid>
             </ScrollView>

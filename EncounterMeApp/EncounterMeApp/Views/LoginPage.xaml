@@ -59,9 +59,25 @@
                         <Label Text="Still Not Connected?" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
 
                         <Button x:Name="btnRegister" Text="Sign Up" HorizontalOptions="Center" TextColor="DarkSeaGreen" FontAttributes="Bold" BackgroundColor="#EBEBEB" CornerRadius="30" Clicked="btnRegister_Clicked"/>
- 
+                                <Button Text ="COMMENTS" 
+                                        Clicked="OpenCommentSection"
+                                        Grid.Row="5" 
+                                        Grid.Column="0" 
+                                        Grid.RowSpan="2"  
+                                        BorderColor="Silver" 
+                                        TextColor="Black" 
+                                        BorderWidth="1" 
+                                        BackgroundColor="Transparent" 
+                                        FontAttributes="Bold" 
+                                        FontSize="15" 
+                                        WidthRequest="130" 
+                                        HeightRequest="50" 
+                                        CornerRadius="25" 
+                                        VerticalOptions="Center" 
+                                        Margin="0,0,30,0" 
+                                        HorizontalOptions="End"/>
 
-                    </StackLayout>
+                            </StackLayout>
                     </StackLayout>
                    
                 </Frame>    

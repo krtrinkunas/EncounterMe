@@ -1,11 +1,13 @@
-﻿using EncounterMeApp.Models;
+﻿using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Pages;
+using EncounterMeApp.Models;
 using EncounterMeApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using EncounterMeApp;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
@@ -96,6 +98,11 @@ namespace EncounterMeApp.Views
             {
                 await DisplayAlert("Forbidden action", "Only location owners can remove locations", "Got it");
             }
+        }
+
+        private async void OpenCommentSection(object sender, EventArgs e)
+        {
+            //await Navigation.PushPopupAsync(new CommentSection());
         }
     }
 }

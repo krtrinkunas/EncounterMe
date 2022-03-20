@@ -1,0 +1,2 @@
+2022-03-14 21:37:07.046 +02:00 [INF] It took 1026 ms to perform this action Post in this controller Player
+2022-03-14 21:37:13.677 +02:00 [INF] It took 163 ms to perform this action GetPlayers in this controller Player

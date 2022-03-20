@@ -10,6 +10,8 @@ using EncounterMeApp.Services;
 using EncounterMeApp.Models;
 using EncounterMeApp;
 using Xamarin.Essentials;
+using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Pages;
 
 namespace EncounterMeApp.Views
 {
@@ -88,6 +90,13 @@ namespace EncounterMeApp.Views
             {
                 Preferences.Clear();
             }
+        }
+
+        private async void OpenCommentSection(object sender, EventArgs e)
+        {
+            CommentSection what = new CommentSection();
+            await Navigation.PushAsync(what);
+            what.CreateGridForComment();
         }
     }
 }
