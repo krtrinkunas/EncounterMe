@@ -13,11 +13,15 @@ namespace Api.ModelContext
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         public DbSet<MyLocation> Locations {get; set;}
         public DbSet<Player> Players { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<CommentRating> CommentRatings { get; set; }
+        public DbSet<LocationRating> LocationRatings { get; set; }
+        public DbSet<CaptureAttempt> CaptureAttempts { get; set; }
     }
     public class YourDbContextFactory : IDesignTimeDbContextFactory<DatabaseContext>
     {
