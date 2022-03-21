@@ -52,6 +52,8 @@ namespace Api
 
             services.AddScoped<ICommentRatingRepository, CommentRatingRepository>();
 
+            services.AddScoped<ILocationRatingRepository, LocationRatingRepository>();
+
             services.AddDbContext<DatabaseContext>(o => o.UseSqlite("Data source=EncounterMeDB.db"));
 
             services.AddControllers();
@@ -79,6 +81,10 @@ namespace Api
                 .InstancePerDependency();
 
             builder.RegisterType<InternetCommentRatingService>().As<ICommentRatingService>()
+                .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
+                .InstancePerDependency();
+
+            builder.RegisterType<InternetLocationRatingService>().As<ILocationRatingService>()
                 .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
                 .InstancePerDependency();
 
