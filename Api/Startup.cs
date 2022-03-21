@@ -54,6 +54,8 @@ namespace Api
 
             services.AddScoped<ILocationRatingRepository, LocationRatingRepository>();
 
+            services.AddScoped<ICaptureAttemptRepository, CaptureAttemptRepository>();
+
             services.AddDbContext<DatabaseContext>(o => o.UseSqlite("Data source=EncounterMeDB.db"));
 
             services.AddControllers();
@@ -85,6 +87,10 @@ namespace Api
                 .InstancePerDependency();
 
             builder.RegisterType<InternetLocationRatingService>().As<ILocationRatingService>()
+                .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
+                .InstancePerDependency();
+
+            builder.RegisterType<InternetCaptureAttemptService>().As<ICaptureAttemptService>()
                 .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
                 .InstancePerDependency();
 
