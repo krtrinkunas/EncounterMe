@@ -50,6 +50,8 @@ namespace Api
 
             services.AddScoped<ICommentRepository, CommentRepository>();
 
+            services.AddScoped<ICommentRatingRepository, CommentRatingRepository>();
+
             services.AddDbContext<DatabaseContext>(o => o.UseSqlite("Data source=EncounterMeDB.db"));
 
             services.AddControllers();
@@ -73,6 +75,10 @@ namespace Api
                 .InstancePerDependency();
 
             builder.RegisterType<InternetCommentService>().As<ICommentService>()
+                .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
+                .InstancePerDependency();
+
+            builder.RegisterType<InternetCommentRatingService>().As<ICommentRatingService>()
                 .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
                 .InstancePerDependency();
 
