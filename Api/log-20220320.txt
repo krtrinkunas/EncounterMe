@@ -1,0 +1,9 @@
+2022-03-20 12:39:25.233 +02:00 [INF] It took 992 ms to perform this action GetPlayers in this controller Player
+2022-03-20 12:39:44.820 +02:00 [INF] It took 171 ms to perform this action Post in this controller Player
+2022-03-20 12:39:48.728 +02:00 [INF] It took 32 ms to perform this action GetPlayers in this controller Player
+2022-03-20 12:39:58.352 +02:00 [INF] It took 27 ms to perform this action GetLocations in this controller Location
+2022-03-20 12:40:00.370 +02:00 [INF] It took 8 ms to perform this action GetLocations in this controller Location
+2022-03-20 12:40:00.963 +02:00 [INF] It took 5 ms to perform this action GetLocations in this controller Location
+2022-03-20 12:40:16.661 +02:00 [INF] It took 23 ms to perform this action Put in this controller Player
+2022-03-20 12:40:16.764 +02:00 [INF] It took 22 ms to perform this action Post in this controller Location
+2022-03-20 12:40:20.205 +02:00 [INF] It took 8 ms to perform this action GetLocations in this controller Location
