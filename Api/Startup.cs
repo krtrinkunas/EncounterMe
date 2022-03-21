@@ -39,7 +39,7 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.File("log-.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File("Logs/log-.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             services.AddScoped<ILocationRepository, LocationRepository>();
@@ -47,6 +47,8 @@ namespace Api
 
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             //services.AddDbContext<PlayerContext>(o => o.UseSqlite("Data source=players.db"));
+
+            services.AddScoped<ICommentRepository, CommentRepository>();
 
             services.AddDbContext<DatabaseContext>(o => o.UseSqlite("Data source=EncounterMeDB.db"));
 
@@ -67,6 +69,10 @@ namespace Api
                 .InstancePerDependency();
 
             builder.RegisterType<InternetPlayerService>().As<IPlayerService>()
+                .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
+                .InstancePerDependency();
+
+            builder.RegisterType<InternetCommentService>().As<ICommentService>()
                 .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
                 .InstancePerDependency();
 
