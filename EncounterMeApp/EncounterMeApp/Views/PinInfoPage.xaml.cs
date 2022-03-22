@@ -21,11 +21,13 @@ namespace EncounterMeApp.Views
         MyLocation currentLocation;
         IPlayerService playerService;
         ILocationService locationService;
+        ICommentService commentService;
         public PinInfoPage(MyLocation location)
         {
             InitializeComponent();
             playerService = DependencyService.Get<IPlayerService>();
             locationService = DependencyService.Get<ILocationService>();
+            //commentService = DependencyService.Get<ICommentService>();
 
             nameOfPin.Text = location.NAME;
             ownerOfPin.Text = "Owner: " + location.owner;
@@ -102,7 +104,9 @@ namespace EncounterMeApp.Views
 
         private async void OpenCommentSection(object sender, EventArgs e)
         {
-            //await Navigation.PushPopupAsync(new CommentSection());
+            CommentSection what = new CommentSection(currentLocation, App.player);
+            await Navigation.PushAsync(what);
+            what.CreateLayoutForMultipleComments();
         }
     }
 }
