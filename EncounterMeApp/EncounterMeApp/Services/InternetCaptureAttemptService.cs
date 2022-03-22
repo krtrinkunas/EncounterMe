@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(InternetLocationService))]
+[assembly: Dependency(typeof(InternetCaptureAttemptService))]
 namespace EncounterMeApp.Services
 {
     public class InternetCaptureAttemptService : ICaptureAttemptService

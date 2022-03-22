@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(InternetLocationService))]
+[assembly: Dependency(typeof(InternetLocationRatingService))]
 namespace EncounterMeApp.Services
 {
     public class InternetLocationRatingService : ILocationRatingService

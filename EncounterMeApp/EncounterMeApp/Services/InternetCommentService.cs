@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(InternetLocationService))]
+[assembly: Dependency(typeof(InternetCommentService))]
 namespace EncounterMeApp.Services
 {
     public class InternetCommentService : ICommentService
