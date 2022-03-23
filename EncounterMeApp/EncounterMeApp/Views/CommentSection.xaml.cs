@@ -15,16 +15,21 @@ namespace EncounterMeApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CommentSection : ContentPage
     {
+        bool showspoilers;
+
         MyLocation location;
         Player player;
         ICommentService commentService;
-        public CommentSection(MyLocation location, Player player)
+        public CommentSection()//MyLocation location, Player player, ICommentService commentService)
         {
-            this.location = location;
-            this.player = player;
-            commentService = DependencyService.Get<ICommentService>();
-
             InitializeComponent();
+            showspoilers = false;
+            //this.location = location;
+            //this.player = player;
+            //commentService = DependencyService.Get<ICommentService>();
+            //this.commentService = commentService;
+
+            
             //missing filter
         }
 
@@ -41,8 +46,10 @@ namespace EncounterMeApp.Views
 
         private async void CreateComment(object sender, EventArgs e)
         {
+            //doesn't work now
             if (entryComment.Text != "")//prob works
             {
+                /*
                 Comment comment = new Comment();
                 comment.LocationId = location.Id;
                 comment.CommentId = new Random().Next(100); // ???
@@ -52,8 +59,8 @@ namespace EncounterMeApp.Views
                 comment.HasSpoilers = spoilerCheckBox.IsChecked;
                 comment.HasCaptured = false; //IMPLEMENT WITH NEW CLASS
                 comment.TimePosted = DateTime.Now;
-
-                
+                */
+                //testLabel.Text = "id: " + location.Id.ToString() + ",idu: "+ player.Id.ToString()+ ",txt: " + entryComment.Text;
                 //await commentService.AddComment(comment); //comment service tuscias
                 //fix
                 /*
@@ -70,6 +77,20 @@ namespace EncounterMeApp.Views
 
         }
 
+        private async void FilterByRatings(object sender, EventArgs e)
+        {
+            //implement
+        }
+
+        private async void FilterByDate(object sender, EventArgs e)
+        {
+            //implement
+        }
+
+        private async void ShowSpoilers(object sender, EventArgs e)
+        {
+            //implement
+        }
 
         public Grid CreateGridForComment(String name, String text, DateTime date, int points, bool spoiler, bool captured, String image)
         {
@@ -96,12 +117,12 @@ namespace EncounterMeApp.Views
             newGrid.Children.Add(CreateLabelText(text), 0, 1);
             newGrid.Children.Add(CreateGridForReview(points, date), 0, 2);
 
-            /*
-            if (spoiler == true)
-                newGrid.Children.Add(SpoilerButton(), 1, 0);
-            if (captured == true)
-                newGrid.Children.Add(CapturedButton(), 1, 0);
-            */
+            if(showspoilers == false && spoiler == true)
+                newGrid.Children.Add(CreateLabelSpoilerHidden(text), 0, 1);
+
+            //if() prisijunges player atitinka komentaro kureja
+            newGrid.RowDefinitions.Add(new RowDefinition() { Height = 20 });
+            newGrid.Children.Add(CreateGridForEditing(), 0, 3);
 
             return newGrid;
         }
@@ -140,6 +161,50 @@ namespace EncounterMeApp.Views
             return newGrid;
         }
 
+        private Grid CreateGridForEditing()
+        {
+            Grid newGrid = new Grid();
+            newGrid.RowDefinitions.Add(new RowDefinition() { Height = 30 });
+            newGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 180 });
+            newGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 70 });
+            newGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 70 });
+
+            newGrid.Children.Add(DeleteButton(), 1, 0);
+            newGrid.Children.Add(EditButton(), 2, 0);
+
+            return newGrid;
+        }
+
+        private Button DeleteButton()
+        {
+            return new Button
+            {
+                Text = "DELETE",
+                FontSize = 10,
+                TextColor = Color.White,
+                BackgroundColor = Color.FromHex("#6CD4FF"),
+                HorizontalOptions = LayoutOptions.End,
+                WidthRequest = 70,
+                HeightRequest = 30,
+                CornerRadius = 30
+            };
+        }
+
+        private Button EditButton()
+        {
+            return new Button
+            {
+                Text = "EDIT",
+                FontSize = 10,
+                TextColor = Color.White,
+                BackgroundColor = Color.FromHex("#6CD4FF"),
+                HorizontalOptions = LayoutOptions.End,
+                WidthRequest = 70,
+                HeightRequest = 30,
+                CornerRadius = 30
+            };
+        }
+
         private Button SpoilerButton()
         {
             return new Button
@@ -162,14 +227,27 @@ namespace EncounterMeApp.Views
                 Text = "CAPTURED",
                 FontSize = 10,
                 TextColor = Color.White,
-                BackgroundColor = Color.Green,
+                BackgroundColor = Color.FromHex("#29E35C"),
                 HorizontalOptions = LayoutOptions.End,
                 WidthRequest = 80,
                 HeightRequest = 30,
                 CornerRadius = 30
             };
         }
-
+        private Label CreateLabelSpoilerHidden(String text)
+        {
+            String spoiler = "This comment contains spoilers ";
+            if (text.Length <= spoiler.Length)
+            {
+                return new Label { Text = spoiler, TextColor = Color.White, BackgroundColor = Color.FromHex("#FF4949"), WidthRequest = 270, HorizontalOptions = LayoutOptions.Start, VerticalOptions = LayoutOptions.Center, LineBreakMode = LineBreakMode.CharacterWrap };
+            }
+            else
+            {
+                //spoiler = spoiler + new string(' ', text.Length - spoiler.Length);
+                int height = (text.Length % spoiler.Length + 1) * 4;
+                return new Label { Text = spoiler, TextColor = Color.White, BackgroundColor = Color.FromHex("#FF4949"), HeightRequest = height,WidthRequest=270 ,HorizontalOptions = LayoutOptions.Start, VerticalOptions = LayoutOptions.Center, LineBreakMode = LineBreakMode.CharacterWrap };
+            }
+        }
         private Label CreateLabelText(String text)
         {
             return new Label { Text = text, TextColor = Color.Black, HorizontalOptions = LayoutOptions.Start, VerticalOptions = LayoutOptions.Center };

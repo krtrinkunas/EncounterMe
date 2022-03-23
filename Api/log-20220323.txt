@@ -1,0 +1,10 @@
+2022-03-23 00:46:36.305 +02:00 [INF] It took 752 ms to perform this action GetPlayers in this controller Player
+2022-03-23 00:46:44.492 +02:00 [INF] It took 36 ms to perform this action GetLocations in this controller Location
+2022-03-23 00:46:47.726 +02:00 [ERR] WebApi exception, Method: GET http://10.0.2.2:20082/api/Comment, Content: ""
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Api.Middleware.StatisticsMiddleware.InvokeAsync(HttpContext context) in C:\Users\emili\Source\Repos\EncounterMe2\Api\Middleware\StatisticsMiddleware.cs:line 28
+   at Api.Middleware.ErrorHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\emili\Source\Repos\EncounterMe2\Api\Middleware\ErrorHandlingMiddleware.cs:line 32
+2022-03-23 00:46:47.726 +02:00 [ERR] WebApi exception, Method: POST http://10.0.2.2:20082/api/Comment, Content: "{\"CommentId\":0,\"LocationId\":85,\"UserId\":26,\"CommentText\":\":(\",\"Rating\":0,\"HasSpoilers\":false,\"HasCaptured\":false,\"TimePosted\":\"2022-03-23T00:46:45.940906+02:00\"}"
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Api.Middleware.StatisticsMiddleware.InvokeAsync(HttpContext context) in C:\Users\emili\Source\Repos\EncounterMe2\Api\Middleware\StatisticsMiddleware.cs:line 28
+   at Api.Middleware.ErrorHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\emili\Source\Repos\EncounterMe2\Api\Middleware\ErrorHandlingMiddleware.cs:line 32

@@ -27,15 +27,43 @@ namespace EncounterMeApp.Views
             InitializeComponent();
             playerService = DependencyService.Get<IPlayerService>();
             locationService = DependencyService.Get<ILocationService>();
-            //commentService = DependencyService.Get<ICommentService>();
+            commentService = DependencyService.Get<ICommentService>();
 
             nameOfPin.Text = location.NAME;
             ownerOfPin.Text = "Owner: " + location.owner;
             pointsOfPin.Text = location.points.ToString();
 
             currentLocation = location;
-        }
+            /*
+            
+            Comment comment = new Comment();
+            comment.LocationId = location.Id;
+            //comment.CommentId = new Random().Next(100); // ???
+            comment.UserId = App.player.Id;
+            comment.CommentText = ":(";
+            comment.Rating = 0;
+            comment.HasSpoilers = false;
+            comment.HasCaptured = false; //IMPLEMENT WITH NEW CLASS
+            comment.TimePosted = DateTime.Now;
 
+            commentService.AddComment(comment);
+
+            testingfunc();
+            */
+        }
+        /*
+        private async void testingfunc()
+        {
+            var comments = await commentService.GetComments();
+            int result = 0;
+            foreach (var com in comments)
+            {
+                result++;
+            }
+
+            testing.Text = "Comment num: " + result.ToString();
+        }
+        */
         private async void Occupy_Button_Clicked(object sender, EventArgs e)
         {
             if (App.player.NickName != currentLocation.owner)
@@ -104,9 +132,9 @@ namespace EncounterMeApp.Views
 
         private async void OpenCommentSection(object sender, EventArgs e)
         {
-            CommentSection what = new CommentSection(currentLocation, App.player);
-            await Navigation.PushAsync(what);
-            what.CreateLayoutForMultipleComments();
+            //CommentSection what = new CommentSection(currentLocation, App.player, commentService);
+            //await Navigation.PushAsync(what);
+            //what.CreateLayoutForMultipleComments();
         }
     }
 }

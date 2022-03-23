@@ -43,7 +43,8 @@
 
                     <!--4. Description-->
                     <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" TextColor="Silver" FontSize="17" Padding="20,0,20,70" VerticalOptions="Start" Text="Some information &#x0a;" />
-                    <Button Text ="COMMENTS" 
+                    <Button x:Name="testing"
+                            Text ="COMMENTS" 
                             Clicked="OpenCommentSection"
                             Grid.Row="5" 
                             Grid.Column="0" 
