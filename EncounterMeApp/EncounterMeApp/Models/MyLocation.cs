@@ -14,5 +14,6 @@ namespace EncounterMeApp.Models
         public int Id { get; set; }
         public string question { get; set; }
         public string answer { get; set; }
+        public int rating { get; set; }
     }
 }
