@@ -17,10 +17,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\CommentSectionPage.xaml.cs">
+      <DependentUpon>CommentSectionPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Views\AddNewLocationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CommentSection.xaml">
+    <EmbeddedResource Update="Views\CommentSectionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EditCommentPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LeaderboardPage.xaml">

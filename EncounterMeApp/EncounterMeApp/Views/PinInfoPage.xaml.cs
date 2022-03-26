@@ -21,13 +21,13 @@ namespace EncounterMeApp.Views
         MyLocation currentLocation;
         IPlayerService playerService;
         ILocationService locationService;
-        ICommentService commentService;
+        ICaptureAttemptService captureAttemptService;
         public PinInfoPage(MyLocation location)
         {
             InitializeComponent();
             playerService = DependencyService.Get<IPlayerService>();
             locationService = DependencyService.Get<ILocationService>();
-            commentService = DependencyService.Get<ICommentService>();
+            captureAttemptService = DependencyService.Get<ICaptureAttemptService>();
 
             nameOfPin.Text = location.NAME;
             ownerOfPin.Text = "Owner: " + location.owner;
@@ -51,19 +51,13 @@ namespace EncounterMeApp.Views
             testingfunc();
             */
         }
-        /*
-        private async void testingfunc()
-        {
-            var comments = await commentService.GetComments();
-            int result = 0;
-            foreach (var com in comments)
-            {
-                result++;
-            }
 
-            testing.Text = "Comment num: " + result.ToString();
+        private async void CheckCaptureAttempt()
+        {
+
+            await captureAttemptService.GetCaptureAttempts();
         }
-        */
+
         private async void Occupy_Button_Clicked(object sender, EventArgs e)
         {
             if (App.player.NickName != currentLocation.owner)
@@ -132,9 +126,9 @@ namespace EncounterMeApp.Views
 
         private async void OpenCommentSection(object sender, EventArgs e)
         {
-            //CommentSection what = new CommentSection(currentLocation, App.player, commentService);
-            //await Navigation.PushAsync(what);
-            //what.CreateLayoutForMultipleComments();
+            CommentSectionPage what = new CommentSectionPage(currentLocation, App.player);
+            await Navigation.PushAsync(what);
+            what.CreateLayoutForMultipleComments();
         }
     }
 }
