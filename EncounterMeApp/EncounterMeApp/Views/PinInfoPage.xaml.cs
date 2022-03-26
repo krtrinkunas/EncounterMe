@@ -21,41 +21,58 @@ namespace EncounterMeApp.Views
         MyLocation currentLocation;
         IPlayerService playerService;
         ILocationService locationService;
-        ICaptureAttemptService captureAttemptService;
+        ICaptureAttemptService captureService;
+        CaptureAttempt captureAttempt;
         public PinInfoPage(MyLocation location)
         {
             InitializeComponent();
             playerService = DependencyService.Get<IPlayerService>();
             locationService = DependencyService.Get<ILocationService>();
-            captureAttemptService = DependencyService.Get<ICaptureAttemptService>();
+            captureService = DependencyService.Get<ICaptureAttemptService>();
 
             nameOfPin.Text = location.NAME;
             ownerOfPin.Text = "Owner: " + location.owner;
             pointsOfPin.Text = location.points.ToString();
 
             currentLocation = location;
-            /*
-            
-            Comment comment = new Comment();
-            comment.LocationId = location.Id;
-            //comment.CommentId = new Random().Next(100); // ???
-            comment.UserId = App.player.Id;
-            comment.CommentText = ":(";
-            comment.Rating = 0;
-            comment.HasSpoilers = false;
-            comment.HasCaptured = false; //IMPLEMENT WITH NEW CLASS
-            comment.TimePosted = DateTime.Now;
 
-            commentService.AddComment(comment);
-
-            testingfunc();
-            */
+            CheckCaptureAttempt();
         }
 
         private async void CheckCaptureAttempt()
         {
+            var captures = await captureService.GetCaptureAttempts();
+            CaptureAttempt capture;
 
-            await captureAttemptService.GetCaptureAttempts();
+            if (captures == null || captures.Any())
+            {
+                capture = CreateCaptureAttempt();
+                captureAttempt = capture;
+                await captureService.AddCaptureAttempt(capture);
+                return;
+            }
+            
+            capture = captures.Single(c => c.UserId == App.player.Id && c.LocationId == currentLocation.Id);
+            
+            if (capture == null)
+            {
+                capture = CreateCaptureAttempt();
+                captureAttempt = capture;
+                await captureService.AddCaptureAttempt(capture);
+                return;
+            }
+            
+            captureAttempt = capture;
+        }
+
+        private CaptureAttempt CreateCaptureAttempt()
+        {
+            CaptureAttempt newCapture = new CaptureAttempt();
+            newCapture.HasCaptured = false;
+            newCapture.LocationId = currentLocation.Id;
+            newCapture.UserId = App.player.Id;
+
+            return newCapture;
         }
 
         private async void Occupy_Button_Clicked(object sender, EventArgs e)
@@ -70,6 +87,10 @@ namespace EncounterMeApp.Views
                     {
                         App.player.Points += currentLocation.points;
                         App.player.LocationsOwned += 1;
+
+                        //capture update
+                        captureAttempt.HasCaptured = true;
+                        await captureService.UpdateCaptureAttempt(captureAttempt);
 
                         var PlayerList = new List<Player>();
                         PlayerList.Clear();
@@ -126,9 +147,9 @@ namespace EncounterMeApp.Views
 
         private async void OpenCommentSection(object sender, EventArgs e)
         {
-            CommentSectionPage what = new CommentSectionPage(currentLocation, App.player);
+            CommentSectionPage what = new CommentSectionPage(currentLocation, App.player, captureAttempt);
             await Navigation.PushAsync(what);
-            what.CreateLayoutForMultipleComments();
+            //what.CreateLayoutForMultipleComments();
         }
     }
 }

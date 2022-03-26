@@ -24,16 +24,19 @@ namespace EncounterMeApp.Views
         Player player;
         ICommentService commentService;
         IPlayerService playerService;
-        public CommentSectionPage(MyLocation location, Player player)
+        CaptureAttempt captureAttempt;
+        public CommentSectionPage(MyLocation location, Player player, CaptureAttempt captureAttempt)
         {
             InitializeComponent();
             showspoilers = false;
             this.location = location;
             this.player = player;
-            
-            //this.commentService = commentService;
+            this.captureAttempt = captureAttempt;
+            commentService = DependencyService.Get<ICommentService>();
+            playerService = DependencyService.Get<IPlayerService>();
 
-            
+            CreateLayoutForMultipleComments();
+
             //missing filter
         }
 
@@ -53,18 +56,6 @@ namespace EncounterMeApp.Views
 
         public async void CreateLayoutForMultipleComments()
         {
-            commentService = DependencyService.Get<ICommentService>();
-            playerService = DependencyService.Get<IPlayerService>();
-            //change
-            //StackLayout newStack = new StackLayout();
-            /*
-            stackLayout.Children.Add(CreateGridForComment("HamsterWasHere", "Prasau veik Prasau veik Prasau veik", new DateTime(2022, 3, 21), 10, true, true, "discover_button.png"));
-            stackLayout.Children.Add(new BoxView() { Color = Color.Black, WidthRequest = 100, HeightRequest = 1 });
-            stackLayout.Children.Add(CreateGridForComment("HamsterWasNotHere", "Manyciau kad veikia", new DateTime(2022, 3, 20), 12, false, true, "discover_button.png"));
-            stackLayout.Children.Add(new BoxView() { Color = Color.Black, WidthRequest = 100, HeightRequest = 1 });
-            stackLayout.Children.Add(CreateGridForComment("FoxWasHere", "Probs veikia Probs veikiaProbs veikiaProbs veikiaProbs veikiaProbs veikiaProbs veikia", new DateTime(2022, 3, 19), 0, true, false, "discover_button.png"));
-                */
-
             stackLayout.Children.Clear();
 
             var comments = await commentService.GetComments();
@@ -83,15 +74,13 @@ namespace EncounterMeApp.Views
                             com.TimePosted,
                             com.Rating,
                             com.HasSpoilers, //spoiler 
-                            true,//com.HasCaptured, //captured
+                            com.HasCaptured, //captured
                             edit,
                             "discover_button.png"));
                     //add line
                     stackLayout.Children.Add(new BoxView() { Color = Color.Black, WidthRequest = 100, HeightRequest = 1 });
                 }
             }
-            
-            //stackLayout = newStack;
         }
 
         private async void CreateComment(object sender, EventArgs e)
@@ -106,13 +95,14 @@ namespace EncounterMeApp.Views
                 comment.CommentText = entryComment.Text;
                 comment.Rating = 0;
                 comment.HasSpoilers = spoilerCheckBox.IsChecked;
-                comment.HasCaptured = false; //IMPLEMENT WITH NEW CLASS
+                comment.HasCaptured = captureAttempt.HasCaptured; 
                 comment.TimePosted = DateTime.Now;
                 
-                //testLabel.Text = "id: " + location.Id.ToString() + ",idu: "+ player.Id.ToString()+ ",txt: " + entryComment.Text;
-                await commentService.AddComment(comment); //comment service tuscias
-                //fix
-                
+                await commentService.AddComment(comment);
+
+                entryComment.Text = "";
+                CreateLayoutForMultipleComments();
+                /*
                 var comments = await commentService.GetComments();
                 int result = 0;
                 foreach (var com in comments)
@@ -121,7 +111,7 @@ namespace EncounterMeApp.Views
                 }
 
                 testLabel.Text = "Comment num: "+ result.ToString();
-                
+                */
             }
 
         }
