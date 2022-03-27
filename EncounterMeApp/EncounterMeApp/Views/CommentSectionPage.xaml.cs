@@ -24,6 +24,8 @@ namespace EncounterMeApp.Views
         Player player;
         ICommentService commentService;
         IPlayerService playerService;
+        ICommentRatingService comratingService;
+
         CaptureAttempt captureAttempt;
         public CommentSectionPage(MyLocation location, Player player, CaptureAttempt captureAttempt)
         {
@@ -34,6 +36,7 @@ namespace EncounterMeApp.Views
             this.captureAttempt = captureAttempt;
             commentService = DependencyService.Get<ICommentService>();
             playerService = DependencyService.Get<IPlayerService>();
+            comratingService = DependencyService.Get<ICommentRatingService>();
 
             CreateLayoutForMultipleComments();
 
@@ -154,7 +157,7 @@ namespace EncounterMeApp.Views
 
             newGrid.Children.Add(CreateGridFirstRow(name,spoiler, captured), 0, 0);
             newGrid.Children.Add(CreateLabelText(text), 0, 1);
-            newGrid.Children.Add(CreateGridForReview(points, date), 0, 2);
+            newGrid.Children.Add(CreateGridForReview(id, points, date), 0, 2);
 
             if(showspoilers == false && spoiler == true)
                 newGrid.Children.Add(CreateLabelSpoilerHidden(text), 0, 1);
@@ -186,7 +189,7 @@ namespace EncounterMeApp.Views
             return newGrid;
         }
 
-        private Grid CreateGridForReview(int points, DateTime date)
+        private Grid CreateGridForReview(int id, int points, DateTime date)
         {
             Grid newGrid = new Grid();
             newGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 30 });
@@ -195,8 +198,8 @@ namespace EncounterMeApp.Views
             newGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 120 });
 
             newGrid.Children.Add(CreateLabelText(points.ToString()), 0, 0);
-            newGrid.Children.Add(CreateButtonUp(), 1, 0);
-            newGrid.Children.Add(CreateButtonDown(), 2, 0);
+            newGrid.Children.Add(CreateButtonUp(id), 1, 0);
+            newGrid.Children.Add(CreateButtonDown(id), 2, 0);
             newGrid.Children.Add(CreateDateLabel(date), 3, 0);
 
 
@@ -324,37 +327,106 @@ namespace EncounterMeApp.Views
             return new Label { Text = text, FontAttributes = FontAttributes.Bold, TextColor = Color.Black, HorizontalOptions = LayoutOptions.Start, VerticalOptions = LayoutOptions.Center };
         }
 
-        private Image CreateButtonUp()
+        private Image CreateButtonUp(int id)
         {
             Image image = new Image
             {
-                Source = "green.png"
+                Source = "green.png",
+                ClassId = id.ToString()
             };
 
             var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.Tapped += (s, e) => {
-                GoBack(s,e); //change
+                RateComment(s, true);
             };
             image.GestureRecognizers.Add(tapGestureRecognizer);
 
             return image;
         }
 
-        private Image CreateButtonDown()
+        private Image CreateButtonDown(int id)
         {
             Image image = new Image
             {
-                Source = "red.png"
+                Source = "red.png",
+                ClassId = id.ToString()
             };
 
             var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.Tapped += (s, e) => {
-                GoBack(s, e); //change
+                RateComment(s, false);
             };
             image.GestureRecognizers.Add(tapGestureRecognizer);
 
             return image;
         }
+
+        private async void RateComment(object sender, bool boolrating)
+        {
+            int id = Int16.Parse((sender as Image).ClassId);
+            
+            var ratings = await comratingService.GetCommentRatings();
+            CommentRating rating;
+
+            if (ratings == null || !ratings.Any())
+            {
+                rating = CreateCommentRating(id, boolrating);
+                await comratingService.AddCommentRating(rating);
+                //comment rating
+                UpdateCommentRating(id, boolrating, 1);
+                
+                return;
+            }
+
+            //find old rating
+            rating = ratings.SingleOrDefault(c => c.UserId == App.player.Id && c.LocationId == location.Id && c.CommentId == id);
+
+            if (rating == null)
+            {
+                rating = CreateCommentRating(id, boolrating);
+                await comratingService.AddCommentRating(rating);
+                //comment rating
+                UpdateCommentRating(id, boolrating, 1);
+                
+                return;
+            }
+
+            //update rating
+            if (rating.Rating != boolrating)
+            {
+                rating.Rating = boolrating;
+                await comratingService.UpdateCommentRating(rating);
+                //comment rating
+                UpdateCommentRating(id, boolrating, 2);
+                
+                return;
+            }
+            
+        }
+
+        private async void UpdateCommentRating(int id, bool boolrating, int num)
+        {
+            Comment comment = await commentService.GetComment(id);
+            if (boolrating)
+                comment.Rating = comment.Rating + num;
+            else
+                comment.Rating = comment.Rating - num;
+
+            await commentService.UpdateComment(comment);
+            CreateLayoutForMultipleComments();//maybe something smarter?
+        }
+
+            private CommentRating CreateCommentRating(int id, bool rating)
+        {
+            CommentRating newRating = new CommentRating();
+            newRating.Rating = rating;
+            newRating.CommentId = id;
+            newRating.LocationId = location.Id;
+            newRating.UserId = App.player.Id;
+
+            return newRating;
+        }
+
 
         private Label CreateDateLabel(DateTime date)
         {

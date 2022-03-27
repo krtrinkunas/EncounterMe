@@ -44,7 +44,7 @@ namespace EncounterMeApp.Views
             var captures = await captureService.GetCaptureAttempts();
             CaptureAttempt capture;
 
-            if (captures == null || captures.Any())
+            if (captures == null || !captures.Any())
             {
                 capture = CreateCaptureAttempt();
                 captureAttempt = capture;
@@ -52,7 +52,7 @@ namespace EncounterMeApp.Views
                 return;
             }
             
-            capture = captures.Single(c => c.UserId == App.player.Id && c.LocationId == currentLocation.Id);
+            capture = captures.SingleOrDefault(c => c.UserId == App.player.Id && c.LocationId == currentLocation.Id);
             
             if (capture == null)
             {
