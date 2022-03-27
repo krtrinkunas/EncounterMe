@@ -19,6 +19,8 @@ namespace EncounterMeApp.Views
     public partial class CommentSectionPage : ContentPage
     {
         bool showspoilers;
+        bool filterbydate;
+        bool filterbyratings;
 
         MyLocation location;
         Player player;
@@ -30,13 +32,16 @@ namespace EncounterMeApp.Views
         public CommentSectionPage(MyLocation location, Player player, CaptureAttempt captureAttempt)
         {
             InitializeComponent();
-            showspoilers = false;
             this.location = location;
             this.player = player;
             this.captureAttempt = captureAttempt;
             commentService = DependencyService.Get<ICommentService>();
             playerService = DependencyService.Get<IPlayerService>();
             comratingService = DependencyService.Get<ICommentRatingService>();
+
+            showspoilers = false;
+            filterbydate = false;
+            filterbyratings = false;
 
             CreateLayoutForMultipleComments();
 
@@ -62,24 +67,32 @@ namespace EncounterMeApp.Views
             stackLayout.Children.Clear();
 
             var comments = await commentService.GetComments();
+
+            if (filterbydate && filterbyratings)
+                comments = comments.OrderByDescending(x => x.Rating).ThenBy(x => x.TimePosted);
+            else if (filterbyratings)
+                comments = comments.OrderByDescending(x => x.Rating);
+            else if (filterbydate)
+                comments = comments.OrderByDescending(x => x.TimePosted);
+
             foreach (var com in comments)
             {
                 if (location.Id == com.LocationId)
                 {
-                    var player = await playerService.GetPlayer(com.UserId);
+                    var locplayer = await playerService.GetPlayer(com.UserId);
                     bool edit = player.Id == com.UserId ? true : false;
 
                     stackLayout.Children.Add(
                         CreateGridForComment(
                             com.CommentId,
-                            player.NickName,
+                            locplayer.NickName,
                             com.CommentText,
                             com.TimePosted,
                             com.Rating,
                             com.HasSpoilers, //spoiler 
                             com.HasCaptured, //captured
                             edit,
-                            "discover_button.png"));
+                            locplayer.ProfilePic));//"discover_button.png"));
                     //add line
                     stackLayout.Children.Add(new BoxView() { Color = Color.Black, WidthRequest = 100, HeightRequest = 1 });
                 }
@@ -121,17 +134,56 @@ namespace EncounterMeApp.Views
 
         private async void FilterByRatings(object sender, EventArgs e)
         {
-            //implement
+            if (filterbyratings)
+            {
+                filterbyratings = false;
+                (sender as Button).BackgroundColor = Color.White;
+                (sender as Button).TextColor = Color.FromHex("#6CD4FF");
+            }
+            else
+            {
+                filterbyratings = true;
+                (sender as Button).BackgroundColor = Color.FromHex("#6CD4FF");
+                (sender as Button).TextColor = Color.White;
+            }
+                
+            CreateLayoutForMultipleComments();
         }
 
         private async void FilterByDate(object sender, EventArgs e)
         {
-            //implement
+            if (filterbydate)
+            {
+                filterbydate = false;
+                (sender as Button).BackgroundColor = Color.White;
+                (sender as Button).TextColor = Color.FromHex("#29E35C");
+            }
+            else
+            {
+                filterbydate = true;
+                (sender as Button).BackgroundColor = Color.FromHex("#29E35C");
+                (sender as Button).TextColor = Color.White;
+            }
+
+            CreateLayoutForMultipleComments();
         }
 
         private async void ShowSpoilers(object sender, EventArgs e)
         {
-            //implement
+            if (showspoilers)
+            {
+                showspoilers = false;
+                (sender as Button).BackgroundColor = Color.White;
+                (sender as Button).TextColor = Color.Red;
+            }
+            else
+            {
+                showspoilers = true;
+                (sender as Button).BackgroundColor = Color.Red;
+                (sender as Button).TextColor = Color.White;
+            }
+                
+            CreateLayoutForMultipleComments();
         }
 
         public Grid CreateGridForComment(int id, String name, String text, DateTime date, int points, bool spoiler, bool captured, bool edit, String image)

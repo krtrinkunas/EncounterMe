@@ -21,6 +21,8 @@ namespace EncounterMeApp.Views
         public string username;
         public Player newPlayer;
         public List<Player> PlayerList;
+
+        IPlayerService playerService;
         public ProfilePage()
         {
             //NavigationPage.SetBackButtonTitle(this, "Back");
@@ -32,6 +34,8 @@ namespace EncounterMeApp.Views
             visitedPlacesLabel.Text = App.player.LocationsVisited.ToString();
             ownedPlacesLabel.Text = App.player.LocationsOwned.ToString();
             currentEmail.Text = App.player.Email;
+
+            playerService = DependencyService.Get<IPlayerService>();
         }
         protected override void OnAppearing()
         {
@@ -48,6 +52,9 @@ namespace EncounterMeApp.Views
             string profilePicPath = await DisplayPromptAsync("What is the file name?", "(The file must exist in Resources/drawable folder of the app", keyboard: Keyboard.Default);
             ProfileImage.Source = profilePicPath;
 
+            App.player.ProfilePic = profilePicPath;
+
+            await playerService.UpdatePlayer(App.player);
             //var result = MediaPicker.PickPhotoAsync(new MediaPickerOptions
             //{
             //    Title = "Please pick a photo!"

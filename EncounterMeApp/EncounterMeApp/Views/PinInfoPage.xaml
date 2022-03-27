@@ -72,7 +72,7 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <Image Source="commenticon.jpg" Grid.Column="0" HeightRequest="30" WidthRequest="30">
+                    <Image Source="comment.png" Grid.Column="0" HeightRequest="30" WidthRequest="30">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OpenCommentSection"/>
                         </Image.GestureRecognizers>

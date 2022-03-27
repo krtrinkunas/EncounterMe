@@ -6,6 +6,9 @@
     <ContentPage.Content>
         <StackLayout>
             <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="130"/>
                     <ColumnDefinition Width="130"/>
@@ -13,8 +16,10 @@
                 </Grid.ColumnDefinitions>
                 <Button Text="Filter by Ratings"
                         FontSize="10"
-                        TextColor="White"
-                        BackgroundColor="#6CD4FF" 
+                        TextColor="#6CD4FF"
+                        BorderColor="#6CD4FF"
+                        BorderWidth="3"
+                        BackgroundColor="White" 
                         VerticalOptions="End"
                         HorizontalOptions="Start"
                         WidthRequest="130"
@@ -26,8 +31,10 @@
                 </Button>
                 <Button Text="Filter by Date"
                         FontSize="12"
-                        TextColor="White"
-                        BackgroundColor="#29E35C" 
+                        TextColor="#29E35C"
+                        BackgroundColor="White" 
+                        BorderColor="#29E35C"
+                        BorderWidth="3"
                         VerticalOptions="End"
                         HorizontalOptions="Start"
                         WidthRequest="130"
@@ -39,8 +46,10 @@
                 </Button>
                 <Button Text="Show Spoilers"
                         FontSize="12"
-                        TextColor="White"
-                        BackgroundColor="Red" 
+                        TextColor="Red"
+                        BackgroundColor="White" 
+                        BorderColor="Red"
+                        BorderWidth="3"
                         VerticalOptions="End"
                         HorizontalOptions="Start"
                         WidthRequest="130"
@@ -58,7 +67,7 @@
             <StackLayout VerticalOptions="EndAndExpand">
                 <Grid VerticalOptions="End" Margin="10,10,10,10">
                     <Grid.RowDefinitions>
-                        <RowDefinition />
+                        <RowDefinition Height="70"/>
                         <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -102,7 +111,6 @@
                                   Grid.Column="0"/>
                         <Label Text="Spoiler"
                                Grid.Column="1"/>
-                        <Label x:Name="testLabel" Text="TEST" Grid.Column="2"/>
                     </Grid>
 
                     </Grid>

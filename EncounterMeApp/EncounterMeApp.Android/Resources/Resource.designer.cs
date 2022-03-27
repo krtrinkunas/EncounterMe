@@ -25653,7 +25653,7 @@ namespace EncounterMeApp.Droid
 			public const int btn_radio_on_to_off_mtrl_animation = 2131165278;
 			
 			// aapt resource value: 0x7F07005F
-			public const int commenticon = 2131165279;
+			public const int comment = 2131165279;
 			
 			// aapt resource value: 0x7F070060
 			public const int common_full_open_on_phone = 2131165280;
