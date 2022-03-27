@@ -3,14 +3,16 @@ using System;
 using Api.ModelContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220324105359_newDB5")]
+    partial class newDB5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,9 +124,6 @@ namespace Api.Migrations
 
                     b.Property<string>("answer")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("numberOfRatings")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("owner")
                         .HasColumnType("TEXT");
