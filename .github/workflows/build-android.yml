@@ -3,7 +3,7 @@ name: Build Xamarin.Android app
 on: [push]
 
 jobs:
-  build:
+  build-android-app:
 
     runs-on: macos-latest
 
