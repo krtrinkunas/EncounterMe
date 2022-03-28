@@ -1,0 +1,56 @@
+2022-03-22 01:54:50.061 +02:00 [INF] It took 745 ms to perform this action GetPlayers in this controller Player
+2022-03-22 01:54:59.225 +02:00 [INF] It took 67 ms to perform this action GetLocations in this controller Location
+2022-03-22 01:57:00.105 +02:00 [INF] It took 761 ms to perform this action GetPlayers in this controller Player
+2022-03-22 01:57:09.477 +02:00 [INF] It took 42 ms to perform this action GetLocations in this controller Location
+2022-03-22 02:01:13.123 +02:00 [INF] It took 728 ms to perform this action GetPlayers in this controller Player
+2022-03-22 02:01:21.471 +02:00 [INF] It took 41 ms to perform this action GetLocations in this controller Location
+2022-03-22 02:04:56.538 +02:00 [INF] It took 645 ms to perform this action GetPlayers in this controller Player
+2022-03-22 02:05:05.465 +02:00 [INF] It took 41 ms to perform this action GetLocations in this controller Location
+2022-03-22 02:07:16.668 +02:00 [INF] It took 649 ms to perform this action GetPlayers in this controller Player
+2022-03-22 02:07:24.630 +02:00 [INF] It took 34 ms to perform this action GetLocations in this controller Location
+2022-03-22 02:09:24.932 +02:00 [INF] It took 697 ms to perform this action GetPlayers in this controller Player
+2022-03-22 02:09:32.992 +02:00 [INF] It took 43 ms to perform this action GetLocations in this controller Location
+2022-03-22 13:51:18.981 +02:00 [INF] It took 630 ms to perform this action GetPlayers in this controller Player
+2022-03-22 13:51:39.338 +02:00 [INF] It took 166 ms to perform this action Post in this controller Player
+2022-03-22 13:51:41.417 +02:00 [INF] It took 32 ms to perform this action GetPlayers in this controller Player
+2022-03-22 13:51:48.297 +02:00 [INF] It took 31 ms to perform this action GetLocations in this controller Location
+2022-03-22 13:51:51.836 +02:00 [INF] It took 7 ms to perform this action GetLocations in this controller Location
+2022-03-22 13:52:05.598 +02:00 [INF] It took 25 ms to perform this action Put in this controller Player
+2022-03-22 13:52:05.745 +02:00 [INF] It took 22 ms to perform this action Post in this controller Location
+2022-03-22 13:52:07.965 +02:00 [INF] It took 6 ms to perform this action GetLocations in this controller Location
+2022-03-22 13:54:22.599 +02:00 [INF] It took 695 ms to perform this action GetPlayers in this controller Player
+2022-03-22 13:54:32.628 +02:00 [INF] It took 45 ms to perform this action GetLocations in this controller Location
+2022-03-22 13:58:34.124 +02:00 [INF] It took 670 ms to perform this action GetPlayers in this controller Player
+2022-03-22 13:58:42.862 +02:00 [INF] It took 37 ms to perform this action GetLocations in this controller Location
+2022-03-22 14:01:17.202 +02:00 [INF] It took 654 ms to perform this action GetPlayers in this controller Player
+2022-03-22 14:01:26.012 +02:00 [INF] It took 36 ms to perform this action GetLocations in this controller Location
+2022-03-22 14:02:36.921 +02:00 [INF] It took 642 ms to perform this action GetPlayers in this controller Player
+2022-03-22 14:02:45.270 +02:00 [INF] It took 37 ms to perform this action GetLocations in this controller Location
+2022-03-22 22:35:06.605 +02:00 [INF] It took 1008 ms to perform this action GetPlayers in this controller Player
+2022-03-22 22:35:14.928 +02:00 [INF] It took 41 ms to perform this action GetLocations in this controller Location
+2022-03-22 22:36:56.829 +02:00 [INF] It took 636 ms to perform this action GetPlayers in this controller Player
+2022-03-22 22:37:05.332 +02:00 [INF] It took 41 ms to perform this action GetLocations in this controller Location
+2022-03-22 22:38:53.868 +02:00 [INF] It took 653 ms to perform this action GetPlayers in this controller Player
+2022-03-22 22:39:16.075 +02:00 [INF] It took 51 ms to perform this action GetLocations in this controller Location
+2022-03-22 22:45:20.930 +02:00 [INF] It took 652 ms to perform this action GetPlayers in this controller Player
+2022-03-22 22:45:30.566 +02:00 [INF] It took 38 ms to perform this action GetLocations in this controller Location
+2022-03-22 22:46:54.654 +02:00 [INF] It took 37 ms to perform this action GetPlayers in this controller Player
+2022-03-22 22:47:02.928 +02:00 [INF] It took 7 ms to perform this action GetLocations in this controller Location
+2022-03-22 22:49:11.642 +02:00 [INF] It took 652 ms to perform this action GetPlayers in this controller Player
+2022-03-22 22:49:21.652 +02:00 [INF] It took 43 ms to perform this action GetLocations in this controller Location
+2022-03-22 22:49:50.883 +02:00 [ERR] WebApi exception, Method: GET http://10.0.2.2:20082/api/Comment, Content: ""
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Api.Middleware.StatisticsMiddleware.InvokeAsync(HttpContext context) in C:\Users\emili\Source\Repos\EncounterMe2\Api\Middleware\StatisticsMiddleware.cs:line 28
+   at Api.Middleware.ErrorHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\emili\Source\Repos\EncounterMe2\Api\Middleware\ErrorHandlingMiddleware.cs:line 32
+2022-03-22 23:06:32.006 +02:00 [INF] It took 710 ms to perform this action GetPlayers in this controller Player
+2022-03-22 23:06:43.394 +02:00 [INF] It took 37 ms to perform this action GetLocations in this controller Location
+2022-03-22 23:06:47.137 +02:00 [ERR] WebApi exception, Method: POST http://10.0.2.2:20082/api/Comment, Content: "{\"CommentId\":0,\"LocationId\":85,\"UserId\":26,\"CommentText\":\":(\",\"Rating\":0,\"HasSpoilers\":false,\"HasCaptured\":false,\"TimePosted\":\"2022-03-22T23:06:45.692742+02:00\"}"
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Api.Middleware.StatisticsMiddleware.InvokeAsync(HttpContext context) in C:\Users\emili\Source\Repos\EncounterMe2\Api\Middleware\StatisticsMiddleware.cs:line 28
+   at Api.Middleware.ErrorHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\emili\Source\Repos\EncounterMe2\Api\Middleware\ErrorHandlingMiddleware.cs:line 32
+2022-03-22 23:09:27.662 +02:00 [INF] It took 677 ms to perform this action GetPlayers in this controller Player
+2022-03-22 23:09:35.849 +02:00 [INF] It took 42 ms to perform this action GetLocations in this controller Location
+2022-03-22 23:09:44.894 +02:00 [ERR] WebApi exception, Method: POST http://10.0.2.2:20082/api/Comment, Content: "{\"CommentId\":88,\"LocationId\":85,\"UserId\":26,\"CommentText\":\"gggggg\",\"Rating\":0,\"HasSpoilers\":false,\"HasCaptured\":false,\"TimePosted\":\"2022-03-22T23:09:43.862406+02:00\"}"
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Api.Middleware.StatisticsMiddleware.InvokeAsync(HttpContext context) in C:\Users\emili\Source\Repos\EncounterMe2\Api\Middleware\StatisticsMiddleware.cs:line 28
+   at Api.Middleware.ErrorHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\emili\Source\Repos\EncounterMe2\Api\Middleware\ErrorHandlingMiddleware.cs:line 32

@@ -43,7 +43,8 @@
 
                     <!--4. Description-->
                     <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" TextColor="Silver" FontSize="17" Padding="20,0,20,70" VerticalOptions="Start" Text="Some information &#x0a;" />
-                    <Button Text ="COMMENTS" 
+                    <Button x:Name="testing"
+                            Text ="COMMENTS" 
                             Clicked="OpenCommentSection"
                             Grid.Row="5" 
                             Grid.Column="0" 
@@ -66,7 +67,18 @@
 
             <!-- 5. Float buttons-->
             <StackLayout Grid.Row="0" Orientation="Horizontal"  Padding="0,0,0,22" VerticalOptions="End" HorizontalOptions="CenterAndExpand" HeightRequest="60">
-                <Button BackgroundColor="Black" TextColor="White" ImageSource="Message" FontAttributes="Bold" Text="Occupy" WidthRequest="150" CornerRadius="30" FontSize="18" Clicked="Occupy_Button_Clicked"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Image Source="comment.png" Grid.Column="0" HeightRequest="30" WidthRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OpenCommentSection"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Button BackgroundColor="Black" Grid.Column="1" TextColor="White" ImageSource="Message" FontAttributes="Bold" Text="Occupy" WidthRequest="150" CornerRadius="30" FontSize="18" Clicked="Occupy_Button_Clicked"/>
+                </Grid>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

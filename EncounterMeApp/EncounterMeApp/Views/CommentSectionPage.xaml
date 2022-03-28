@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EncounterMeApp.Views.CommentSectionPage"
+             NavigationPage.HasNavigationBar="false">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="130"/>
+                </Grid.ColumnDefinitions>
+                <Button Text="Filter by Ratings"
+                        FontSize="10"
+                        TextColor="#6CD4FF"
+                        BorderColor="#6CD4FF"
+                        BorderWidth="3"
+                        BackgroundColor="White" 
+                        VerticalOptions="End"
+                        HorizontalOptions="Start"
+                        WidthRequest="130"
+                        HeightRequest="40"
+                        CornerRadius = "30"
+                        Grid.Column="0"
+                        Margin="10,10,0,20"
+                        Clicked="FilterByRatings">
+                </Button>
+                <Button Text="Filter by Date"
+                        FontSize="12"
+                        TextColor="#29E35C"
+                        BackgroundColor="White" 
+                        BorderColor="#29E35C"
+                        BorderWidth="3"
+                        VerticalOptions="End"
+                        HorizontalOptions="Start"
+                        WidthRequest="130"
+                        HeightRequest="40"
+                        CornerRadius = "30"
+                        Grid.Column="1"
+                        Margin="0,10,0,20"
+                        Clicked="FilterByDate">
+                </Button>
+                <Button Text="Show Spoilers"
+                        FontSize="12"
+                        TextColor="Red"
+                        BackgroundColor="White" 
+                        BorderColor="Red"
+                        BorderWidth="3"
+                        VerticalOptions="End"
+                        HorizontalOptions="Start"
+                        WidthRequest="130"
+                        HeightRequest="40"
+                        CornerRadius = "30"
+                        Grid.Column="2"
+                        Margin="0,10,0,20"
+                        Clicked="ShowSpoilers">
+                </Button>
+            </Grid>
+            <ScrollView VerticalScrollBarVisibility="Always">
+                <StackLayout x:Name="stackLayout">
+                </StackLayout>
+            </ScrollView>
+            <StackLayout VerticalOptions="EndAndExpand">
+                <Grid VerticalOptions="End" Margin="10,10,10,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="70"/>
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="userImage"
+                           Source = "map_global.png" 
+                           Margin = "5,5,5,5" 
+                           HorizontalOptions = "Center"
+                           VerticalOptions = "Start" 
+                           Grid.Column="0">
+                    </Image>
+                    <Entry x:Name="entryComment" 
+                            Placeholder="Write your comment..." 
+                            TextColor="Black" 
+                            HorizontalOptions="FillAndExpand" 
+                            Margin="0,0,15,0"
+                            Grid.Column="1"/>
+                    <Button Text="POST"
+                                FontSize="Medium"
+                                TextColor="White"
+                                BackgroundColor="#6CD4FF" 
+                                VerticalOptions="End"
+                                HorizontalOptions="Start"
+                                WidthRequest="70"
+                                HeightRequest="50"
+                                CornerRadius = "30"
+                                Grid.Column="2"
+                                Margin="0,10,0,20"
+                                Clicked="CreateComment">
+                    </Button>
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox x:Name="spoilerCheckBox"
+                                  Grid.Column="0"/>
+                        <Label Text="Spoiler"
+                               Grid.Column="1"/>
+                    </Grid>
+
+                    </Grid>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+     
+        
+      

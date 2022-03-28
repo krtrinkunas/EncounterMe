@@ -94,9 +94,9 @@ namespace EncounterMeApp.Views
 
         private async void OpenCommentSection(object sender, EventArgs e)
         {
-            CommentSection what = new CommentSection();
-            await Navigation.PushAsync(what);
-            what.CreateLayoutForMultipleComments();
+            //CommentSection what = new CommentSection();
+            //await Navigation.PushPopupAsync(new EditCommentPage());
+            //what.CreateLayoutForMultipleComments();
         }
     }
 }
