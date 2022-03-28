@@ -36,7 +36,51 @@ namespace EncounterMeApp.Views
 
             currentLocation = location;
 
+            SetLocationRating();
             GetCaptureAttempt();
+        }
+
+        private void SetLocationRating()
+        {
+            //for now ratings acts as allRatings sum
+            //maybe in the future add allRatings?
+            
+            if (currentLocation.numberOfRatings == 0)
+            {
+                starRating.Text = "☆☆☆☆☆ " + currentLocation.numberOfRatings.ToString();
+                return;
+            }
+
+            double ratingAvrg = currentLocation.rating / currentLocation.numberOfRatings;
+            int rating = (int)Math.Round(ratingAvrg, 0, MidpointRounding.AwayFromZero);
+            
+            switch (ratingAvrg)
+            {
+                case 0:
+                    starRating.Text = "☆☆☆☆☆ " + currentLocation.numberOfRatings.ToString();
+                    break;
+                case 1:
+                    starRating.Text = "★☆☆☆☆ " + currentLocation.numberOfRatings.ToString();
+                    break;
+                case 2:
+                    starRating.Text = "★★☆☆☆ " + currentLocation.numberOfRatings.ToString();
+                    break;
+                case 3:
+                    starRating.Text = "★★★☆☆ " + currentLocation.numberOfRatings.ToString();
+                    break;
+                case 4:
+                    starRating.Text = "★★★★☆ " + currentLocation.numberOfRatings.ToString();
+                    break;
+                case 5:
+                    starRating.Text = "★★★★★ " + currentLocation.numberOfRatings.ToString();
+                    break;
+            }
+        }
+
+        private async void OpenRatingPage(object sender, EventArgs e)
+        {
+            await Navigation.PushPopupAsync(new RatingPage(currentLocation));
+            SetLocationRating();
         }
 
         private async void GetCaptureAttempt()
@@ -97,12 +141,11 @@ namespace EncounterMeApp.Views
         {
             if (App.player.NickName != currentLocation.owner)
             {
-                //moved capture attempt
-                CheckCaptureAttempt();
-
                 var currentCoords = await Geolocation.GetLastKnownLocationAsync();
                 if (Location.CalculateDistance(currentLocation.positionX, currentLocation.positionY, currentCoords.Latitude, currentCoords.Longitude, 0) <= 1)
                 {
+                    //moved capture attempt
+                    CheckCaptureAttempt();
                     string answer = await DisplayPromptAsync(currentLocation.question, "Answer goes here");
                     if (answer == currentLocation.answer)
                     {

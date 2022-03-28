@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+        xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+        x:Class="EncounterMeApp.Views.RatingPage"
+        BackgroundInputTransparent="True"
+        CloseWhenBackgroundIsClicked="False"
+        BackgroundColor="Transparent"
+        NavigationPage.HasNavigationBar="false">
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+                PositionIn="Bottom"
+                PositionOut="Bottom"
+                
+                DurationIn="400"
+                DurationOut="300"
+                EasingIn="SinOut"
+                EasingOut="SinIn"
+                HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+    <StackLayout 
+            VerticalOptions="EndAndExpand" 
+            HorizontalOptions="FillAndExpand" 
+           >
+        <Frame CornerRadius="20" HeightRequest="200" VerticalOptions="FillAndExpand" Margin="0,0,0,50">
+            <StackLayout>
+                <Button Text="close"
+                        FontSize="Medium"
+                        TextColor="White"
+                        BackgroundColor="#6CD4FF" 
+                        VerticalOptions="End"
+                        HorizontalOptions="Center"
+                        WidthRequest="300"
+                        HeightRequest="40"
+                        CornerRadius = "30"
+                        Clicked="GoBack"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name ="one" Text="☆" FontSize="50" Grid.Column="0" ClassId="1">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ChangeRating"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name ="two" Text="☆" FontSize="50" Grid.Column="1" ClassId="2">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ChangeRating"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name ="three" Text="☆" FontSize="50" Grid.Column="2" ClassId="3">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ChangeRating"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name ="four" Text="☆" FontSize="50" Grid.Column="3" ClassId="4">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ChangeRating"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name ="five" Text="☆" FontSize="50" Grid.Column="4" ClassId="5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ChangeRating"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+                <Button Text="RATE"
+                    FontSize="Medium"
+                    Clicked="PostRating"
+                    TextColor="White"
+                    BackgroundColor="#72FF6C" 
+                    VerticalOptions="End"
+                    HorizontalOptions="Center"
+                    WidthRequest="150"
+                    HeightRequest="40"
+                    CornerRadius = "30"
+                    Grid.Column="1"/>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</pages:PopupPage>
