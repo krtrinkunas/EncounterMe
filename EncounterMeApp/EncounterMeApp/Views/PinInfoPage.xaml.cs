@@ -36,7 +36,25 @@ namespace EncounterMeApp.Views
 
             currentLocation = location;
 
-            CheckCaptureAttempt();
+            GetCaptureAttempt();
+        }
+
+        private async void GetCaptureAttempt()
+        {
+            var captures = await captureService.GetCaptureAttempts();
+            //if null, then there is none
+            if (captures == null || !captures.Any())
+                captureAttempt = null;
+            else
+                captureAttempt = captures.SingleOrDefault(c => c.UserId == App.player.Id && c.LocationId == currentLocation.Id);
+
+            if (currentLocation.owner == App.player.NickName && captureAttempt == null)
+            {
+                captureAttempt = CreateCaptureAttempt();
+                //because author so it automatically is captured (no author tag for now)
+                captureAttempt.HasCaptured = true;
+                await captureService.AddCaptureAttempt(captureAttempt);
+            }
         }
 
         private async void CheckCaptureAttempt()
@@ -79,6 +97,9 @@ namespace EncounterMeApp.Views
         {
             if (App.player.NickName != currentLocation.owner)
             {
+                //moved capture attempt
+                CheckCaptureAttempt();
+
                 var currentCoords = await Geolocation.GetLastKnownLocationAsync();
                 if (Location.CalculateDistance(currentLocation.positionX, currentLocation.positionY, currentCoords.Latitude, currentCoords.Longitude, 0) <= 1)
                 {
@@ -147,9 +168,9 @@ namespace EncounterMeApp.Views
 
         private async void OpenCommentSection(object sender, EventArgs e)
         {
-            CommentSectionPage what = new CommentSectionPage(currentLocation, App.player, captureAttempt);
-            await Navigation.PushAsync(what);
-            //what.CreateLayoutForMultipleComments();
+            //check if capture attempt was made
+            CommentSectionPage commentSection = new CommentSectionPage(currentLocation, App.player, captureAttempt);
+            await Navigation.PushAsync(commentSection);
         }
     }
 }
