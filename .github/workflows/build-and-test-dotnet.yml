@@ -1,12 +1,10 @@
-name: build and test dotnet
+name: Build and test .NET projects
 
 on:
   push:
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
-    paths:
-    - '**.cs'
-    - '**.csproj'
+    branches: [ master ]
 
 env:
   DOTNET_VERSION: '5.0.301' # The .NET SDK version to use
@@ -37,4 +35,4 @@ jobs:
       run: dotnet build AppTests/AppTests.csproj --configuration Debug --no-restore
     
     - name: Run Tests
-      run: dotnet test AppTests/AppTests.csproj --no-restore --verbosity normal
+      run: dotnet test AppTests --no-restore --verbosity normal
