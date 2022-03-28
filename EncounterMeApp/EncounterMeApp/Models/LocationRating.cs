@@ -11,6 +11,6 @@ namespace EncounterMeApp.Models
         public int LocationRatingId { get; set; }
         public int LocationId { get; set; }
         public int UserId { get; set; }
-        public bool Rating { get; set; }
+        public int Rating { get; set; }
     }
 }
