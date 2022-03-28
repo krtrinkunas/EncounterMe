@@ -22,14 +22,18 @@ namespace EncounterMeApp.Views
         MyLocation location;
         LocationRating locationRate;
         int rate;
+        int oldrate;
+        PinInfoPage pinPage;
 
-        public RatingPage(MyLocation location)
+        public RatingPage(MyLocation location, PinInfoPage pinPage)
         {
             InitializeComponent();
+            this.pinPage = pinPage;
             locationrateService = DependencyService.Get<ILocationRatingService>();
             locationService = DependencyService.Get<ILocationService>();
             this.location = location;
             rate = 0;
+            oldrate = 0;
 
             CheckRating();
         }
@@ -49,8 +53,9 @@ namespace EncounterMeApp.Views
                 if (rating != null)
                 {
                     locationRate = rating;
-                    //rate = Int16.Parse(rating.Rating);lmao
-                    //UpdateRating(rating.Rating);
+                    rate = rating.Rating;
+                    oldrate = rating.Rating;
+                    UpdateRate(rating.Rating.ToString());
                 }
             }
 
@@ -115,16 +120,20 @@ namespace EncounterMeApp.Views
             {
                 locationRate = CreateRating();
                 await locationrateService.AddLocationRating(locationRate);
+                location.numberOfRatings++;
+                location.rating += rate;
             }
             else
             {
-                //locationRate.Rating = rate;
+                location.rating -= oldrate;
+                location.rating += rate;
+                locationRate.Rating = rate;
                 await locationrateService.UpdateLocationRating(locationRate);
             }
 
-            location.numberOfRatings++;
-            location.rating+=rate;
             await locationService.UpdateLocation(location);
+            pinPage.SetLocationRating();
+            await Navigation.PopPopupAsync();
         }
 
         private LocationRating CreateRating()
@@ -132,7 +141,7 @@ namespace EncounterMeApp.Views
             LocationRating loc = new LocationRating();
             loc.LocationId = location.Id;
             loc.UserId = App.player.Id;
-            //loc.Rating = rate;
+            loc.Rating = rate;
             return loc;
         }
 

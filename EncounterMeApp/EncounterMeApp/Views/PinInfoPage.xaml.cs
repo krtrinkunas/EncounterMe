@@ -40,7 +40,7 @@ namespace EncounterMeApp.Views
             GetCaptureAttempt();
         }
 
-        private void SetLocationRating()
+        public void SetLocationRating()
         {
             //for now ratings acts as allRatings sum
             //maybe in the future add allRatings?
@@ -79,8 +79,11 @@ namespace EncounterMeApp.Views
 
         private async void OpenRatingPage(object sender, EventArgs e)
         {
-            await Navigation.PushPopupAsync(new RatingPage(currentLocation));
-            SetLocationRating();
+            if(captureAttempt == null)
+                await DisplayAlert("Cannot Rate", "You cannot submit a rating until you tried to occupy the location.", "OK");
+            else
+                await Navigation.PushPopupAsync(new RatingPage(currentLocation, this));
+            
         }
 
         private async void GetCaptureAttempt()
