@@ -43,9 +43,8 @@ namespace EncounterMeApp.Views
             filterbydate = false;
             filterbyratings = false;
 
+            userImage.Source = player.ProfilePic;
             CreateLayoutForMultipleComments();
-
-            //missing filter
         }
 
         /*
@@ -101,33 +100,30 @@ namespace EncounterMeApp.Views
 
         private async void CreateComment(object sender, EventArgs e)
         {
-            if (entryComment.Text != "")//prob works
+            if (captureAttempt == null)
             {
-                
-                Comment comment = new Comment();
-                comment.LocationId = location.Id;
-                //comment.CommentId = new Random().Next(100); // ???
-                comment.UserId = player.Id;
-                comment.CommentText = entryComment.Text;
-                comment.Rating = 0;
-                comment.HasSpoilers = spoilerCheckBox.IsChecked;
-                comment.HasCaptured = captureAttempt.HasCaptured; 
-                comment.TimePosted = DateTime.Now;
-                
-                await commentService.AddComment(comment);
-
-                entryComment.Text = "";
-                CreateLayoutForMultipleComments();
-                /*
-                var comments = await commentService.GetComments();
-                int result = 0;
-                foreach (var com in comments)
+                await DisplayAlert("Cannot Post", "You cannot comment without trying to occupy the location.", "OK");
+            }
+            else
+            {
+                if (entryComment.Text != "")//prob works
                 {
-                    result++;
-                }
 
-                testLabel.Text = "Comment num: "+ result.ToString();
-                */
+                    Comment comment = new Comment();
+                    comment.LocationId = location.Id;
+                    //comment.CommentId = new Random().Next(100); // ???
+                    comment.UserId = player.Id;
+                    comment.CommentText = entryComment.Text;
+                    comment.Rating = 0;
+                    comment.HasSpoilers = spoilerCheckBox.IsChecked;
+                    comment.HasCaptured = captureAttempt.HasCaptured;
+                    comment.TimePosted = DateTime.Now;
+
+                    await commentService.AddComment(comment);
+
+                    entryComment.Text = "";
+                    CreateLayoutForMultipleComments();
+                }
             }
 
         }
