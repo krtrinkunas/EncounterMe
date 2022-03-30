@@ -2,7 +2,6 @@ name: Build Xamarin.Android app
 
 on:
   push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
