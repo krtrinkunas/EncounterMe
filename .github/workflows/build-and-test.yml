@@ -1,4 +1,4 @@
-name: Build Xamarin.Android app
+name: Build Xamarin.Android app on windows
 
 on:
   push:
