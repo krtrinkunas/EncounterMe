@@ -19,7 +19,7 @@ jobs:
         dotnet-version: '5.0.x'
 
     - name: Install dependencies
-      run: nuget restore EncounterMeApp.sln
+      run: nuget restore
 
     - name: Build
       run: msbuild /p:Configuration=Debug
