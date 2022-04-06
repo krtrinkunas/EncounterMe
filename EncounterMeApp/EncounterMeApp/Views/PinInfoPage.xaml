@@ -17,7 +17,8 @@
 
 
                     <!--2. Main information-->
-                    <Label x:Name ="nameOfPin" Grid.Row="1" Grid.ColumnSpan="2" FontAttributes="Bold" FontSize="20" Padding="20,10,20,5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Label x:Name ="nameOfPin" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" FontSize="20" Padding="20,10,20,5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Label x:Name ="starRating" Text ="★★★★★" VerticalOptions="Center" FontSize="30" Grid.Row="1" Grid.Column="1"/>
                     <Label x:Name ="ownerOfPin" Grid.Row="2" Grid.Column="0" TextColor="Silver" FontAttributes="Bold" FontSize="15" Padding="20,0" VerticalOptions="Start"/>
                     <Button x:Name ="pointsOfPin" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"  BorderColor="Silver" TextColor="Black" BorderWidth="1" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="15" WidthRequest="130" HeightRequest="50" CornerRadius="25" VerticalOptions="Center" Margin="0,0,30,0" HorizontalOptions="End"/>
 
@@ -43,24 +44,6 @@
 
                     <!--4. Description-->
                     <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" TextColor="Silver" FontSize="17" Padding="20,0,20,70" VerticalOptions="Start" Text="Some information &#x0a;" />
-                    <Button x:Name="testing"
-                            Text ="COMMENTS" 
-                            Clicked="OpenCommentSection"
-                            Grid.Row="5" 
-                            Grid.Column="0" 
-                            Grid.RowSpan="2"  
-                            BorderColor="Silver" 
-                            TextColor="Black" 
-                            BorderWidth="1" 
-                            BackgroundColor="Transparent" 
-                            FontAttributes="Bold" 
-                            FontSize="15" 
-                            WidthRequest="130" 
-                            HeightRequest="50" 
-                            CornerRadius="25" 
-                            VerticalOptions="Center" 
-                            Margin="0,0,30,0" 
-                            HorizontalOptions="End"/>
 
                 </Grid>
             </ScrollView>
@@ -71,10 +54,16 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Image Source="comment.png" Grid.Column="0" HeightRequest="30" WidthRequest="30">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OpenCommentSection"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image Source="starrating.png" Grid.Column="2" HeightRequest="30" WidthRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OpenRatingPage"/>
                         </Image.GestureRecognizers>
                     </Image>
                     <Button BackgroundColor="Black" Grid.Column="1" TextColor="White" ImageSource="Message" FontAttributes="Bold" Text="Occupy" WidthRequest="150" CornerRadius="30" FontSize="18" Clicked="Occupy_Button_Clicked"/>
