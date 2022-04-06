@@ -6,6 +6,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Autofac.Extras.DynamicProxy;
 using EncounterMeApp.Services;
+using ModeratorUI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -91,6 +92,10 @@ namespace Api
                 .InstancePerDependency();
 
             builder.RegisterType<InternetCaptureAttemptService>().As<ICaptureAttemptService>()
+                .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
+                .InstancePerDependency();
+
+            builder.RegisterType<InternetConsoleCommentService>().As<IConsoleCommentService>()
                 .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
                 .InstancePerDependency();
 

@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EncounterMeApp\EncounterMeApp\EncounterMeApp.csproj" />
+    <ProjectReference Include="..\ModeratorUI\ModeratorUI.csproj" />
   </ItemGroup>
 
 </Project>
