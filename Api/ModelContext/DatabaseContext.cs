@@ -22,6 +22,18 @@ namespace Api.ModelContext
         public DbSet<CommentRating> CommentRatings { get; set; }
         public DbSet<LocationRating> LocationRatings { get; set; }
         public DbSet<CaptureAttempt> CaptureAttempts { get; set; }
+        public DbSet<FriendRequest> FriendRequests
+        {
+            get; set;
+        }
+        public DbSet<Block> Blocks
+        {
+            get; set;
+        }
+        public DbSet<Friend> Friends
+        {
+            get; set;
+        }
     }
     public class YourDbContextFactory : IDesignTimeDbContextFactory<DatabaseContext>
     {

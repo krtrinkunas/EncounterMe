@@ -57,6 +57,12 @@ namespace Api
 
             services.AddScoped<ICaptureAttemptRepository, CaptureAttemptRepository>();
 
+            services.AddScoped<IFriendRequestRepository, FriendRequestRepository>();
+
+            services.AddScoped<IBlockRepository, BlockRepository>();
+
+            services.AddScoped<IFriendRepository, FriendRepository>();
+
             services.AddDbContext<DatabaseContext>(o => o.UseSqlite("Data source=EncounterMeDB.db"));
 
             services.AddControllers();
@@ -96,6 +102,18 @@ namespace Api
                 .InstancePerDependency();
 
             builder.RegisterType<InternetConsoleCommentService>().As<IConsoleCommentService>()
+                .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
+                .InstancePerDependency();
+
+            builder.RegisterType<InternetFriendRequestService>().As<IFriendRequestService>()
+                .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
+                .InstancePerDependency();
+
+            builder.RegisterType<InternetBlockService>().As<IBlockService>()
+                .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
+                .InstancePerDependency();
+
+            builder.RegisterType<InternetFriendService>().As<IFriendService>()
                 .EnableInterfaceInterceptors().InterceptedBy(typeof(LogAspect))
                 .InstancePerDependency();
 
