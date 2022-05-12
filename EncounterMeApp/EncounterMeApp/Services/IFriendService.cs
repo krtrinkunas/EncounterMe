@@ -10,7 +10,7 @@ namespace EncounterMeApp.Services
     {
         Task<IEnumerable<Friend>> GetFriends();
         //Task<IEnumerable<Friend>> GetFriends(Player player);
-        //Task<IEnumerable<Friend>> GetFriends(int playerID);
+        Task<IEnumerable<Friend>> GetFriends(int id);
         Task<Friend> GetFriend(int id);
         Task AddFriend(Friend friend);
         Task UpdateFriend(Friend friend);

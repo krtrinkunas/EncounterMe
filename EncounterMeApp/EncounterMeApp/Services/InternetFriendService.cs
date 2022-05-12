@@ -61,6 +61,16 @@ namespace EncounterMeApp.Services
             return JsonConvert.DeserializeObject<IEnumerable<Friend>>(responseAsString);
         }
 
+        public async Task<IEnumerable<Friend>> GetFriends(int id)
+        {
+
+            var response = await _httpClient.GetAsync($"api/Friend/User/{id}");
+            response.EnsureSuccessStatusCode();
+
+            var responseAsString = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<IEnumerable<Friend>>(responseAsString);
+        }
+
         public async Task UpdateFriend(Friend friend)
         {
             var response = await _httpClient.PutAsync($"api/Friend/{friend.Id}",

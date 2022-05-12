@@ -42,6 +42,12 @@ namespace Api.Controllers
             return await _friendRequestRepository.Get(id);
         }
 
+        [HttpGet("User/{id}")]
+        public async Task<IEnumerable<FriendRequest>> GetFriendRequestsByUserID(int id)
+        {
+            return await _friendRequestRepository.GetByID(id);
+        }
+
         [HttpPost]
         public async Task<ActionResult<FriendRequest>> Post([FromBody] FriendRequest value)
         {

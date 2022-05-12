@@ -10,6 +10,7 @@ namespace Api.Repositories
     {
         Task<IEnumerable<FriendRequest>> Get();
         Task<FriendRequest> Get(int id);
+        Task<IEnumerable<FriendRequest>> GetByID(int id);
         Task<FriendRequest> Create(FriendRequest friendRequest);
         Task Update(FriendRequest friendRequest);
         Task Delete(int id);

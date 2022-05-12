@@ -46,5 +46,10 @@ namespace Api.Repositories
             _context.Entry(friendRequest).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<FriendRequest>> GetByID(int id)
+        {
+            return await _context.FriendRequests.Where(user => user.ReceiverID == id).ToListAsync();
+        }
     }
 }

@@ -35,6 +35,13 @@ namespace Api.Controllers
             return await _friendRepository.Get();
         }
 
+        // GET: api/Friends/User/5
+        [HttpGet("User/{id}")]
+        public async Task<IEnumerable<Friend>> GetFriendsByUserID(int id)
+        {
+            return await _friendRepository.GetByID(id);
+        }
+
         //GET: api/Friends/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Friend>> GetSingle(int id)
