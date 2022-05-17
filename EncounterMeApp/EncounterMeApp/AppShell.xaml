@@ -94,6 +94,9 @@
     <FlyoutItem Title="Leaderboard" Icon="icon_leaderboard.png">
         <ShellContent Route="LeaderboardPage" ContentTemplate="{DataTemplate local:LeaderboardPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Friends" Icon="friends.png">
+        <ShellContent Route="FriendPage" ContentTemplate="{DataTemplate local:FriendPage}" />
+    </FlyoutItem>
     <FlyoutItem Title="Settings" Icon="icon_settings.png">
         <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
     </FlyoutItem>
