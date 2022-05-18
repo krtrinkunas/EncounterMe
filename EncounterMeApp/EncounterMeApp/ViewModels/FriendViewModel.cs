@@ -45,7 +45,7 @@ namespace EncounterMeApp.ViewModels
 
         }
 
-        async Task Refresh()
+        public async Task Refresh()
         {
             IsBusy = true;
 
@@ -77,5 +77,6 @@ namespace EncounterMeApp.ViewModels
 
             IsBusy = false;
         }
+
     }
 }

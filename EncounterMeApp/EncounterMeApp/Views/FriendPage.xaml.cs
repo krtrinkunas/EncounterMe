@@ -81,6 +81,7 @@ namespace EncounterMeApp.Views
         {
             //add profile viewing
             
+            //adding friend request for testing 
             FriendRequest newreqst = new FriendRequest();
             newreqst.ReceiverID = App.player.Id;
             newreqst.SenderID = 555;
@@ -114,8 +115,10 @@ namespace EncounterMeApp.Views
                     newfriend.Friend1ID = App.player.Id;
                     newfriend.Friend2ID = rqst.SenderID;
                     await friendService.AddFriend(newfriend);
+                    
                     UpdateRequestNumber("Hide Requests");
-                    //requestList.RefreshCommand;
+                    FriendViewModel Viewmodel = (FriendViewModel)this.BindingContext;
+                    await Viewmodel.Refresh();
                     return;
                 }
             }
@@ -130,8 +133,10 @@ namespace EncounterMeApp.Views
                 if (rqst.ReceiverID == App.player.Id && rqst.SenderID == int.Parse((sender as Button).ClassId))
                 {
                     await friendRequestService.DeleteFriendRequest(rqst);
+                    
                     UpdateRequestNumber("Hide Requests");
-                    //requestList.RefreshCommand;
+                    FriendViewModel Viewmodel = (FriendViewModel)this.BindingContext;
+                    await Viewmodel.Refresh();
                     return;
                 }
             }
