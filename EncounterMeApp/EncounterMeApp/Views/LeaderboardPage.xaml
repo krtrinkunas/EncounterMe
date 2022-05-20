@@ -68,8 +68,6 @@
         
         <ListView x:Name="globalList"
                   IsVisible="True"
-                  ItemSelected="ListView_ItemSelected"
-                  ItemTapped="ListView_ItemTapped"
                   CachingStrategy="RecycleElement"
                   BackgroundColor="Transparent"
                   ItemsSource="{Binding Player1}"

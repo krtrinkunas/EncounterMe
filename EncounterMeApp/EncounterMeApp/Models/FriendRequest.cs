@@ -20,6 +20,8 @@ namespace EncounterMeApp.Models
         {
             get; set;
         }
+
+        //better to not have multiple of these, no need to keep denied or accepted
         public int Status
         {
             get; set;
