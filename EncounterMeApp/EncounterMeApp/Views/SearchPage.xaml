@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:viewmodels="clr-namespace:EncounterMeApp.ViewModels"
+    xmlns:mvvm ="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
+    xmlns:model ="clr-namespace:EncounterMeApp.Models"
+    x:Class="EncounterMeApp.Views.SearchPage"
+    BackgroundImageSource="https://w0.peakpx.com/wallpaper/477/255/HD-wallpaper-minimal-colorful-mountain-sun-sunset.jpg"
+    x:DataType="viewmodels:SearchViewModel"
+    Title="Search"
+    x:Name="MySearchPage">
+    <ContentPage.BindingContext>
+        <viewmodels:SearchViewModel/>
+    </ContentPage.BindingContext>
+
+    <!--
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddCommand}"/>
+    </ContentPage.ToolbarItems>
+    -->
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Entry x:Name="searchEntry" 
+                           Placeholder="Write username..." 
+                           PlaceholderColor="White"
+                           TextColor="White" 
+                           HorizontalOptions="FillAndExpand" 
+                           HeightRequest="60"
+                           Margin="10,10,10,10"/>
+            <ImageButton 
+                        Source="search.png"
+                        x:Name="searchButton"
+                        VerticalOptions="End"
+                        HorizontalOptions="End"
+                        WidthRequest="60"
+                        HeightRequest="60"
+                        CornerRadius = "10"
+                        Margin="10,10,0,10"
+                        BorderColor="LightGray" 
+                        Opacity="0.75" 
+                        BackgroundColor="LightGoldenrodYellow"
+                        Clicked="ClickedSearch">
+            </ImageButton>
+        </StackLayout>
+        <Label x:Name="searchLabel"
+                   TextColor="White"
+                   FontSize="Medium"
+                   HeightRequest="200"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   Text="No matches found."
+                   IsVisible="False"
+                   />
+
+        <ListView x:Name="resultList"
+                  IsVisible="True"
+                  CachingStrategy="RecycleElement"
+                  BackgroundColor="Transparent"
+                  ItemsSource="{Binding Player}"
+                  HasUnevenRows="True"
+                  SeparatorColor="Blue"
+                  SeparatorVisibility="None"
+                  IsPullToRefreshEnabled="False">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Player">
+                    <ViewCell>
+                        <Grid Padding="5">
+                            <Frame CornerRadius="10" 
+                                   HasShadow="True" 
+                                   BorderColor="LightGray" 
+                                   Opacity="0.75" 
+                                   BackgroundColor="LightGoldenrodYellow"
+                                   HeightRequest="60">
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding ProfilePic}"
+                                           WidthRequest="70"/>
+                                    <Label VerticalOptions="Center"
+                                           WidthRequest="200"
+                                           HeightRequest="30"
+                                            TextColor="Black"
+                                            FontAttributes="Bold"
+                                            FontSize="Large"
+                                            Text="{Binding NickName}"/>
+                                    <Button Text="View"
+                                            FontSize="Medium"
+                                            TextColor="Black"
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="End"
+                                            WidthRequest="100"
+                                            HeightRequest="20"
+                                            BorderColor="LightGray" 
+                                            Opacity="0.75" 
+                                            BackgroundColor="#b3db69"
+                                            Clicked="ViewProfile"
+                                            ClassId="{Binding Id}">
+                                    </Button>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
