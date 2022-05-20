@@ -21,6 +21,8 @@ namespace EncounterMeApp.Views
             InitializeComponent();
 
             playerService = DependencyService.Get<IPlayerService>();
+
+
         }
 
         /*
@@ -33,19 +35,38 @@ namespace EncounterMeApp.Views
 
         private async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            /*
             var player = ((ListView)sender).SelectedItem as Player;
             if(player == null)
             {
                 return;
             }
 
-            await DisplayAlert("Player selected", player.NickName, "OK");
+            await DisplayAlert("Player selected", player.NickName, "OK");*/
         }
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
+            /*
             ((ListView)sender).SelectedItem = null;
+            */
         }
 
+        private async void ClickedFriend(object sender, EventArgs e)
+        {
+            friendButton.IsEnabled = false;
+            globalButton.IsEnabled = true;
+
+            globalList.IsVisible = false;
+            friendList.IsVisible = true;
+        }
+        private async void ClickedGlobal(object sender, EventArgs e)
+        {
+            globalButton.IsEnabled = false;
+            friendButton.IsEnabled = true;
+
+            friendList.IsVisible = false;
+            globalList.IsVisible = true;
+        }
     }
 }

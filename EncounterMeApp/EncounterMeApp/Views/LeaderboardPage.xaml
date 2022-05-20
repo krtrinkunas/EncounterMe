@@ -19,49 +19,141 @@
         <ToolbarItem Text="Add" Command="{Binding AddCommand}"/>
     </ContentPage.ToolbarItems>
     -->
-    
-    <ListView 
-              ItemSelected="ListView_ItemSelected"
-              ItemTapped="ListView_ItemTapped"
-              CachingStrategy="RecycleElement"
-              BackgroundColor="Transparent"
-              ItemsSource="{Binding Player}"
-              HasUnevenRows="True"
-              SeparatorColor="Blue"
-              SeparatorVisibility="None"
-              IsPullToRefreshEnabled="True"
-              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-              RefreshCommand="{Binding RefreshCommand}">
-        <ListView.ItemTemplate>
-            <DataTemplate x:DataType="model:Player">
-                <ViewCell>
-                    <Grid Padding="5">
-                        <Frame CornerRadius="10" 
-                               HasShadow="True" BorderColor="LightGray" Opacity="0.75" BackgroundColor="LightGoldenrodYellow">
-                            <StackLayout Orientation="Horizontal">
-                                <Image Source="{Binding ProfilePic}"
-                                       WidthRequest="70"/>
-                                <StackLayout VerticalOptions="Center">
-                                    <Label VerticalOptions="Center"
-                                        TextColor="Black"
-                                        FontAttributes="Bold"
-                                        FontSize="Large"
-                                        Text="{Binding NickName}"/>
-                                    <Label VerticalOptions="Center"
-                                       FontSize="Small"
-                                       TextColor="DarkSlateGray"
-                                       Text="{Binding Points, StringFormat='Points: {0}'}"/>
-                                    <Label VerticalOptions="Center"
-                                       FontSize="Small"
-                                       TextColor="DarkSlateGray"
-                                       Text="{Binding Id, StringFormat='Player Id: {0}'}"/>
+    <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        
+            <Button x:Name="globalButton"
+                    Text="GLOBAL"
+                    FontSize="20"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    VerticalOptions="End"
+                    HorizontalOptions="Center"
+                    WidthRequest="130"
+                    HeightRequest="60"
+                    CornerRadius = "10"
+                    Grid.Column="0"
+                    Margin="10,10,0,10"
+                    BorderColor="LightGray" 
+                    Opacity="0.75" 
+                    BackgroundColor="LightGoldenrodYellow"
+                    Clicked="ClickedGlobal"
+                    IsEnabled="False">
+            </Button>
+            <Button x:Name="friendButton"
+                    Text="FRIENDS"
+                    FontSize="20"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    VerticalOptions="End"
+                    HorizontalOptions="Center"
+                    WidthRequest="130"
+                    HeightRequest="60"
+                    CornerRadius = "10"
+                    Grid.Column="1"
+                    Margin="10,10,0,10"
+                    BorderColor="LightGray" 
+                    Opacity="0.75" 
+                    BackgroundColor="LightGoldenrodYellow"
+                    Clicked="ClickedFriend"
+                    IsEnabled="True">
+            </Button>
+        </Grid>
+        
+        <ListView x:Name="globalList"
+                  IsVisible="True"
+                  ItemSelected="ListView_ItemSelected"
+                  ItemTapped="ListView_ItemTapped"
+                  CachingStrategy="RecycleElement"
+                  BackgroundColor="Transparent"
+                  ItemsSource="{Binding Player1}"
+                  HasUnevenRows="True"
+                  SeparatorColor="Blue"
+                  SeparatorVisibility="None"
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  RefreshCommand="{Binding RefreshCommand}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Player">
+                    <ViewCell>
+                        <Grid Padding="5">
+                            <Frame CornerRadius="10" 
+                                   HasShadow="True" BorderColor="LightGray" Opacity="0.75" BackgroundColor="LightGoldenrodYellow">
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding ProfilePic}"
+                                           WidthRequest="70"/>
+                                    <StackLayout VerticalOptions="Center">
+                                        <Label VerticalOptions="Center"
+                                            TextColor="Black"
+                                            FontAttributes="Bold"
+                                            FontSize="Large"
+                                            Text="{Binding NickName}"/>
+                                        <Label VerticalOptions="Center"
+                                           FontSize="Small"
+                                           TextColor="DarkSlateGray"
+                                           Text="{Binding Points, StringFormat='Points: {0}'}"/>
+                                        <Label VerticalOptions="Center"
+                                           FontSize="Small"
+                                           TextColor="DarkSlateGray"
+                                           Text="{Binding Id, StringFormat='Player Id: {0}'}"/>
+                                    </StackLayout>
                                 </StackLayout>
-                            </StackLayout>
-                        </Frame>
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                            </Frame>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
+        <ListView x:Name="friendList"
+                  IsVisible="False"
+                  ItemSelected="ListView_ItemSelected"
+                  ItemTapped="ListView_ItemTapped"
+                  CachingStrategy="RecycleElement"
+                  BackgroundColor="Transparent"
+                  ItemsSource="{Binding PlayerFriends}"
+                  HasUnevenRows="True"
+                  SeparatorColor="Blue"
+                  SeparatorVisibility="None"
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  RefreshCommand="{Binding RefreshCommand}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Player">
+                    <ViewCell>
+                        <Grid Padding="5">
+                            <Frame CornerRadius="10" 
+                                   HasShadow="True" BorderColor="LightGray" Opacity="0.75" BackgroundColor="LightGoldenrodYellow">
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding ProfilePic}"
+                                           WidthRequest="70"/>
+                                    <StackLayout VerticalOptions="Center">
+                                        <Label VerticalOptions="Center"
+                                            TextColor="Black"
+                                            FontAttributes="Bold"
+                                            FontSize="Large"
+                                            Text="{Binding NickName}"/>
+                                        <Label VerticalOptions="Center"
+                                           FontSize="Small"
+                                           TextColor="DarkSlateGray"
+                                           Text="{Binding Points, StringFormat='Points: {0}'}"/>
+                                        <Label VerticalOptions="Center"
+                                           FontSize="Small"
+                                           TextColor="DarkSlateGray"
+                                           Text="{Binding Id, StringFormat='Player Id: {0}'}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>
