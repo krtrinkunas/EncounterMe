@@ -28,7 +28,8 @@
             <StackLayout>
                 <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" 
                       ColumnDefinitions="*,*,*">
-                    <Label Text="Profile"
+                    <Label x:Name="ProfileLabel"
+                           Text="Profile"
                            FontSize="Large"
                            WidthRequest="280"
                            HeightRequest="60"
@@ -38,7 +39,8 @@
                            Grid.Row="0"
                            Grid.Column="0" 
                            Grid.ColumnSpan="2"/>
-                    <Image Source="discover_button.png"
+                    <Image x:Name="ProfileImage"
+                           Source="discover_button.png"
                            WidthRequest="40"
                            HeightRequest="40"
                            Grid.Row="0"
@@ -100,7 +102,7 @@
                            HorizontalTextAlignment="Center"/>
                 </Grid>
 
-                <Grid HeightRequest="350">
+                <Grid HeightRequest="350" HorizontalOptions="Center">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
@@ -115,7 +117,7 @@
                         FontSize="Medium"
                         TextColor="White"
                         BackgroundColor="#72FF6C" 
-                        VerticalOptions="End"
+                        VerticalOptions="Center"
                         HorizontalOptions="Center"
                         WidthRequest="150"
                         HeightRequest="50"
@@ -156,11 +158,11 @@
                             IsVisible="False"
                             Clicked="UnblockPlayer"/>
                     <Button x:Name="CancelButton"
-                        Text="Cancel Friend Request"
-                        FontSize="Medium"
+                        Text="Cancel Friend"
+                        FontSize="Small"
                         TextColor="White"
                         BackgroundColor="#6b6b6b" 
-                        VerticalOptions="End"
+                        VerticalOptions="Center"
                         HorizontalOptions="Center"
                         WidthRequest="100"
                         HeightRequest="50"
@@ -175,7 +177,7 @@
                         FontSize="Medium"
                         TextColor="White"
                         BackgroundColor="#e83046" 
-                        VerticalOptions="End"
+                        VerticalOptions="Center"
                         HorizontalOptions="Center"
                         WidthRequest="100"
                         HeightRequest="50"
@@ -190,7 +192,7 @@
                         FontSize="Small"
                         TextColor="White"
                         BackgroundColor="#e83046" 
-                        VerticalOptions="End"
+                        VerticalOptions="Center"
                         HorizontalOptions="Center"
                         WidthRequest="100"
                         HeightRequest="50"
@@ -204,7 +206,7 @@
                         FontSize="Small"
                         TextColor="White"
                         BackgroundColor="#72FF6C" 
-                        VerticalOptions="End"
+                        VerticalOptions="Center"
                         HorizontalOptions="Center"
                         WidthRequest="100"
                         HeightRequest="50"
@@ -217,7 +219,7 @@
                         FontSize="Medium"
                         TextColor="White"
                         BackgroundColor="#6CD4FF" 
-                        VerticalOptions="Start"
+                        VerticalOptions="Center"
                         HorizontalOptions="Center"
                         WidthRequest="300"
                         HeightRequest="40"

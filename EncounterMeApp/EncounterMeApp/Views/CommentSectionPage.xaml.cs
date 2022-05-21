@@ -83,6 +83,7 @@ namespace EncounterMeApp.Views
 
                     stackLayout.Children.Add(
                         CreateGridForComment(
+                            com.UserId,
                             com.CommentId,
                             locplayer.NickName,
                             com.CommentText,
@@ -182,14 +183,14 @@ namespace EncounterMeApp.Views
             CreateLayoutForMultipleComments();
         }
 
-        public Grid CreateGridForComment(int id, String name, String text, DateTime date, int points, bool spoiler, bool captured, bool edit, String image)
+        public Grid CreateGridForComment(int userId, int id, String name, String text, DateTime date, int points, bool spoiler, bool captured, bool edit, String image)
         {
             Grid newGrid = new Grid();
             newGrid.RowDefinitions.Add(new RowDefinition());
             newGrid.ColumnDefinitions.Add(new ColumnDefinition() {Width = 70 });
             newGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
-            newGrid.Children.Add(CreateImage(image), 0, 0);
+            newGrid.Children.Add(CreateImage(image, userId), 0, 0);
             newGrid.Children.Add(CreateGridForCommentInfo(id, name, text, date, points, spoiler, captured, edit), 1, 0); //column, row
             return newGrid;
         }
@@ -481,10 +482,37 @@ namespace EncounterMeApp.Views
             return new Label { Text = date.ToShortDateString(), TextColor = Color.Black, HorizontalOptions = LayoutOptions.End, VerticalOptions = LayoutOptions.Center };
         }
 
-        private Image CreateImage(String link)
+        private Image CreateImage(String link, int userId)
         {
-            return new Image { Source = link, Margin = 5, HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.Start };
+            Image img = new Image { Source = link, Margin = 5, HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.Start, ClassId = userId.ToString() };
+
+            var openProfile = new TapGestureRecognizer();
+            openProfile.Tapped += async (s, e) =>
+            {
+                OpenProfile(int.Parse((s as Image).ClassId));
+            };
+            img.GestureRecognizers.Add(openProfile);
+
+            return img;
         }
+
+        private async void OpenProfile(int userId)
+        {
+            var plrs = await playerService.GetPlayers();
+            Player owner = null;
+
+            foreach (var plr in plrs)
+            {
+                if (userId == plr.Id)
+                {
+                    owner = plr;
+                    break;
+                }
+            }
+
+            await Navigation.PushPopupAsync(new OpenProfilePage(owner));
+        }
+
         private async void GoBack(object sender, EventArgs e)
         {
             await Navigation.PopAsync();

@@ -63,7 +63,7 @@ namespace EncounterMeApp.Services
 
         public async Task<IEnumerable<FriendRequest>> GetFriendRequests(int id)
         {
-            var response = await _httpClient.GetAsync($"api/FriendRequest/User/{id}");
+            var response = await _httpClient.GetAsync($"api/FriendRequest/{id}");
             response.EnsureSuccessStatusCode();
 
             var responseAsString = await response.Content.ReadAsStringAsync();
@@ -72,7 +72,7 @@ namespace EncounterMeApp.Services
 
         public async Task UpdateFriendRequest(FriendRequest friendRequest)
         {
-            var response = await _httpClient.PutAsync($"api/CaptureAttempt/{friendRequest.Id}",
+            var response = await _httpClient.PutAsync($"api/FriendRequest/{friendRequest.Id}",
                 new StringContent(JsonConvert.SerializeObject(friendRequest), Encoding.UTF8, "application/json"));
 
             response.EnsureSuccessStatusCode();

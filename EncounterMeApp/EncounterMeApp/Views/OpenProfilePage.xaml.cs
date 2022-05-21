@@ -38,15 +38,53 @@ namespace EncounterMeApp.Views
 
             
             this.player = player;
-            
+
+            FillInformation();
+
             IsUserBlocked();
             IsUserBlocking();
-            /*
+
             IsFriend();
             IsPending();
             IsRequest();
-            */
             SetButtons();
+
+            //check if the same user
+            if (App.player.Id == player.Id)
+                HideButtons();
+            else
+            {
+                /*
+                IsUserBlocked();
+                IsUserBlocking();
+
+                IsFriend();
+                IsPending();
+                IsRequest();*/
+
+                //SetButtons();
+            }
+        }
+
+        public void GetInformation()
+        {
+            IsUserBlocked();
+            IsUserBlocking();
+
+            IsFriend();
+            IsPending();
+            IsRequest();
+            //SetButtons();
+        }
+
+        private void FillInformation()
+        {
+            ProfileLabel.Text = player.NickName;
+            ProfileImage.Source = player.ProfilePic;
+            currentEmail.Text = player.Email;
+            pointsLabel.Text = player.Points.ToString();
+            visitedPlacesLabel.Text = player.LocationsVisited.ToString();
+            ownedPlacesLabel.Text = player.LocationsOwned.ToString();
         }
 
         private void SetButtons()
@@ -82,8 +120,8 @@ namespace EncounterMeApp.Views
             }
             else
             {
-                AddButton.IsVisible = true;
-                BlockButton.IsVisible = true;
+                //AddButton.IsVisible = true;
+                //BlockButton.IsVisible = true;
             }
         }
 
@@ -102,12 +140,15 @@ namespace EncounterMeApp.Views
         private async void IsUserBlocked()
         {
             var blocks = await blockService.GetBlocks();
-            //null nxxxxxxxxxxxxxxxxxxxxx
+
+            
             foreach (var block in blocks)
             {
                 if (App.player.Id == block.UserBlockedID && player.Id == block.BlockedByID)
                 {
                     isUserBlocked = block;
+                    AddButton.IsVisible = true;
+                    AddButton.IsEnabled = false;
                     return;
                 }
             }
@@ -117,6 +158,16 @@ namespace EncounterMeApp.Views
         private async void IsUserBlocking()
         {
             var blocks = await blockService.GetBlocks();
+
+            if (blocks == null || !blocks.Any())
+            {
+                isUserBlocking = null;
+                AddButton.IsVisible = true;
+                AddButton.IsEnabled = false;
+
+                UnblockButton.IsVisible = true;
+                return;
+            }
 
             foreach (var block in blocks)
             {
@@ -133,12 +184,20 @@ namespace EncounterMeApp.Views
         {
             var friends = await friendService.GetFriends();
 
+            /*
+            if (friends == null)
+            {
+                isFriend = null;
+                return;
+            }
+            */
             foreach (var frnd in friends)
             {
                 if ((App.player.Id == frnd.Friend1ID && player.Id == frnd.Friend2ID) ||
                     (App.player.Id == frnd.Friend2ID && player.Id == frnd.Friend1ID))
                 {
                     isFriend = frnd;
+                    RemoveButton.IsVisible = true;
                     return;
                 }
             }
@@ -149,11 +208,20 @@ namespace EncounterMeApp.Views
         {
             var requests = await friendRequestService.GetFriendRequests();
 
+            /*
+            if (requests == null)
+            {
+                isPending = null;
+                return;
+            }*/
+
             foreach (var rqst in requests)
             {
                 if (App.player.Id == rqst.SenderID && player.Id == rqst.ReceiverID)
                 {
                     isPending = rqst;
+                    CancelButton.IsVisible = true;
+                    BlockButton.IsVisible = true;
                     return;
                 }
             }
@@ -164,11 +232,21 @@ namespace EncounterMeApp.Views
         {
             var requests = await friendRequestService.GetFriendRequests();
 
+            /*
+            if (requests == null)
+            {
+                isRequest = null;
+                return;
+            }*/
+
             foreach (var rqst in requests)
             {
                 if (App.player.Id == rqst.ReceiverID && player.Id == rqst.SenderID)
                 {
                     isRequest = rqst;
+                    AcceptRequestButton.IsVisible = true;
+                    DeclineRequestButton.IsVisible = true;
+                    BlockButton.IsVisible = true;
                     return;
                 }
             }
@@ -182,6 +260,7 @@ namespace EncounterMeApp.Views
         private async void SendRequest(object sender, EventArgs e)
         {
             FriendRequest rqst = new FriendRequest();
+            rqst.Id = (new Random()).Next(1,99999);
             rqst.SenderID = App.player.Id;
             rqst.ReceiverID = player.Id;
             isPending = rqst;
@@ -199,6 +278,7 @@ namespace EncounterMeApp.Views
         private async void AcceptRequest(object sender, EventArgs e)
         {
             Friend frnd = new Friend();
+            frnd.Id = (new Random()).Next(1, 99999);
             frnd.Friend1ID = App.player.Id;
             frnd.Friend2ID = player.Id;
             await friendService.AddFriend(frnd);
@@ -218,28 +298,45 @@ namespace EncounterMeApp.Views
         }
         private async void BlockPlayer(object sender, EventArgs e)
         {
-            Block blck = new Block();
-            blck.BlockedByID = App.player.Id;
-            blck.UserBlockedID = player.Id;
-            await blockService.AddBlock(blck);
-            isUserBlocking = blck;
-            isRequest = null;
-            isPending = null;
+            bool action = await DisplayAlert("Block User", "Are you sure you want to block this user?", "Yes", "Cancel");
+            if (action)
+            {
+                Block blck = new Block();
+                blck.Id = (new Random()).Next(1, 99999);
+                blck.BlockedByID = App.player.Id;
+                blck.UserBlockedID = player.Id;
+                await blockService.AddBlock(blck);
+                isUserBlocking = blck;
+                if (isRequest != null)
+                    await friendRequestService.DeleteFriendRequest(isRequest);
+                if (isPending != null)
+                    await friendRequestService.DeleteFriendRequest(isPending);
+                isRequest = null;
+                isPending = null;
+            }
 
             SetButtons();
         }
         private async void RemoveFriend(object sender, EventArgs e)
         {
-            await friendService.DeleteFriend(isFriend);
-            isFriend = null;
+            bool action = await DisplayAlert("Remove Friend", "Are you sure you want to remove friend?", "Yes", "Cancel");
+            if (action)
+            {
+                await friendService.DeleteFriend(isFriend);
+                isFriend = null;
+            }
 
             SetButtons();
         }
 
         private async void UnblockPlayer(object sender, EventArgs e)
         {
-            await blockService.DeleteBlock(isUserBlocking);
-            isUserBlocking = null;
+            bool action = await DisplayAlert("Unblock User", "Are you sure you want to unblock this user?", "Yes", "Cancel");
+            if (action)
+            {
+                await blockService.DeleteBlock(isUserBlocking);
+                isUserBlocking = null;
+            }
 
             SetButtons();
         }        /*

@@ -20,6 +20,7 @@ namespace EncounterMeApp.Views
         IPlayerService playerService;
         IFriendRequestService friendRequestService;
         IFriendService friendService;
+        IBlockService blockService;
 
         public SearchPage()
         {
@@ -28,6 +29,7 @@ namespace EncounterMeApp.Views
             playerService = DependencyService.Get<IPlayerService>();
             friendService = DependencyService.Get<IFriendService>();
             friendRequestService = DependencyService.Get<IFriendRequestService>();
+            blockService = DependencyService.Get<IBlockService>();
         }
 
         /*
@@ -68,8 +70,16 @@ namespace EncounterMeApp.Views
             newreqst.SenderID = 555;
             await friendRequestService.AddFriendRequest(newreqst);
             */
+            /*
+            Block blck = new Block();
+            blck.BlockedByID = 60;
+            blck.UserBlockedID = 60;
+            await blockService.AddBlock(blck);
+            */
             Player plr = await playerService.GetPlayer(int.Parse((sender as Button).ClassId));
-            await Navigation.PushPopupAsync(new OpenProfilePage(plr));
+            OpenProfilePage page = new OpenProfilePage(plr);
+            page.GetInformation();
+            await Navigation.PushPopupAsync(page);
         }
 
         private async void ClickedSearch(object sender, EventArgs e)

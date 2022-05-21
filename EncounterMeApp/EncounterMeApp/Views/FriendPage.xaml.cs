@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Rg.Plugins.Popup.Extensions;
 
 namespace EncounterMeApp.Views
 {
@@ -17,6 +18,7 @@ namespace EncounterMeApp.Views
     {
         IFriendRequestService friendRequestService;
         IFriendService friendService;
+        IPlayerService playerService;
 
         bool showRequests;
         public FriendPage()
@@ -26,6 +28,7 @@ namespace EncounterMeApp.Views
             showRequests = false;
             friendService = DependencyService.Get<IFriendService>();
             friendRequestService = DependencyService.Get<IFriendRequestService>();
+            playerService = DependencyService.Get<IPlayerService>();
 
             UpdateRequestNumber();
         }
@@ -78,13 +81,17 @@ namespace EncounterMeApp.Views
         private async void ViewProfile(object sender, EventArgs e)
         {
             //add profile viewing
-            
+
             //adding friend request for testing 
+            /*
             FriendRequest newreqst = new FriendRequest();
             newreqst.ReceiverID = App.player.Id;
             newreqst.SenderID = 555;
             await friendRequestService.AddFriendRequest(newreqst);
-            
+            */
+            Player plr = await playerService.GetPlayer(int.Parse((sender as Button).ClassId));
+            await Navigation.PushPopupAsync(new OpenProfilePage(plr));
+
         }
 
         private async void UpdateRequestNumber(String text = "Show Requests")
@@ -110,6 +117,7 @@ namespace EncounterMeApp.Views
                 {
                     await friendRequestService.DeleteFriendRequest(rqst);
                     Friend newfriend = new Friend();
+                    newfriend.Id = (new Random()).Next(1, 99999);
                     newfriend.Friend1ID = App.player.Id;
                     newfriend.Friend2ID = rqst.SenderID;
                     await friendService.AddFriend(newfriend);
