@@ -90,7 +90,9 @@ namespace EncounterMeApp.Views
             await friendRequestService.AddFriendRequest(newreqst);
             */
             Player plr = await playerService.GetPlayer(int.Parse((sender as Button).ClassId));
-            await Navigation.PushPopupAsync(new OpenProfilePage(plr));
+            OpenProfilePage page = new OpenProfilePage(plr);
+            page.GetInformation();
+            await Navigation.PushPopupAsync(page);
 
         }
 

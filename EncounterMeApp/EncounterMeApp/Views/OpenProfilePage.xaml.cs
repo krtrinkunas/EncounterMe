@@ -52,18 +52,6 @@ namespace EncounterMeApp.Views
             //check if the same user
             if (App.player.Id == player.Id)
                 HideButtons();
-            else
-            {
-                /*
-                IsUserBlocked();
-                IsUserBlocking();
-
-                IsFriend();
-                IsPending();
-                IsRequest();*/
-
-                //SetButtons();
-            }
         }
 
         public void GetInformation()
@@ -95,11 +83,13 @@ namespace EncounterMeApp.Views
             {
                 AddButton.IsVisible = true;
                 AddButton.IsEnabled = false;
+                AddButton.BackgroundColor = Color.FromHex("#6b6b6b");
             }
             else if (isUserBlocking != null)
             {
                 AddButton.IsVisible = true;
                 AddButton.IsEnabled = false;
+                AddButton.BackgroundColor = Color.FromHex("#6b6b6b");
 
                 UnblockButton.IsVisible = true;
             }
@@ -120,8 +110,8 @@ namespace EncounterMeApp.Views
             }
             else
             {
-                //AddButton.IsVisible = true;
-                //BlockButton.IsVisible = true;
+                AddButton.IsVisible = true;
+                BlockButton.IsVisible = true;
             }
         }
 
@@ -129,6 +119,7 @@ namespace EncounterMeApp.Views
         {
             AddButton.IsVisible = false;
             AddButton.IsEnabled = true;
+            AddButton.BackgroundColor = Color.FromHex("#72FF6C");
             UnblockButton.IsVisible = false;
             RemoveButton.IsVisible = false;
             CancelButton.IsVisible = false;
@@ -152,6 +143,7 @@ namespace EncounterMeApp.Views
                     return;
                 }
             }
+            SetButtons();
             isUserBlocked = null;
         }
 
@@ -159,6 +151,7 @@ namespace EncounterMeApp.Views
         {
             var blocks = await blockService.GetBlocks();
 
+            /*
             if (blocks == null || !blocks.Any())
             {
                 isUserBlocking = null;
@@ -168,15 +161,18 @@ namespace EncounterMeApp.Views
                 UnblockButton.IsVisible = true;
                 return;
             }
+            */
 
             foreach (var block in blocks)
             {
                 if (App.player.Id == block.BlockedByID && player.Id == block.UserBlockedID)
                 {
                     isUserBlocking = block;
+                    SetButtons();
                     return;
                 }
             }
+            SetButtons();
             isUserBlocking = null;
         }
 
@@ -197,10 +193,11 @@ namespace EncounterMeApp.Views
                     (App.player.Id == frnd.Friend2ID && player.Id == frnd.Friend1ID))
                 {
                     isFriend = frnd;
-                    RemoveButton.IsVisible = true;
+                    SetButtons();
                     return;
                 }
             }
+            SetButtons();
             isFriend = null;
         }
 
@@ -220,11 +217,11 @@ namespace EncounterMeApp.Views
                 if (App.player.Id == rqst.SenderID && player.Id == rqst.ReceiverID)
                 {
                     isPending = rqst;
-                    CancelButton.IsVisible = true;
-                    BlockButton.IsVisible = true;
+                    SetButtons();
                     return;
                 }
             }
+            SetButtons();
             isPending = null;
         }
 
@@ -244,12 +241,11 @@ namespace EncounterMeApp.Views
                 if (App.player.Id == rqst.ReceiverID && player.Id == rqst.SenderID)
                 {
                     isRequest = rqst;
-                    AcceptRequestButton.IsVisible = true;
-                    DeclineRequestButton.IsVisible = true;
-                    BlockButton.IsVisible = true;
+                    SetButtons();
                     return;
                 }
             }
+            SetButtons();
             isRequest = null;
         }
 

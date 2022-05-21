@@ -510,7 +510,9 @@ namespace EncounterMeApp.Views
                 }
             }
 
-            await Navigation.PushPopupAsync(new OpenProfilePage(owner));
+            OpenProfilePage page = new OpenProfilePage(owner);
+            page.GetInformation();
+            await Navigation.PushPopupAsync(page);
         }
 
         private async void GoBack(object sender, EventArgs e)

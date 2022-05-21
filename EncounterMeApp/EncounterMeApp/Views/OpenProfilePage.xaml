@@ -174,7 +174,7 @@
                             Clicked="CancelRequest"/>
                     <Button x:Name="RemoveButton"
                         Text="Remove Friend"
-                        FontSize="Medium"
+                        FontSize="Small"
                         TextColor="White"
                         BackgroundColor="#e83046" 
                         VerticalOptions="Center"
