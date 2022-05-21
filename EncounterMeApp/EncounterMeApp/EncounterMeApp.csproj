@@ -20,6 +20,9 @@
     <Compile Update="Views\CommentSectionPage.xaml.cs">
       <DependentUpon>CommentSectionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\OpenProfilePage.xaml.cs">
+      <DependentUpon>OpenProfilePage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>

@@ -15,7 +15,6 @@ namespace EncounterMeApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FriendPage : ContentPage
     {
-        IPlayerService playerService;
         IFriendRequestService friendRequestService;
         IFriendService friendService;
 
@@ -25,7 +24,6 @@ namespace EncounterMeApp.Views
             InitializeComponent();
 
             showRequests = false;
-            playerService = DependencyService.Get<IPlayerService>();
             friendService = DependencyService.Get<IFriendService>();
             friendRequestService = DependencyService.Get<IFriendRequestService>();
 

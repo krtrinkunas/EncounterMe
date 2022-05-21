@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Pages;
 
 namespace EncounterMeApp.Views
 {
@@ -58,13 +60,16 @@ namespace EncounterMeApp.Views
         private async void ViewProfile(object sender, EventArgs e)
         {
             //add profile viewing
-            
+
             //adding friend request for testing 
+            /*
             FriendRequest newreqst = new FriendRequest();
             newreqst.ReceiverID = App.player.Id;
             newreqst.SenderID = 555;
             await friendRequestService.AddFriendRequest(newreqst);
-            
+            */
+            Player plr = await playerService.GetPlayer(int.Parse((sender as Button).ClassId));
+            await Navigation.PushPopupAsync(new OpenProfilePage(plr));
         }
 
         private async void ClickedSearch(object sender, EventArgs e)
