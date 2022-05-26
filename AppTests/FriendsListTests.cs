@@ -13,24 +13,17 @@ namespace AppTests
 {
     public class FriendsListTests
     {
-
-        Mock<IPlayerService> playerService = new();
-
-        private readonly PlayerManager _plm;
         private readonly InternetPlayerService _ipls;
         public int deletedPlayerId;
 
-        List<Player> players = new List<Player>();   //assign
+        List<Player> players = new List<Player>();
 
         public FriendsListTests()
         {
-            _plm = new PlayerManager(playerService.Object);
             _ipls = new InternetPlayerService();
-
-            SetupDataForDatabaseTests();
         }
 
-        private async void SetupDataForDatabaseTests()
+        private async Task SetupDataForDatabaseTests()
         {
             Player player1 = new Player { NickName = "Petras", Points = 0, Email = "email1@email.com", Id = 52, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = "TestFirstName", Lastname = "TestLatsName", Password = "password123" };
             Player player2 = new Player { NickName = "Antanas", Points = 0, Email = "email2@email.com", Id = 53, LocationsOwned = 0, LocationsVisited = 0, ProfilePic = "https://cdn3.iconfinder.com/data/icons/games-11/24/_user-512.png", Type = 0, Firstname = "TestFirstName", Lastname = "TestLatsName", Password = "password123" };
@@ -52,7 +45,7 @@ namespace AppTests
         [Fact]
         public async Task GetPlayer_ReturnsCorrectPlayer()
         {
-
+            await SetupDataForDatabaseTests();
             Player player1 = await _ipls.GetPlayer(players[0].Id);
 
             Assert.Equal(player1, players[0]);
@@ -61,7 +54,6 @@ namespace AppTests
         [Fact]
         public async Task GetPlayers_ReturnsCorrectPlayers()
         {
-
             List<Player> searchedPlayers =(List<Player>) await _ipls.GetPlayers();
 
 
@@ -71,7 +63,6 @@ namespace AppTests
         [Fact]
         public async Task GetPlayers_ReturnsCorrectPlayerList()
         {
-
             List<Player> players1 = (List<Player>)await _ipls.GetPlayers();
             List<Player> players2 = new List<Player> { players[0], players[2] };
 
@@ -81,7 +72,6 @@ namespace AppTests
         [Fact]
         public async Task GetPlayer_ReturnsNullIfPlayerIsDeleted()
         {
-
             Player player = await _ipls.GetPlayer(deletedPlayerId);
 
             Assert.Null(player);
