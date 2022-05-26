@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Pages;
 
 namespace EncounterMeApp.Views
 {
@@ -18,6 +20,7 @@ namespace EncounterMeApp.Views
         IPlayerService playerService;
         IFriendRequestService friendRequestService;
         IFriendService friendService;
+        IBlockService blockService;
 
         public SearchPage()
         {
@@ -26,6 +29,7 @@ namespace EncounterMeApp.Views
             playerService = DependencyService.Get<IPlayerService>();
             friendService = DependencyService.Get<IFriendService>();
             friendRequestService = DependencyService.Get<IFriendRequestService>();
+            blockService = DependencyService.Get<IBlockService>();
         }
 
         /*
@@ -58,13 +62,24 @@ namespace EncounterMeApp.Views
         private async void ViewProfile(object sender, EventArgs e)
         {
             //add profile viewing
-            
+
             //adding friend request for testing 
+            /*
             FriendRequest newreqst = new FriendRequest();
             newreqst.ReceiverID = App.player.Id;
             newreqst.SenderID = 555;
             await friendRequestService.AddFriendRequest(newreqst);
-            
+            */
+            /*
+            Block blck = new Block();
+            blck.BlockedByID = 60;
+            blck.UserBlockedID = 60;
+            await blockService.AddBlock(blck);
+            */
+            Player plr = await playerService.GetPlayer(int.Parse((sender as Button).ClassId));
+            OpenProfilePage page = new OpenProfilePage(plr);
+            page.GetInformation();
+            await Navigation.PushPopupAsync(page);
         }
 
         private async void ClickedSearch(object sender, EventArgs e)

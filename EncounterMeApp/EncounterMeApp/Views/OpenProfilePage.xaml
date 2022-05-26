@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+        xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+        x:Class="EncounterMeApp.Views.OpenProfilePage"
+        BackgroundInputTransparent="True"
+        CloseWhenBackgroundIsClicked="False"
+        BackgroundColor="Transparent"
+        NavigationPage.HasNavigationBar="false">
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+                PositionIn="Bottom"
+                PositionOut="Bottom"
+                
+                DurationIn="400"
+                DurationOut="300"
+                EasingIn="SinOut"
+                EasingOut="SinIn"
+                HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+    <StackLayout 
+            VerticalOptions="StartAndExpand" 
+            HorizontalOptions="FillAndExpand" 
+           >
+        <Frame CornerRadius="20" HeightRequest="400" VerticalOptions="FillAndExpand" Margin="0,0,0,50">
+            <StackLayout>
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" 
+                      ColumnDefinitions="*,*,*">
+                    <Label x:Name="ProfileLabel"
+                           Text="Profile"
+                           FontSize="Large"
+                           WidthRequest="280"
+                           HeightRequest="60"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Margin="10,10,10,10"
+                           Grid.Row="0"
+                           Grid.Column="0" 
+                           Grid.ColumnSpan="2"/>
+                    <Image x:Name="ProfileImage"
+                           Source="discover_button.png"
+                           WidthRequest="40"
+                           HeightRequest="40"
+                           Grid.Row="0"
+                           Grid.RowSpan="2"
+                           Grid.Column="2" />
+
+                    <Label Grid.Row="1" 
+                           Grid.Column="0" 
+                           Grid.ColumnSpan="2" 
+                           Text="Bugtown" 
+                           Padding ="20,10,0,0"
+                           TextColor="Silver"/>
+                    <Label Grid.Row="2" 
+                           Grid.Column="0" 
+                           Grid.ColumnSpan="3" 
+                           Padding="20,0,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Email: " 
+                                      FontAttributes="Bold"/>
+                                <Span x:Name="currentEmail"  
+                                      TextColor="Silver"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Grid.Row="3" 
+                           Grid.Column="0" 
+                           Text="Points" 
+                           TextColor="Silver" 
+                           FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" 
+                           Padding="0,20,0,0"/>
+                    <Label Grid.Row="3" 
+                           Grid.Column="1" 
+                           Text="Locations visited" 
+                           TextColor="Silver" 
+                           FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" 
+                           Padding="0,20,0,0"/>
+                    <Label Grid.Row="3" 
+                           Grid.Column="2" 
+                           Text="Locations owned" 
+                           TextColor="Silver" 
+                           FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" 
+                           Padding="0,20,0,0"/>
+
+                    <Label x:Name ="pointsLabel" 
+                           Grid.Row="4" Grid.Column="0" 
+                           FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center"/>
+                    <Label x:Name ="visitedPlacesLabel" 
+                           Grid.Row="4" Grid.Column="1" 
+                           FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center"/>
+                    <Label x:Name ="ownedPlacesLabel" 
+                           Grid.Row="4" Grid.Column="2" 
+                           FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center"/>
+                </Grid>
+
+                <Grid HeightRequest="350" HorizontalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="160"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="AddButton"
+                        Text="Add Friend"
+                        FontSize="Medium"
+                        TextColor="White"
+                        BackgroundColor="#72FF6C" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        WidthRequest="150"
+                        HeightRequest="50"
+                        CornerRadius = "10"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        IsVisible="False"
+                            Clicked="SendRequest"/>
+                    <Button x:Name="BlockButton"
+                        Text="Block"
+                        FontSize="Medium"
+                        TextColor="White"
+                        BackgroundColor="#e83046" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        WidthRequest="150"
+                        HeightRequest="50"
+                        CornerRadius = "10"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                            IsVisible="False"
+                            Clicked="BlockPlayer"/>
+                    <Button x:Name="UnblockButton"
+                        Text="Unblock"
+                        FontSize="Medium"
+                        TextColor="White"
+                        BackgroundColor="#e83046" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        WidthRequest="150"
+                        HeightRequest="50"
+                        CornerRadius = "10"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                            IsVisible="False"
+                            Clicked="UnblockPlayer"/>
+                    <Button x:Name="CancelButton"
+                        Text="Cancel Friend"
+                        FontSize="Small"
+                        TextColor="White"
+                        BackgroundColor="#6b6b6b" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        WidthRequest="100"
+                        HeightRequest="50"
+                        CornerRadius = "10"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Grid.RowSpan="2" 
+                        IsVisible="False"
+                            Clicked="CancelRequest"/>
+                    <Button x:Name="RemoveButton"
+                        Text="Remove Friend"
+                        FontSize="Small"
+                        TextColor="White"
+                        BackgroundColor="#e83046" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        WidthRequest="100"
+                        HeightRequest="50"
+                        CornerRadius = "10"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Grid.RowSpan="2" 
+                        IsVisible="False"
+                            Clicked="RemoveFriend"/>
+                    <Button x:Name="DeclineRequestButton"
+                        Text="Decline Friend"
+                        FontSize="Small"
+                        TextColor="White"
+                        BackgroundColor="#e83046" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        WidthRequest="100"
+                        HeightRequest="50"
+                        CornerRadius = "10"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                            IsVisible="False"
+                             Clicked="DeclineRequest"/>
+                    <Button x:Name="AcceptRequestButton"
+                        Text="Accept Friend"
+                        FontSize="Small"
+                        TextColor="White"
+                        BackgroundColor="#72FF6C" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        WidthRequest="100"
+                        HeightRequest="50"
+                        CornerRadius = "10"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                            IsVisible="False"
+                            Clicked="AcceptRequest"/>
+                    <Button Text="close"
+                        FontSize="Medium"
+                        TextColor="White"
+                        BackgroundColor="#6CD4FF" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        WidthRequest="300"
+                        HeightRequest="40"
+                        CornerRadius = "30"
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        Clicked="GoBack"/>
+                </Grid>
+
+                
+
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</pages:PopupPage>

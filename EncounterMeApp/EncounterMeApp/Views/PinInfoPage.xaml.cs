@@ -23,21 +23,52 @@ namespace EncounterMeApp.Views
         ILocationService locationService;
         ICaptureAttemptService captureService;
         CaptureAttempt captureAttempt;
+        Player Owner;
+
         public PinInfoPage(MyLocation location)
         {
             InitializeComponent();
+            currentLocation = location;
+            
             playerService = DependencyService.Get<IPlayerService>();
             locationService = DependencyService.Get<ILocationService>();
             captureService = DependencyService.Get<ICaptureAttemptService>();
+            getOwner();
 
             nameOfPin.Text = location.NAME;
             ownerOfPin.Text = "Owner: " + location.owner;
+            OpenProfileFunction();
+
             pointsOfPin.Text = location.points.ToString();
 
-            currentLocation = location;
+            
 
             SetLocationRating();
             GetCaptureAttempt();
+        }
+
+        private async void getOwner()
+        {
+            var plrs = await playerService.GetPlayers();
+
+            foreach (var plr in plrs)
+            {
+                if (currentLocation.owner == plr.NickName )
+                {
+                    Owner = plr;
+                    return;
+                }
+            }
+        }
+
+        private async void OpenProfileFunction()
+        {
+            var openProfile = new TapGestureRecognizer();
+            openProfile.Tapped += async (s, e) =>
+            {
+                await Navigation.PushPopupAsync(new OpenProfilePage(Owner));
+            };
+            ownerOfPin.GestureRecognizers.Add(openProfile);
         }
 
         public void SetLocationRating()

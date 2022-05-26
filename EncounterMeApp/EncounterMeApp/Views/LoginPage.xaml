@@ -59,7 +59,7 @@
                         <Label Text="Still Not Connected?" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
 
                         <Button x:Name="btnRegister" Text="Sign Up" HorizontalOptions="Center" TextColor="DarkSeaGreen" FontAttributes="Bold" BackgroundColor="#EBEBEB" CornerRadius="30" Clicked="btnRegister_Clicked"/>
-                        <!--        
+                                <!--
                         <Button Text ="COMMENTS" 
                                         Clicked="OpenCommentSection"
                                         Grid.Row="5" 

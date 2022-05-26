@@ -54,7 +54,7 @@ namespace EncounterMeApp.Services
         public async Task<IEnumerable<Block>> GetBlocks()
         {
 
-            var response = await (_httpClient.GetAsync("apiBlock")).ConfigureAwait(false);
+            var response = await (_httpClient.GetAsync("api/Block")).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 
             var responseAsString = await response.Content.ReadAsStringAsync();
